@@ -52,4 +52,4 @@ Then changes in the attributes observed will cause the UI to render.
 </body>
 ```
 
-<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-feeling.gif" width="250" />
+<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-feeling.gif" width="500" />

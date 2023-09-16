@@ -6,6 +6,9 @@ When you extend the `WebComponent` class for your component, you only have to de
 
 The result is a reactive UI on attribute changes.
 
+Optionally, you can
+1. define a method [`onChanges`](#hooks) that gets triggered when an attribute value changed
+
 ## Installation
 
 ```bash

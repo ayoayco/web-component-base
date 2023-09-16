@@ -18,3 +18,5 @@ export class HelloWorld extends WebComponent {
         }</h1>`
   }
 }
+
+customElements.define('hello-world', HelloWorld);

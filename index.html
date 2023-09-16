@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World WC</title>
+    <script type="module" src="./index.js"></script>
+</head>
+<body>
+    <hello-world name="Ayo" emotion="sad"  />
+    <script>
+        const helloWorld = document.querySelector('hello-world');
+        setTimeout(() => {
+            helloWorld.setAttribute('emotion', 'excited');
+        }, 2500)
+    </script>
+</body>
+</html>

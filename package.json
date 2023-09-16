@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.sr.ht/~ayoayco/web-component-base.git"
+    "url": "https://git.sr.ht/~ayoayco/web-component-base"
   },
   "files": [
     "index.mjs",

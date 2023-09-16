@@ -10,7 +10,7 @@ npm i web-component-base
 
 ## Usage
 
-When you extend the 'WebComponent' class for your component, you only have to define the `template()` and `observedAttributes()`, and the UI will be reactive on attribute changes.
+When you extend the `WebComponent` class for your component, you only have to define the `template()` and `observedAttributes()`, and the UI will be reactive on attribute changes.
 
 ```js
 // HelloWorld.mjs
@@ -52,4 +52,4 @@ Then changes in the attributes observed will cause the UI to render.
 </body>
 ```
 
-<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="./assets/wc-base-demo.gif" width="250" />
+<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-feeling.gif" width="250" />

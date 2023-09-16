@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World WC</title>
-    <script type="module" src="./index.js"></script>
+    <script type="module">
+        import {HelloWorld} from './HelloWorld.mjs';
+        customElements.define('hello-world', HelloWorld);
+    </script>
 </head>
 <body>
     <hello-world name="Ayo" emotion="sad"  />

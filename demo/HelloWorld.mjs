@@ -1,5 +1,5 @@
 // @ts-check
-import { WebComponent } from "./WebComponent.mjs";
+import WebComponent from "../index.mjs";
 
 export class HelloWorld extends WebComponent {
   name = "World";

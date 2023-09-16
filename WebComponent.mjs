@@ -20,7 +20,7 @@ export class WebComponent extends HTMLElement {
       this.render();
     }
 
-    this.onChanges({previousValue, currentValue});
+    this.onChanges({ previousValue, currentValue });
   }
 
   render() {

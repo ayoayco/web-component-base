@@ -1,12 +1,21 @@
-<head>
-  <script type="module" src="HelloWorld.mjs"></script>
-</head>
-<body>
-  <hello-world name="Ayo" emotion="sad">
-  <script>
-      const helloWorld = document.querySelector('hello-world');
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WC demo</title>
+    <script type="module" src="HelloWorld.mjs"></script>
+    <script type="module" src="SimpleText.mjs"></script>
+  </head>
+  <body>
+    <hello-world name="Ayo" emotion="sad"></hello-world>
+    <simple-text greeting="hey"></simple-text>
+
+    <script type="module">
+      const helloWorld = document.querySelector("hello-world");
       setTimeout(() => {
-        helloWorld.setAttribute('emotion', 'excited');
-      }, 2500)
-  </script>
-</body>
+        helloWorld.setAttribute("emotion", "excited");
+      }, 2500);
+    </script>
+  </body>
+</html>

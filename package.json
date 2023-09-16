@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "JavaScript Web Component base class",
   "main": "index.mjs",
   "scripts": {

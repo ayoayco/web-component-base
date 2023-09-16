@@ -21,7 +21,7 @@ export class HelloWorld extends WebComponent {
             this.emotion === 'sad'
                 ? '. 😭'
                 : '! 🙌'
-        }</h1>
+        }</h1>`
   }
 }
 ```
@@ -38,4 +38,4 @@ Then changes in the attributes observed will cause the UI to render.
 </script>
 ```
 
-![UI showing feeling toward Web Components changing from SAD to EXCITED](./assets/wc-feeling.gif)
+<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="./assets/wc-base-demo.gif" width="250" />

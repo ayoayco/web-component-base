@@ -1,8 +1,10 @@
 # Web Component Base
 
-This serves as a very minimal base class for creating custom elements.
+This is a very minimal base class for creating reactive custom elements easily.
 
-This does not aim to be an alternative to [Lit](https://lit.dev/). Lit is good; use it if you want.
+When you extend the `WebComponent` class for your component, you only have to define the `template()` and `observedAttributes()`, and changes in any attribute value will automatically cause the UI to render.
+
+The result is a reactive UI on attribute changes.
 
 ## Installation
 
@@ -12,7 +14,6 @@ npm i web-component-base
 
 ## Usage
 
-When you extend the `WebComponent` class for your component, you only have to define the `template()` and `observedAttributes()`, and the UI will be reactive on attribute changes.
 
 In your component class:
 
@@ -37,7 +38,6 @@ export class HelloWorld extends WebComponent {
 customElements.define('hello-world', HelloWorld);
 ```
 
-Then changes in the attributes observed will cause the UI to render.
 
 In your HTML page:
 

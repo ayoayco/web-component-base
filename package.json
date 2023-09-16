@@ -10,6 +10,10 @@
     "type": "git",
     "url": "https://git.sr.ht/~ayoayco/web-component-base.git"
   },
+  "files": [
+    "index.mjs",
+    "WebComponent.mjs"
+  ],
   "keywords": [
     "web components",
     "web component",

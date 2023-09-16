@@ -9,14 +9,14 @@ export class HelloWorld extends WebComponent {
     return ["name", "emotion"];
   }
 
+  onChanges({ previousValue, currentValue }) {
+    console.log(">>> changed", { previousValue, currentValue });
+  }
+
   get template() {
     return `
-        <h1>Hello ${this.name}${
-            this.emotion === 'sad'
-                ? '. 😭'
-                : '! 🙌'
-        }</h1>`
+        <h1>Hello ${this.name}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
   }
 }
 
-customElements.define('hello-world', HelloWorld);
+customElements.define("hello-world", HelloWorld);

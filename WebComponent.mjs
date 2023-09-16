@@ -1,23 +1,29 @@
 // @ts-check
 
 export class WebComponent extends HTMLElement {
+  get template() {
+    return "";
+  }
 
-    get template () {
-        return ''
+  /**
+   * triggered when an attribute value changed
+   */
+  onChanges({ previousValue, currentValue }) {}
+
+  connectedCallback() {
+    this.render();
+  }
+
+  attributeChangedCallback(property, previousValue, currentValue) {
+    if (previousValue !== currentValue) {
+      this[property] = currentValue;
+      this.render();
     }
 
-    connectedCallback() {
-        this.render()
-    }
+    this.onChanges({previousValue, currentValue});
+  }
 
-    attributeChangedCallback(property, prev, value) {
-        if (prev !== value) {
-            this[property] = value
-            this.render()
-        }
-    }
-
-    render() {
-        this.innerHTML = this.template
-    }
+  render() {
+    this.innerHTML = this.template;
+  }
 }

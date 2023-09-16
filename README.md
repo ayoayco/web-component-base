@@ -60,3 +60,29 @@ In your HTML page:
 The result is a reactive UI that updates on attribute changes:
 
 <img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-base-demo.gif" width="400" />
+
+### Hooks
+
+Currently, you can define behavior when an attribute value changes by defining a method `onChanges` in your component:
+
+```js
+import WebComponent from "../index.mjs";
+
+export class HelloWorld extends WebComponent {
+  name = "World";
+  emotion = "excited";
+
+  static get observedAttributes() {
+    return ["name", "emotion"];
+  }
+
+  onChanges({ previousValue, currentValue }) {
+    console.log(">>> changed", { previousValue, currentValue });
+  }
+
+  get template() {
+    return `
+        <h1>Hello ${this.name}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+  }
+}
+```

@@ -18,7 +18,7 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import { WebComponent } from "web-component-base";
+import WebComponent from "web-component-base";
 
 export class HelloWorld extends WebComponent {
   name = "World";

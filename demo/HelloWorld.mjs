@@ -16,10 +16,8 @@ export class HelloWorld extends WebComponent {
   }
 
   onChanges(changes) {
-    console.log("onChanges", this.querySelector("h1"));
-    Object.keys(changes).forEach((name) => {
-      console.log(name, changes[name]);
-    });
+    const { property, previousValue, currentValue } = changes;
+    console.log(`${property} changed`, { previousValue, currentValue });
   }
 
   get template() {

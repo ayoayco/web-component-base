@@ -28,8 +28,7 @@ export class WebComponent extends HTMLElement {
   onInit() {}
 
   /**
-   * @template {{'previousValue': any, 'currentValue': any}} SimpleChange
-   * @param {Record<string, SimpleChange>} changes
+   * @param {{'property': string, 'previousValue': any, 'currentValue': any}} changes
    */
   onChanges(changes) {}
 
@@ -48,7 +47,7 @@ export class WebComponent extends HTMLElement {
     if (previousValue !== currentValue) {
       this[property] = currentValue;
       this.render();
-      this.onChanges({ [property]: { previousValue, currentValue } });
+      this.onChanges({ property, previousValue, currentValue });
     }
   }
 

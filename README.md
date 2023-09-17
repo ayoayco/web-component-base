@@ -1,4 +1,4 @@
-> **TLDR;** See the [quick start example](#quick-start-example) you can just copy, refactor, and modify 😉
+> **>>> TLDR;** See the [Quick Start Example](#quick-start-example) you can just copy, refactor, and modify 😉
 
 Web Component Base
 ---

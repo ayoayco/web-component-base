@@ -85,7 +85,6 @@ The result is a reactive UI that updates on attribute changes:
 If you want a quick start example to copy, this is an example of using a custom element in a single .html file:
 
 ```html
-https://www.npmjs.com/package/web-component-base
 <!DOCTYPE html>
 <html lang="en">
   <head>

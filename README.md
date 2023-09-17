@@ -37,7 +37,7 @@ In your component class:
 // HelloWorld.mjs
 import WebComponent from "https://unpkg.com/web-component-base";
 
-export class HelloWorld extends WebComponent {
+class HelloWorld extends WebComponent {
   name = "World";
   emotion = "excited";
 

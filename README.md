@@ -1,4 +1,4 @@
-> **>>> TLDR;** See the [Quick Start Example](#quick-start-example) you can just copy, refactor, and modify 😉
+> **>>> TLDR;** See the [Quick Start Example](#quick-start-example) you can just copy, refactor, and modify
 
 Web Component Base
 ---
@@ -14,23 +14,26 @@ When you extend the `WebComponent` class for your component, you only have to de
 The result is a reactive UI on property changes.
 
 ## Table of Contents
-1. [Vanilla JS import](#vanilla-js-import)
-1. [Installation](#installation)
+1. [Import via unpkg](#import-via-unpkg)
+1. [Installation via npm](#installation-via-npm)
 1. [Usage](#usage)
-1. [Quick Start Example](#quick-start-example) 😉
+1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
     1. [`onChanges`](#onchanges) - every time an attribute value changes
 
-## Vanilla JS import
+## Import via unpkg
 Import using [unpkg](https://unpkg.com/web-component-base) in your component. We will use this in the rest of our [usage examples](#usage).
 
 ```js
 import WebComponent from "https://unpkg.com/web-component-base";
+
+// or a specific version
+import WebComponent from "https://unpkg.com/web-component-base@1.6.0/index.mjs";
 ```
 
-## Installation 
+## Installation via npm
 If you have a bundler to help resolving imports:
 
 ```bash
@@ -38,7 +41,6 @@ npm i web-component-base
 ```
 
 ## Usage
-
 
 In your component class:
 

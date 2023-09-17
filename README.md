@@ -19,8 +19,9 @@ The result is a reactive UI on property changes.
 1. [Usage](#usage)
 1. [Quick Start Example](#quick-start-example) 😉
 1. [Life-Cycle Hooks](#life-cycle-hooks)
-    1. [`onInit`](#oninit) - the component is connected to the DOM
-    1. [`onChanges`](#onchanges) - an attribute value changed
+    1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
+    1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
+    1. [`onChanges`](#onchanges) - every time an attribute value changes
 
 ## Vanilla JS import
 Import using [unpkg](https://unpkg.com/web-component-base) in your component. We will use this in the rest of our [usage examples](#usage).
@@ -128,7 +129,7 @@ Here is an example of using a custom element in a single .html file:
 Define behavior when certain events in the component's life cycle is triggered by providing hook methods
 
 ### onInit()
-- gets triggered when the component is connected to the DOM
+- triggered when the component is connected to the DOM
 - best for setting up the component
 
 ```js
@@ -146,8 +147,25 @@ class ClickableText extends WebComponent {
 }
 ```
 
+### afterViewInit()
+- triggered after the view is first initialized
+
+```js
+class ClickableText extends WebComponent {
+  // gets called when the component's innerHTML is first filled
+  afterViewInit() {
+    const footer = this.querySelector('footer');
+    // do stuff to footer after view is initialized
+  }
+
+  get template() {
+    return `<footer>Awesome site &copy; 2023</footer>`;
+  }
+}
+```
+
 ### onChanges()
-- gets triggered when an attribute value changed
+- triggered when an attribute value changed
 
 ```js
 import WebComponent from "https://unpkg.com/web-component-base";

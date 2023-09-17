@@ -18,25 +18,37 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
+   * triggered after view is initialized
+   */
+  afterViewInit() {}
+
+  /**
    * triggered when the component is connected to the DOM
    */
   onInit() {}
 
   /**
-   * triggered when an attribute value changed
+   * @template {{'previousValue': any, 'currentValue': any}} SimpleChange
+   * @param {Record<string, SimpleChange>} changes
    */
-  onChanges({ property, previousValue, currentValue }) {}
+  onChanges(changes) {}
 
   connectedCallback() {
-    this.render();
     this.onInit();
+    this.render();
+    this.afterViewInit();
   }
 
+  /**
+   * @param {string} property
+   * @param {any} previousValue
+   * @param {any} currentValue
+   */
   attributeChangedCallback(property, previousValue, currentValue) {
     if (previousValue !== currentValue) {
       this[property] = currentValue;
-      this.onChanges({ property, previousValue, currentValue });
       this.render();
+      this.onChanges({ [property]: { previousValue, currentValue } });
     }
   }
 

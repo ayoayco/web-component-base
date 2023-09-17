@@ -74,11 +74,13 @@ Define behavior when certain events in the component's life cycle is triggered b
 
 ### onInit()
 - gets triggered when the component is connected to the DOM
+- best for setting up the component
 
 ```js
 import WebComponent from "../index.mjs";
 
 class ClickableText extends WebComponent {
+  // gets called when the component is used in an HTML document
   onInit() {
     this.onclick = () => console.log(">>> click!");
   }
@@ -96,8 +98,9 @@ class ClickableText extends WebComponent {
 import WebComponent from "../index.mjs";
 
 class ClickableText extends WebComponent {
-  onChanges({prev, curr}) {
-    console.log('>>> something changed', prev, curr)
+  // gets called when an attribute value changes
+  onChanges({attr, prev, curr}) {
+    console.log('>>> something changed', {attr, prev, curr})
   }
 
   get template() {

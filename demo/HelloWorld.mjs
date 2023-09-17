@@ -9,8 +9,8 @@ export class HelloWorld extends WebComponent {
     return ["name", "emotion"];
   }
 
-  onChanges({ previousValue, currentValue }) {
-    console.log(">>> changed", { previousValue, currentValue });
+  onChanges({ property, previousValue, currentValue }) {
+    console.log(">>> changed", { property, previousValue, currentValue });
   }
 
   get template() {

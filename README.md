@@ -4,7 +4,7 @@ Web Component Base
 ---
 This is a very minimal base class for creating reactive custom elements easily.
 
-When you extend the `WebComponent` class for your component, you only have to define the `template()` and `observedAttributes()`, and changes in any attribute value will automatically cause the UI to render.
+When you extend the `WebComponent` class for your component, you only have to define the `template()` and `properties`, and changes in any attribute value will automatically cause the UI to render.
 
 The result is a reactive UI on attribute changes.
 
@@ -44,9 +44,7 @@ class HelloWorld extends WebComponent {
   name = "World";
   emotion = "excited";
 
-  static get observedAttributes() {
-    return ["name", "emotion"];
-  }
+  static properties = ["name", "emotion"];
 
   get template() {
     return `
@@ -97,9 +95,8 @@ If you want a quick start example to copy, this is an example of using a custom 
       import WebComponent from "https://unpkg.com/web-component-base";
 
       class HelloWorld extends WebComponent {
-        static get observedAttributes() {
-          return ['name'];
-        }
+        static properties = ["name", "emotion"];
+
         get template() {
           return `<h1>Hello ${this.name || 'World'}!</h1>`;
         }

@@ -1,8 +1,20 @@
 // @ts-check
 
 export class WebComponent extends HTMLElement {
+  /**
+   * @type Array<string>
+   */
+  static properties = [];
+
+  /**
+   * @returns string
+   */
   get template() {
     return "";
+  }
+
+  static get observedAttributes() {
+    return this.properties;
   }
 
   /**

@@ -5,9 +5,7 @@ export class HelloWorld extends WebComponent {
   name = "World";
   emotion = "excited";
 
-  static get observedAttributes() {
-    return ["name", "emotion"];
-  }
+  static properties = ["name", "emotion"];
 
   onChanges({ property, previousValue, currentValue }) {
     console.log(">>> changed", { property, previousValue, currentValue });

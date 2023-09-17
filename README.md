@@ -7,13 +7,22 @@ When you extend the `WebComponent` class for your component, you only have to de
 The result is a reactive UI on attribute changes.
 
 ## Table of Contents
+1. [Vanilla JS import](#vanilla-js-import)
 1. [Installation](#installation)
 1. [Usage](#usage)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM
     1. [`onChanges`](#onchanges) - an attribute value changed
 
-## Installation
+## Vanilla JS import
+Import using [unpkg](https://unpkg.com/web-component-base) in your component. We will use this in the rest of our [usage examples](#usage).
+
+```js
+import WebComponent from "https://unpkg.com/web-component-base";
+```
+
+## Installation 
+If you have a bundler to help resolving imports:
 
 ```bash
 npm i web-component-base
@@ -26,7 +35,7 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import WebComponent from "web-component-base";
+import WebComponent from "https://unpkg.com/web-component-base";
 
 export class HelloWorld extends WebComponent {
   name = "World";
@@ -77,7 +86,7 @@ Define behavior when certain events in the component's life cycle is triggered b
 - best for setting up the component
 
 ```js
-import WebComponent from "../index.mjs";
+import WebComponent from "https://unpkg.com/web-component-base";
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
@@ -95,7 +104,7 @@ class ClickableText extends WebComponent {
 - gets triggered when an attribute value changed
 
 ```js
-import WebComponent from "../index.mjs";
+import WebComponent from "https://unpkg.com/web-component-base";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes

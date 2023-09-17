@@ -1,18 +1,23 @@
-> TLDR; See [quick start example](#minimal-example) you can copy-paste and modify
+> **TLDR;** See the [quick start example](#quick-start-example) you can just copy, refactor, and modify 😉
 
 Web Component Base
 ---
-This is a very minimal base class for creating reactive custom elements easily.
 
-When you extend the `WebComponent` class for your component, you only have to define the `template()` and `properties`, and changes in any attribute value will automatically cause the UI to render.
+[![Package information: NPM version](https://img.shields.io/npm/v/web-component-base)](https://www.npmjs.com/package/web-component-base)
+[![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
+[![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
 
-The result is a reactive UI on attribute changes.
+This provides a very minimal base class for creating reactive custom elements easily.
+
+When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
+
+The result is a reactive UI on property changes.
 
 ## Table of Contents
 1. [Vanilla JS import](#vanilla-js-import)
 1. [Installation](#installation)
 1. [Usage](#usage)
-1. [Minimal Example](#minimal-example) - Quick start you can copy-paste 😉
+1. [Quick Start Example](#quick-start-example) 😉
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM
     1. [`onChanges`](#onchanges) - an attribute value changed
@@ -78,9 +83,9 @@ The result is a reactive UI that updates on attribute changes:
 
 <img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-base-demo.gif" width="400" />
 
-## Minimal Example
+## Quick Start Example
 
-If you want a quick start example to copy, this is an example of using a custom element in a single .html file:
+Here is an example of using a custom element in a single .html file:
 
 ```html
 <!DOCTYPE html>

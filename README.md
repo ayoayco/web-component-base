@@ -1,3 +1,5 @@
+> TLDR; See [quick start example](#minimal-example) you can copy-paste and modify
+
 Web Component Base
 ---
 This is a very minimal base class for creating reactive custom elements easily.
@@ -10,6 +12,7 @@ The result is a reactive UI on attribute changes.
 1. [Vanilla JS import](#vanilla-js-import)
 1. [Installation](#installation)
 1. [Usage](#usage)
+1. [Minimal Example](#minimal-example) - Quick start you can copy-paste 😉
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM
     1. [`onChanges`](#onchanges) - an attribute value changed
@@ -76,6 +79,48 @@ In your HTML page:
 The result is a reactive UI that updates on attribute changes:
 
 <img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-base-demo.gif" width="400" />
+
+## Minimal Example
+
+If you want a quick start example to copy, this is an example of using a custom element in a single .html file:
+
+```html
+https://www.npmjs.com/package/web-component-base
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WC Base Test</title>
+    <script type="module">
+
+      // import from unpkg
+      import WebComponent from "https://unpkg.com/web-component-base";
+
+      class HelloWorld extends WebComponent {
+        static get observedAttributes() {
+          return ['name'];
+        }
+        get template() {
+          return `<h1>Hello ${this.name || 'World'}!</h1>`;
+        }
+      }
+
+      customElements.define("hello-world", HelloWorld);
+
+    </script>
+  </head>
+  <body>
+    <hello-world name="Ayo"></hello-world>
+    <script>
+        const helloWorld = document.querySelector('hello-world');
+        setTimeout(() => {
+            helloWorld.setAttribute('name', 'Ayo zzzZzzz');
+        }, 2500);
+    </script>
+  </body>
+</html>
+```
 
 ## Life-Cycle Hooks
 

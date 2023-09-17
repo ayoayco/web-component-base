@@ -2,7 +2,6 @@
 
 Web Component Base
 ---
-
 [![Package information: NPM version](https://img.shields.io/npm/v/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
@@ -103,7 +102,7 @@ Here is an example of using a custom element in a single .html file:
       import WebComponent from "https://unpkg.com/web-component-base";
 
       class HelloWorld extends WebComponent {
-        static properties = ["name", "emotion"];
+        static properties = ["name"];
 
         get template() {
           return `<h1>Hello ${this.name || 'World'}!</h1>`;

@@ -152,8 +152,9 @@ import WebComponent from "https://unpkg.com/web-component-base";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes
-  onChanges({attr, prev, curr}) {
-    console.log('>>> something changed', {attr, prev, curr})
+  onChanges(changes) {
+      const {property, previousValue, currentValue} = changes;
+      console.log('>>> ', {property, previousValue, currentValue})
   }
 
   get template() {

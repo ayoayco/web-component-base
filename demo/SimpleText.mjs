@@ -2,14 +2,12 @@
 import WebComponent from "../index.mjs";
 
 class SimpleText extends WebComponent {
-  greeting = "Hello";
-
-  static get observedAttributes() {
-    return ["greeting"];
+  onInit() {
+    this.onclick = () => console.log(">>> click!");
   }
 
   get template() {
-    return `<p>Simple text ${this.greeting}</p>`;
+    return `<span>Click me!</span>`;
   }
 }
 

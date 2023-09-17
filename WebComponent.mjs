@@ -6,12 +6,18 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
+   * triggered when the component is connected to the DOM
+   */
+  onInit() {}
+
+  /**
    * triggered when an attribute value changed
    */
   onChanges({ previousValue, currentValue }) {}
 
   connectedCallback() {
     this.render();
+    this.onInit();
   }
 
   attributeChangedCallback(property, previousValue, currentValue) {

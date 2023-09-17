@@ -16,6 +16,10 @@
       setTimeout(() => {
         helloWorld.setAttribute("emotion", "excited");
       }, 2500);
+
+      helloWorld.addEventListener("click", () => {
+        helloWorld.setAttribute("name", "Clicked");
+      });
     </script>
   </body>
 </html>

@@ -23,10 +23,9 @@ export class WebComponent extends HTMLElement {
   attributeChangedCallback(property, previousValue, currentValue) {
     if (previousValue !== currentValue) {
       this[property] = currentValue;
+      this.onChanges({ property, previousValue, currentValue });
       this.render();
     }
-
-    this.onChanges({ property, previousValue, currentValue });
   }
 
   render() {

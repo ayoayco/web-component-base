@@ -2,17 +2,17 @@
   "name": "web-component-base",
   "version": "1.6.1",
   "description": "Minimal base class for creating reactive custom elements easily",
-  "main": "index.mjs",
+  "main": "index.d.ts",
   "scripts": {
-    "start": "npx simple-server ."
+    "start": "npx simple-server .",
+    "build": "tsc --allowJs src/* --outDir dist --declaration"
   },
   "repository": {
     "type": "git",
     "url": "https://git.sr.ht/~ayoayco/web-component-base"
   },
   "files": [
-    "index.mjs",
-    "WebComponent.mjs"
+    "dist/*"
   ],
   "keywords": [
     "web components",
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://todo.sr.ht/~ayoayco/web-component-base"
   },
-  "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme"
+  "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
 }

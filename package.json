@@ -4,7 +4,7 @@
   "description": "Minimal base class for creating reactive custom elements easily",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx simple-server ."
   },
   "repository": {
     "type": "git",

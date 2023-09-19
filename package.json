@@ -5,15 +5,14 @@
   "main": "index.d.ts",
   "scripts": {
     "start": "npx simple-server .",
-    "build": "tsc --allowJs src/* --outDir dist --declaration"
+    "build": "npm run clean && tsc --allowJs src/* --outDir dist --declaration",
+    "clean": "rm -rf dist",
+    "publish": "npm run build && cp package.json ./dist && cd ./dist && npm publish --access public"
   },
   "repository": {
     "type": "git",
     "url": "https://git.sr.ht/~ayoayco/web-component-base"
   },
-  "files": [
-    "dist"
-  ],
   "keywords": [
     "web components",
     "web component",

@@ -1,13 +1,16 @@
 {
   "name": "web-component-base",
-  "version": "1.6.6",
+  "version": "1.6.5",
   "description": "Minimal base class for creating reactive custom elements easily",
   "main": "index.d.ts",
   "scripts": {
     "start": "npx simple-server .",
     "build": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
     "clean": "rm -rf dist",
-    "publish": "npm run clean && npm run build && cp package.json ./dist && cp ./src/* ./dist && cd ./dist && npm publish --access public"
+    "copy:meta": "cp package.json ./dist && cp README.md ./dist",
+    "publish": "npm run clean && npm run build && npm run copy:meta && cp ./src/* ./dist && cd ./dist && npm publish --access public",
+    "publish:patch": "npm version patch && npm run publish",
+    "publish:minor": "npm version minor && npm run publish"
   },
   "repository": {
     "type": "git",

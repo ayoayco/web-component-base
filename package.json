@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "1.6.7",
+  "version": "1.6.6",
   "description": "Minimal base class for creating reactive custom elements easily",
   "main": "index.d.ts",
   "scripts": {

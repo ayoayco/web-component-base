@@ -14,7 +14,7 @@ The result is a reactive UI on property changes.
 
 ## Table of Contents
 1. [Import via unpkg](#import-via-unpkg)
-1. [Installation via npm](#installation-via-npm)
+1. ~~[Installation via npm](#installation-via-npm)~~ - in-progress
 1. [Usage](#usage)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
@@ -32,12 +32,12 @@ import WebComponent from "https://unpkg.com/web-component-base";
 import WebComponent from "https://unpkg.com/web-component-base@1.6.0/index.mjs";
 ```
 
-## Installation via npm
-If you have a bundler to help resolving imports:
+## ~~Installation via npm~~ - in-progress
+Still fixing the module for this to be used as a node module
 
-```bash
+<!--```bash
 npm i web-component-base
-```
+```-->
 
 ## Usage
 

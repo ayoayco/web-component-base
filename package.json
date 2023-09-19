@@ -12,7 +12,7 @@
     "url": "https://git.sr.ht/~ayoayco/web-component-base"
   },
   "files": [
-    "dist/*"
+    "dist"
   ],
   "keywords": [
     "web components",

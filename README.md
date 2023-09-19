@@ -14,7 +14,7 @@ The result is a reactive UI on property changes.
 
 ## Table of Contents
 1. [Import via unpkg](#import-via-unpkg)
-1. ~~[Installation via npm](#installation-via-npm)~~ - in-progress
+1. [Installation via npm](#installation-via-npm)
 1. [Usage](#usage)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
@@ -23,21 +23,18 @@ The result is a reactive UI on property changes.
     1. [`onChanges`](#onchanges) - every time an attribute value changes
 
 ## Import via unpkg
-Import using [unpkg](https://unpkg.com/web-component-base) in your component. We will use this in the rest of our [usage examples](#usage).
+Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base";
-
-// or a specific version
-import WebComponent from "https://unpkg.com/web-component-base@1.6.0/index.mjs";
+import WebComponent from "https://unpkg.com/web-component-base/index.js";
 ```
 
-## ~~Installation via npm~~ - in-progress
-Still fixing the module for this to be used as a node module
+## Installation via npm
+Usable for projects using typescript, or with bundlers, or using import maps.
 
-<!--```bash
+```bash
 npm i web-component-base
-```-->
+```
 
 ## Usage
 
@@ -45,7 +42,7 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import WebComponent from "https://unpkg.com/web-component-base";
+import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class HelloWorld extends WebComponent {
   name = "World";
@@ -99,7 +96,7 @@ Here is an example of using a custom element in a single .html file:
     <script type="module">
 
       // import from unpkg
-      import WebComponent from "https://unpkg.com/web-component-base";
+      import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
       class HelloWorld extends WebComponent {
         static properties = ["name"];
@@ -134,7 +131,7 @@ Define behavior when certain events in the component's life cycle is triggered b
 - best for setting up the component
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base";
+import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
@@ -169,7 +166,7 @@ class ClickableText extends WebComponent {
 - triggered when an attribute value changed
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base";
+import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes

@@ -1,6 +1,6 @@
 // @ts-check
 
-import WebComponent from "../dist/index";
+import WebComponent from "../src/index.js";
 
 class SimpleText extends WebComponent {
   onInit() {

@@ -87,7 +87,7 @@ The result is a reactive UI that updates on attribute changes:
 
 This mental model attempts to reduce the cognitive complexity of authoring components:
 
-1. The `template` is a read-only property (initialized with a `get` keyword) that represents *how* the component view is rendered. This makes the template close to modification.
+1. The `template` is a read-only property (initialized with a `get` keyword) that represents *how* the component view is rendered.
 1. There is a `render()` method that triggers a view render.
 1. This `render()` method is *automatically* called under the hood every time an attribute value changed.
 1. You can *optionally* call this `render()` method at any point to trigger a render if you need.

@@ -1,4 +1,4 @@
-> **>>> TL;DR:** See the [Quick Start Example](#quick-start-example) you can just copy, refactor, and modify
+> **>>> TL;DR:** This provides a minimal vanilla JS base class that aims to reduce the complexity of creating reactive custom elements. See the [Quick Start Example](#quick-start-example)
 
 Web Component Base
 ---
@@ -6,7 +6,6 @@ Web Component Base
 [![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
 
-This provides a very minimal base class for creating reactive custom elements easily.
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 

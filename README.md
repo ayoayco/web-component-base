@@ -20,8 +20,9 @@ The result is a reactive UI on property changes.
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
+    1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
     1. [`onChanges`](#onchanges) - every time an attribute value changes
-    1. [`onDestroy`]()
+
 
 ## Import via unpkg
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).

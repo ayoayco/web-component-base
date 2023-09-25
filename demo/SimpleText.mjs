@@ -3,8 +3,16 @@
 import WebComponent from "../src/index.js";
 
 class SimpleText extends WebComponent {
+  clickCallback() {
+    console.log(">>> click!");
+  }
   onInit() {
-    this.onclick = () => console.log(">>> click!");
+    this.onclick = this.clickCallback;
+  }
+
+  onDestroy() {
+    console.log(">>> removing event listener");
+    this.removeEventListener("click", this.clickCallback);
   }
 
   get template() {

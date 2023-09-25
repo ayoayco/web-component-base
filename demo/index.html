@@ -20,6 +20,10 @@
       helloWorld.addEventListener("click", () => {
         helloWorld.setAttribute("name", "Clicked");
       });
+      const clickableText = document.querySelector("simple-text");
+      setTimeout(() => {
+        clickableText.remove();
+      }, 2000);
     </script>
   </body>
 </html>

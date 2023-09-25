@@ -21,6 +21,7 @@ The result is a reactive UI on property changes.
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
     1. [`onChanges`](#onchanges) - every time an attribute value changes
+    1. [`onDestroy`]()
 
 ## Import via unpkg
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
@@ -136,8 +137,8 @@ Here is an example of using a custom element in a single .html file:
 Define behavior when certain events in the component's life cycle is triggered by providing hook methods
 
 ### onInit()
-- triggered when the component is connected to the DOM
-- best for setting up the component
+- Triggered when the component is connected to the DOM
+- Best for setting up the component
 
 ```js
 import WebComponent from "https://unpkg.com/web-component-base/index.js";
@@ -155,7 +156,8 @@ class ClickableText extends WebComponent {
 ```
 
 ### afterViewInit()
-- triggered after the view is first initialized
+- Triggered after the view is first initialized
+
 
 ```js
 class ClickableText extends WebComponent {
@@ -171,8 +173,40 @@ class ClickableText extends WebComponent {
 }
 ```
 
+### onDestroy()
+- Triggered when the component is disconnected from the DOM
+- best for undoing any setup done in `onInit()`
+
+```js
+import WebComponent from "https://unpkg.com/web-component-base/index.js";
+
+class ClickableText extends WebComponent {
+ 
+  clickCallback() {
+    console.log(">>> click!");
+  }
+
+  onInit() {
+    this.onclick = this.clickCallback;
+  }
+
+  onDestroy() {
+    console.log(">>> removing event listener");
+    this.removeEventListener("click", this.clickCallback);
+  }
+
+  get template() {
+    return `<span style="cursor:pointer">Click me!</span>`;
+  }
+}
+```
+
+
+
+
+
 ### onChanges()
-- triggered when an attribute value changed
+- Triggered when an attribute value changed
 
 ```js
 import WebComponent from "https://unpkg.com/web-component-base/index.js";

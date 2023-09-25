@@ -18,14 +18,19 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
-   * triggered after view is initialized
+   * Triggered after view is initialized
    */
   afterViewInit() {}
 
   /**
-   * triggered when the component is connected to the DOM
+   * Triggered when the component is connected to the DOM
    */
   onInit() {}
+
+  /**
+   * Triggered when the component is disconnected from the DOM
+   */
+  onDestroy() {}
 
   /**
    * @param {{'property': string, 'previousValue': any, 'currentValue': any}} changes
@@ -36,6 +41,10 @@ export class WebComponent extends HTMLElement {
     this.onInit();
     this.render();
     this.afterViewInit();
+  }
+
+  disconnectedCallback() {
+    this.onDestroy();
   }
 
   /**

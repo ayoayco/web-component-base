@@ -1,6 +1,4 @@
-// @ts-check
-
-import WebComponent from "../src/index.js";
+import WebComponent from "../src/index.mjs";
 
 export class HelloWorld extends WebComponent {
   name = "World";
@@ -9,7 +7,10 @@ export class HelloWorld extends WebComponent {
   static properties = ["name", "emotion"];
 
   onInit() {
-    console.log("onInit", this.querySelector("h1"));
+    let count = 0;
+    this.onclick = () => {
+      this.setAttribute("name", `Clicked ${++count}x!`);
+    };
   }
 
   afterViewInit() {
@@ -22,9 +23,9 @@ export class HelloWorld extends WebComponent {
   }
 
   get template() {
-    return `<h1>Hello ${this.name}${
+    return `<button id="btn">Hello ${this.name}${
       this.emotion === "sad" ? ". 😭" : "! 🙌"
-    }</h1>`;
+    }</button>`;
   }
 }
 

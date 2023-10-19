@@ -19,21 +19,25 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Triggered after view is initialized
+   * @returns void
    */
   afterViewInit() {}
 
   /**
    * Triggered when the component is connected to the DOM
+   * @returns void
    */
   onInit() {}
 
   /**
    * Triggered when the component is disconnected from the DOM
+   * @returns void
    */
   onDestroy() {}
 
   /**
    * @param {{'property': string, 'previousValue': any, 'currentValue': any}} changes
+   * @returns void
    */
   onChanges(changes) {}
 

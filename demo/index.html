@@ -8,8 +8,10 @@
     <script type="module" src="SimpleText.mjs"></script>
   </head>
   <body>
-    <hello-world name="Ayo" emotion="sad"></hello-world>
-    <simple-text greeting="hey"></simple-text>
+    <hello-world id="hey" name="Ayo" emotion="sad"></hello-world>
+    <p>
+      <simple-text greeting="hey"></simple-text>
+    </p>
 
     <script type="module">
       const helloWorld = document.querySelector("hello-world");
@@ -17,9 +19,6 @@
         helloWorld.setAttribute("emotion", "excited");
       }, 2500);
 
-      helloWorld.addEventListener("click", () => {
-        helloWorld.setAttribute("name", "Clicked");
-      });
       const clickableText = document.querySelector("simple-text");
       setTimeout(() => {
         clickableText.remove();

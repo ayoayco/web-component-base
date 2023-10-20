@@ -142,11 +142,11 @@ Here is an example of using a custom element in a single .html file:
     </script>
   </head>
   <body>
-    <hello-world name="Ayo"></hello-world>
+    <hello-world data-name="Ayo"></hello-world>
     <script>
         const helloWorld = document.querySelector('hello-world');
         setTimeout(() => {
-            helloWorld.setAttribute('name', 'Ayo zzzZzzz');
+            helloWorld.setAttribute('data-name', 'Ayo zzzZzzz');
         }, 2500);
     </script>
   </body>

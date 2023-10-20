@@ -98,7 +98,7 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 Attributes are generally in `kebab-case`. You can access attribute properties in two ways
 1. Use the camelCase counterpart: `this.myProp`, which is automatically filled.
-1. Or stick with kebab-case: `this[my-prop]`
+1. Or stick with kebab-case: `this["my-prop"]`
 
 ```js
 class HelloWorld extends WebComponent {
@@ -107,7 +107,7 @@ class HelloWorld extends WebComponent {
   get template() {
     return `
         <h1>Hello ${this.myProp}</h1>
-        <h2>Hello ${this['my-prop']}</h2>
+        <h2>Hello ${this["my-prop"]}</h2>
     `;
   }
 }
@@ -130,10 +130,10 @@ Here is an example of using a custom element in a single .html file:
       import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
       class HelloWorld extends WebComponent {
-        static properties = ["name"];
+        static properties = ["data-name"];
 
         get template() {
-          return `<h1>Hello ${this.name || 'World'}!</h1>`;
+          return `<h1>Hello ${this.dataName || 'World'}!</h1>`;
         }
       }
 

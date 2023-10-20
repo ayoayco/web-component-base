@@ -16,6 +16,7 @@ The result is a reactive UI on property changes.
 1. [Installation via npm](#installation-via-npm)
 1. [Usage](#usage)
 1. [`template` vs `render()`](#template-vs-render)
+1. [Prop access](#prop-access)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
@@ -50,11 +51,11 @@ class HelloWorld extends WebComponent {
   name = "World";
   emotion = "excited";
 
-  static properties = ["name", "emotion"];
+  static properties = ["data-name", "emotion"];
 
   get template() {
     return `
-        <h1>Hello ${this.name}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+        <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
   }
 }
 
@@ -92,6 +93,25 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 1. There is a `render()` method that triggers a view render.
 1. This `render()` method is *automatically* called under the hood every time an attribute value changed.
 1. You can *optionally* call this `render()` method at any point to trigger a render if you need.
+
+## Prop Access
+
+Attributes are generally in `kebab-case`. You can access attribute properties in two ways
+1. Use the camelCase counterpart: `this.myProp`, which is automatically filled.
+1. Or stick with kebab-case: `this[my-prop]`
+
+```js
+class HelloWorld extends WebComponent {
+  static properties = ["my-prop"];
+
+  get template() {
+    return `
+        <h1>Hello ${this.myProp}</h1>
+        <h2>Hello ${this['my-prop']}</h2>
+    `;
+  }
+}
+```
 
 ## Quick Start Example
 

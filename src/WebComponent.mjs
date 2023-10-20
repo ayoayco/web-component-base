@@ -57,8 +57,11 @@ export class WebComponent extends HTMLElement {
    * @param {any} currentValue
    */
   attributeChangedCallback(property, previousValue, currentValue) {
+    const camelCaps = (kebab) =>
+      kebab.replace(/-./g, (x) => x[1].toUpperCase());
     if (previousValue !== currentValue) {
       this[property] = currentValue;
+      this[camelCaps(property)] = currentValue;
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }

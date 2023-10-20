@@ -1,15 +1,15 @@
-import WebComponent from "../src/index.mjs";
+import WebComponent from "../src/index.js";
 
 export class HelloWorld extends WebComponent {
   name = "World";
   emotion = "excited";
 
-  static properties = ["name", "emotion"];
+  static properties = ["data-name", "emotion"];
 
   onInit() {
     let count = 0;
     this.onclick = () => {
-      this.setAttribute("name", `Clicked ${++count}x!`);
+      this.setAttribute("data-name", `Clicked ${++count}x!`);
     };
   }
 
@@ -23,7 +23,7 @@ export class HelloWorld extends WebComponent {
   }
 
   get template() {
-    return `<button id="btn">Hello ${this.name}${
+    return `<button id="btn">Hello ${this.dataName}${
       this.emotion === "sad" ? ". 😭" : "! 🙌"
     }</button>`;
   }

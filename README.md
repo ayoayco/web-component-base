@@ -48,7 +48,7 @@ In your component class:
 import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class HelloWorld extends WebComponent {
-  name = "World";
+  dataName = "World";
   emotion = "excited";
 
   static properties = ["data-name", "emotion"];

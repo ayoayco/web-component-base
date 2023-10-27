@@ -10,8 +10,7 @@
     "clean": "rm -rf dist",
     "copy:meta": "cp package.json ./dist && cp README.md ./dist",
     "copy:source": "cp ./src/* ./dist",
-    "prepare": "npm run clean && npm run build && npm run copy:meta && npm run copy:source && cd ./dist",
-    "publish": "npm publish --access public",
+    "publish": "npm run clean && npm run build && npm run copy:meta && npm run copy:source && cd ./dist && npm publish --access public",
     "publish:patch": "npm version patch && npm run publish",
     "publish:minor": "npm version minor && npm run publish"
   },

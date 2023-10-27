@@ -1,6 +1,16 @@
 // @ts-check
 
+/**
+ * A base class with custom element utilities extending HTMLElement
+ * @class
+ * @constructor
+ * @public
+ */
 export class WebComponent extends HTMLElement {
+  constructor() {
+    super();
+  }
+
   /**
    * @type Array<string>
    */
@@ -57,11 +67,10 @@ export class WebComponent extends HTMLElement {
    * @param {any} currentValue
    */
   attributeChangedCallback(property, previousValue, currentValue) {
-    const camelCaps = (kebab) =>
-      kebab.replace(/-./g, (x) => x[1].toUpperCase());
+    const camelCaps = this.#getCamelCaps(property);
     if (previousValue !== currentValue) {
       this[property] = currentValue;
-      this[camelCaps(property)] = currentValue;
+      this[camelCaps] = currentValue;
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
@@ -69,5 +78,9 @@ export class WebComponent extends HTMLElement {
 
   render() {
     this.innerHTML = this.template;
+  }
+
+  #getCamelCaps(kebab) {
+    return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 }

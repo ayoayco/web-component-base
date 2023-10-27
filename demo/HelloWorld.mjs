@@ -1,3 +1,4 @@
+// @ts-check
 import WebComponent from "../src/index.js";
 
 export class HelloWorld extends WebComponent {

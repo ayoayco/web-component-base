@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * A base class with custom element utilities extending HTMLElement
  * @class
@@ -84,3 +82,5 @@ export class WebComponent extends HTMLElement {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 }
+
+export default WebComponent;

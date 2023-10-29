@@ -1,3 +1,2 @@
-// @ts-check
-import { WebComponent } from "./WebComponent.mjs";
+import { WebComponent } from "./WebComponent.js";
 export default WebComponent;

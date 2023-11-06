@@ -1,8 +1,26 @@
 /**
- * A base class with custom element utilities extending HTMLElement
- * @class
- * @constructor
- * @public
+ * A minimal vanilla JS base class to reduce the complexity of creating reactive custom elements
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @author Ayo Ayco <https://ayo.ayco.io>
+ * @see https://www.npmjs.com/package/web-component-base#readme
+ * @example
+ * ```js
+ * import WebComponent from "https://unpkg.com/web-component-base/index.js";
+ *
+ * class HelloWorld extends WebComponent {
+ *   dataName = "World";
+ *   emotion = "excited";
+ *
+ *   static properties = ["data-name", "emotion"];
+ *
+ *   get template() {
+ *     return `
+ *         <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</* h1>`;
+ *   }
+ * }
+ *
+ * customElements.define('hello-world', HelloWorld);
+ * ```
  */
 export class WebComponent extends HTMLElement {
   constructor() {
@@ -50,12 +68,14 @@ export class WebComponent extends HTMLElement {
   onChanges(changes) {}
 
   connectedCallback() {
+    super.connectedCallback();
     this.onInit();
     this.render();
     this.afterViewInit();
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     this.onDestroy();
   }
 

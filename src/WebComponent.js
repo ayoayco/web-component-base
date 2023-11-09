@@ -23,10 +23,6 @@
  * ```
  */
 export class WebComponent extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   /**
    * @type Array<string>
    */
@@ -68,14 +64,12 @@ export class WebComponent extends HTMLElement {
   onChanges(changes) {}
 
   connectedCallback() {
-    super.connectedCallback();
     this.onInit();
     this.render();
     this.afterViewInit();
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
     this.onDestroy();
   }
 

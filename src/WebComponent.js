@@ -1,5 +1,5 @@
 /**
- * A minimal vanilla JS base class to reduce the complexity of creating reactive custom elements
+ * A minimal base class to reduce the complexity of creating reactive custom elements
  * @license MIT <https://opensource.org/licenses/MIT>
  * @author Ayo Ayco <https://ayo.ayco.io>
  * @see https://www.npmjs.com/package/web-component-base#readme
@@ -8,14 +8,11 @@
  * import WebComponent from "https://unpkg.com/web-component-base/index.js";
  *
  * class HelloWorld extends WebComponent {
- *   dataName = "World";
- *   emotion = "excited";
- *
  *   static properties = ["data-name", "emotion"];
  *
  *   get template() {
  *     return `
- *         <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</* h1>`;
+ *         <h1>Hello ${this.dataName || 'World'}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
  *   }
  * }
  *
@@ -58,7 +55,13 @@ export class WebComponent extends HTMLElement {
   onDestroy() {}
 
   /**
-   * @param {{'property': string, 'previousValue': any, 'currentValue': any}} changes
+   * Triggered when an attribute value changes
+   * @typedef {{
+   *  property: string,
+   *  previousValue: any,
+   *  currentValue: any
+   * }} Changes
+   * @param {Changes} changes
    * @returns void
    */
   onChanges(changes) {}
@@ -92,6 +95,11 @@ export class WebComponent extends HTMLElement {
     this.innerHTML = this.template;
   }
 
+  /**
+   * Converts a kebab-cased string into camelCaps
+   * @param {string} kebab string in kebab-case
+   * @returns {string}
+   */
   #getCamelCaps(kebab) {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }

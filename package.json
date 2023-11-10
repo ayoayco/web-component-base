@@ -8,7 +8,7 @@
     "start": "npx simple-server .",
     "build": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
     "clean": "rm -rf dist",
-    "copy:meta": "cp package.json ./dist && cp README.md ./dist",
+    "copy:meta": "cp package.json ./dist && cp README.md ./dist && cp LICENSE ./dist",
     "copy:source": "cp ./src/* ./dist",
     "publish": "npm run clean && npm run build && npm run copy:meta && npm run copy:source && cd ./dist && npm publish --access public",
     "publish:patch": "npm version patch && npm run publish",

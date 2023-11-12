@@ -8,11 +8,17 @@
  * import WebComponent from "https://unpkg.com/web-component-base/index.js";
  *
  * class HelloWorld extends WebComponent {
+ *   // initialize prop
+ *   dataName = 'World';
+ *
+ *   // tell the browser which attributes to cause a render
  *   static properties = ["data-name", "emotion"];
  *
+ *   // give the component a readonly template
+ *   // note: props have kebab-case & camelCase counterparts
  *   get template() {
  *     return `
- *         <h1>Hello ${this.dataName || 'World'}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+ *         <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
  *   }
  * }
  *

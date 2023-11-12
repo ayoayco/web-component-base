@@ -2,7 +2,7 @@
 import WebComponent from "../src/index.js";
 
 export class HelloWorld extends WebComponent {
-  name = "World";
+  dataName = "World";
   emotion = "excited";
 
   static properties = ["data-name", "emotion"];

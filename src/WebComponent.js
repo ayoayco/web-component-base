@@ -8,9 +8,6 @@
  * import WebComponent from "https://unpkg.com/web-component-base/index.js";
  *
  * class HelloWorld extends WebComponent {
- *   // initialize prop
- *   dataName = 'World';
- *
  *   // tell the browser which attributes to cause a render
  *   static properties = ["data-name", "emotion"];
  *
@@ -18,7 +15,7 @@
  *   // note: props have kebab-case & camelCase counterparts
  *   get template() {
  *     return `
- *         <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+ *         <h1>Hello ${this.props.dataName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
  *   }
  * }
  *
@@ -27,12 +24,15 @@
  */
 export class WebComponent extends HTMLElement {
   /**
+   * Array of strings that tells the browsers which attributes will cause a render
    * @type Array<string>
    */
   static properties = [];
 
   /**
+   * Read-only string property that represents how the component will be rendered
    * @returns string
+   * @see https://www.npmjs.com/package/web-component-base#template-vs-render
    */
   get template() {
     return "";
@@ -43,19 +43,48 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
-   * Triggered after view is initialized
+   * Proxy object containing camelCase counterparts of observed attributes.
+   * This works like HTMLElement.dataset except dataset is only for attributes prefixed with `data-`.
+   * Assigning a value to a camelCase counterpart using `props` will automatically call `this.setAttribute` under the hood for any attribute name, with or without the `data-` prefix.
+   * @see https://www.npmjs.com/package/web-component-base#prop-access
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+   *
+   * @example
+   *
+   * class HelloWorld extends WebComponent {
+   *   static properties = ["my-prop"];
+   *   get template() {
+   *     return `
+   *        <h1>Hello ${this.props.myProp}</h1>
+   *        <h2>Hello ${this["my-prop"]}</h2>
+   *     `;
+   *   }
+   * }
+   */
+  props;
+
+  constructor() {
+    super();
+    if (!this.props) {
+      const { props, ...clone } = this;
+      this.props = new Proxy(clone, this.#handler(this));
+    }
+  }
+
+  /**
+   * Triggered after view is initialized. Best for querying DOM nodes that will only exist after render.
    * @returns void
    */
   afterViewInit() {}
 
   /**
-   * Triggered when the component is connected to the DOM
+   * Triggered when the component is connected to the DOM. Best for initializing the component like attaching event handlers.
    * @returns void
    */
   onInit() {}
 
   /**
-   * Triggered when the component is disconnected from the DOM
+   * Triggered when the component is disconnected from the DOM. Any initialization done in `onInit` must be undone here.
    * @returns void
    */
   onDestroy() {}
@@ -89,9 +118,12 @@ export class WebComponent extends HTMLElement {
    */
   attributeChangedCallback(property, previousValue, currentValue) {
     const camelCaps = this.#getCamelCaps(property);
+
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
-      this[camelCaps] = currentValue === "" || currentValue;
+
+      this.props[camelCaps] = this[property];
+
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
@@ -109,6 +141,24 @@ export class WebComponent extends HTMLElement {
   #getCamelCaps(kebab) {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
+
+  #handler = (el) => ({
+    set(obj, prop, newval) {
+      obj[prop] = newval;
+
+      const kebabize = (str) =>
+        str.replace(
+          /[A-Z]+(?![a-z])|[A-Z]/g,
+          ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
+        );
+
+      const kebab = kebabize(prop);
+      el.setAttribute(kebab, newval);
+
+      // Indicate success
+      return true;
+    },
+  });
 }
 
 export default WebComponent;

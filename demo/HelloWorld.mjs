@@ -2,30 +2,16 @@
 import WebComponent from "../src/index.js";
 
 export class HelloWorld extends WebComponent {
-  dataName = "World";
-  emotion = "excited";
-
-  static properties = ["data-name", "emotion"];
+  static properties = ["my-name", "emotion"];
 
   onInit() {
     let count = 0;
-    this.onclick = () => {
-      this.setAttribute("data-name", `Clicked ${++count}x!`);
-    };
-  }
-
-  afterViewInit() {
-    console.log("afterViewInit", this.querySelector("h1"));
-  }
-
-  onChanges(changes) {
-    const { property, previousValue, currentValue } = changes;
-    console.log(`${property} changed`, { previousValue, currentValue });
+    this.onclick = () => (this.props.myName = `Clicked ${++count}`);
   }
 
   get template() {
-    return `<button id="btn">Hello ${this.dataName}${
-      this.emotion === "sad" ? ". 😭" : "! 🙌"
+    return `<button id="btn">Hello ${this.props.myName ?? "World"}${
+      this.props.emotion === "sad" ? ". 😭" : "! 🙌"
     }</button>`;
   }
 }

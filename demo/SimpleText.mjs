@@ -16,7 +16,7 @@ class SimpleText extends WebComponent {
   }
 
   get template() {
-    return `<span>Click me!</span>`;
+    return `<span style="cursor:pointer">Click me!</span>`;
   }
 }
 

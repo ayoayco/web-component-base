@@ -96,8 +96,10 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 ## Prop Access
 
-Attributes are generally in `kebab-case`. You can access attribute properties in two ways
-1. Use the camelCase counterpart: `this.myProp`, which is automatically filled.
+A `WebComponent.props` read-only property exists to provide easy access to *any* observed attribute. This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) except `dataset` is only for attributes prefixed with `data-*`. Assigning a value to a camelCase counterpart using `WebComponent.props` will call `this.setAttribute` for any attribute name, with or without the `data-*` prefix.
+
+You can access attribute properties in two ways:
+1. Use the camelCase counterpart: `this.props.myProp`, which is automatically filled.
 1. Or stick with kebab-case: `this["my-prop"]`
 
 ```js
@@ -106,7 +108,7 @@ class HelloWorld extends WebComponent {
 
   get template() {
     return `
-        <h1>Hello ${this.myProp}</h1>
+        <h1>Hello ${this.props.myProp}</h1>
         <h2>Hello ${this["my-prop"]}</h2>
     `;
   }

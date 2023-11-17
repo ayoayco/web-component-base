@@ -125,7 +125,7 @@ export class WebComponent extends HTMLElement {
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
-
+      this[camelCaps] = this[property]; // remove on v2
       this.props[camelCaps] = this[property];
 
       this.render();

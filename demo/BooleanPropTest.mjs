@@ -2,15 +2,16 @@ import WebComponent from "../src/WebComponent.js";
 
 export class BooleanPropTest extends WebComponent {
   isInline = false;
+  anotherone = false;
 
-  static properties = ["is-inline"];
+  static properties = ["is-inline", "anotherone"];
 
   onChanges(changes) {
     console.log(">>> boolean prop test", changes);
   }
 
   get template() {
-    return `<span>${this.isInline}</span>`;
+    return `<p>is-inline: ${this.isInline}</p><p>another-one: ${this.anotherone}</p>`;
   }
 }
 

@@ -43,9 +43,9 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
-   * Proxy object containing camelCase counterparts of observed attributes.
+   * Read-only property containing camelCase counterparts of observed attributes.
    * This works like HTMLElement.dataset except dataset is only for attributes prefixed with `data-`.
-   * Assigning a value to a camelCase counterpart using `props` will automatically call `this.setAttribute` under the hood for any attribute name, with or without the `data-` prefix.
+   * A camelCase counterpart using `WebComponent.props` will give read/write access to any attribute, with or without the `data-*` prefix.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
    *
@@ -61,13 +61,17 @@ export class WebComponent extends HTMLElement {
    *   }
    * }
    */
-  props;
+  get props() {
+    return this.#props;
+  }
+
+  #props;
 
   constructor() {
     super();
-    if (!this.props) {
+    if (!this.#props) {
       const { props, ...clone } = this;
-      this.props = new Proxy(clone, this.#handler(this));
+      this.#props = new Proxy(clone, this.#handler(this));
     }
   }
 

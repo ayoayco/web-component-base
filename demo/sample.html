@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WC Base Test</title>
+    <script type="module">
+      import WebComponent from "https://unpkg.com/web-component-base/index.js";
+      class HelloWorld extends WebComponent {
+        static properties = ["data-name"];
+
+        get template() {
+          return `<h1>Hello ${this.props.dataName ?? "World"}!</h1>`;
+        }
+      }
+      customElements.define("hello-world", HelloWorld);
+    </script>
+  </head>
+  <body>
+    <hello-world data-name="Ayo"></hello-world>
+    <script>
+      const helloWorld = document.querySelector("hello-world");
+      setTimeout(() => {
+        helloWorld.setAttribute("data-name", "Ayo zzzZzzz");
+      }, 2500);
+    </script>
+  </body>
+</html>

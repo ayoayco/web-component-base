@@ -90,8 +90,8 @@ export class WebComponent extends HTMLElement {
   attributeChangedCallback(property, previousValue, currentValue) {
     const camelCaps = this.#getCamelCaps(property);
     if (previousValue !== currentValue) {
-      this[property] = currentValue;
-      this[camelCaps] = currentValue;
+      this[property] = currentValue === "" || currentValue;
+      this[camelCaps] = currentValue === "" || currentValue;
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }

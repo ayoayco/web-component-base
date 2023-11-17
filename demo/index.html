@@ -6,11 +6,15 @@
     <title>WC demo</title>
     <script type="module" src="HelloWorld.mjs"></script>
     <script type="module" src="SimpleText.mjs"></script>
+    <script type="module" src="BooleanPropTest.mjs"></script>
   </head>
   <body>
     <hello-world id="hey" data-name="Ayo" emotion="sad"></hello-world>
     <p>
       <simple-text greeting="hey"></simple-text>
+    </p>
+    <p>
+      <boolean-prop-test></boolean-prop-test>
     </p>
 
     <script type="module">
@@ -18,11 +22,6 @@
       setTimeout(() => {
         helloWorld.setAttribute("emotion", "excited");
       }, 2500);
-
-      const clickableText = document.querySelector("simple-text");
-      setTimeout(() => {
-        clickableText.remove();
-      }, 2000);
     </script>
   </body>
 </html>

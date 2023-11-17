@@ -48,14 +48,11 @@ In your component class:
 import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class HelloWorld extends WebComponent {
-  dataName = "World";
-  emotion = "excited";
-
   static properties = ["data-name", "emotion"];
 
   get template() {
     return `
-        <h1>Hello ${this.dataName}${this.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+        <h1>Hello ${this.props.dataName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
   }
 }
 
@@ -127,20 +124,15 @@ Here is an example of using a custom element in a single .html file:
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WC Base Test</title>
     <script type="module">
-
-      // import from unpkg
       import WebComponent from "https://unpkg.com/web-component-base/index.js";
-
       class HelloWorld extends WebComponent {
         static properties = ["data-name"];
 
         get template() {
-          return `<h1>Hello ${this.dataName || 'World'}!</h1>`;
+          return `<h1>Hello ${this.props.dataName ?? 'World'}!</h1>`;
         }
       }
-
       customElements.define("hello-world", HelloWorld);
-
     </script>
   </head>
   <body>

@@ -95,11 +95,7 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 ## Prop Access
 
- The `WebComponent.props` read-only property is provided for easy access to *any* observed attribute. This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset), except `dataset` is only for attributes prefixed with `data-*`.
-
-A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-*` prefix.
-
-### Accessing props within the component
+ The `WebComponent.props` read-only property is provided for easy access to *any* observed attribute.
 
 This API gives us read/write access to any attribute properties:
 
@@ -118,15 +114,8 @@ class HelloWorld extends WebComponent {
 }
 ```
 
-With this, the `this.props` object gives us an easy way to read or write property values, which also triggers the attribute change hook.
+Assigning value to the `props.camelCase` counterpart will trigger an attribute change hook.
 
-The alternatives are using what `HTMLElement` provides which are
-1. `HTMLElement.dataset` for attributes prefixed with `data-*`
-1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`
-
-### Updating props in the parent
-
-Assigning value to the `props.camelCase` counterpart will trigger an attribute change too.
 
 For example, assigning a value like so:
 ```
@@ -139,7 +128,16 @@ this.props.myName = 'hello'
 this.setAttribute('my-name','hello');
 ```
 
-Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provide with `static properties = ['my-name']`;
+Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provided with `static properties = ['my-name']`;
+
+> This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset), except `dataset` is only for attributes prefixed with `data-*`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-*` prefix.
+
+
+### Alternatives
+
+The current alternatives are using what `HTMLElement` provides out-of-the-box, which are:
+1. `HTMLElement.dataset` for attributes prefixed with `data-*`
+1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows
 
 ## Quick Start Example
 

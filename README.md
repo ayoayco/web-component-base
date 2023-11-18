@@ -1,4 +1,3 @@
-> **>>> TL;DR:** This provides a zero-dependency, ~760 Bytes (when minified & brotlied), JS base class that aims to reduce the complexity of creating reactive custom elements. [Skip to the Quick Start Example](#quick-start-example)
 
 Web Component Base
 ---
@@ -6,6 +5,7 @@ Web Component Base
 [![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
 
+This provides a zero-dependency, ~760 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily.
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
@@ -17,12 +17,14 @@ The result is a reactive UI on property changes.
 1. [Usage](#usage)
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
+    1. [Alternatives](#alternatives)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
     1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
-    1. [`onChanges`](#onchanges) - every time an attribute value changes
+    1. [`oChanges`](#onchanges) - every time an attribute value changes
+1. [Library Size](#library-size)
 
 
 ## Import via unpkg
@@ -147,18 +149,17 @@ Here is an example of using a custom element in a single .html file:
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WC Base Test</title>
     <script type="module">
       import WebComponent from "https://unpkg.com/web-component-base/index.js";
+
       class HelloWorld extends WebComponent {
         static properties = ["my-name"];
-
         get template() {
-          return `<h1>Hello ${this.props.myName ?? 'World'}!</h1>`;
+          return `<h1>Hello ${this.props.myName}!</h1>`;
         }
       }
+
       customElements.define("hello-world", HelloWorld);
     </script>
   </head>
@@ -265,3 +266,7 @@ class ClickableText extends WebComponent {
   }
 }
 ```
+
+## Library Size 
+
+Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the library size as around 767 B, minified and brotlied. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.

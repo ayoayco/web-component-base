@@ -101,12 +101,16 @@ export class WebComponent extends HTMLElement {
   /**
    * start HTMLElement callbacks
    */
+  constructor() {
+    super();
+    this.#initializeProps();
+  }
+
   static get observedAttributes() {
     return this.properties;
   }
 
   connectedCallback() {
-    this.#initializeProps();
     this.onInit();
     this.render();
     this.afterViewInit();

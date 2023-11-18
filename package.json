@@ -8,9 +8,10 @@
     "start": "npx simple-server .",
     "build": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
     "clean": "rm -rf dist",
+    "minify": "npx uglifyjs ./dist/WebComponent.js -o ./dist/WebComponent.min.js",
     "copy:meta": "cp package.json ./dist && cp README.md ./dist && cp LICENSE ./dist",
     "copy:source": "cp ./src/* ./dist",
-    "publish": "npm run clean && npm run build && npm run copy:meta && npm run copy:source && cd ./dist && npm publish --access public",
+    "publish": "npm run clean && npm run build && npm run copy:meta && npm run copy:source && npm run minify && cd ./dist && npm publish --access public",
     "publish:patch": "npm version patch && npm run publish",
     "publish:minor": "npm version minor && npm run publish",
     "check:size": "npm run build && size-limit ./dist"
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "uglify-js": "^3.17.4"
   }
 }

@@ -154,27 +154,26 @@ export class WebComponent extends HTMLElement {
    * @returns
    */
   #handler = (setter) => ({
-    set(obj, prop, newval) {
-      const oldval = obj[prop];
-      console.log(">>> old value:", oldval, typeof oldval);
+    set(obj, prop, newValue) {
+      const oldValue = obj[prop];
 
-      obj[prop] = newval;
+      obj[prop] = newValue;
 
       /**
        * Converts camelCaps string into kebab-case
        * @param {string} str
        * @returns {string}
        */
-      const kebabize = (str) =>
+      const getKebab = (str) =>
         str.replace(
           /[A-Z]+(?![a-z])|[A-Z]/g,
           ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
         );
 
-      if (JSON.stringify(oldval) !== newval) {
-        console.log(oldval, newval);
-        const kebab = kebabize(prop);
-        setter(kebab, newval);
+      if (oldValue != newValue) {
+        console.log("value changed", oldValue, newValue);
+        const kebab = getKebab(prop);
+        setter(kebab, newValue);
       }
 
       return true;

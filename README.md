@@ -33,7 +33,7 @@ import WebComponent from "https://unpkg.com/web-component-base/index.js";
 ```
 
 ## Installation via npm
-Usable for projects using typescript, or with bundlers, or using import maps.
+Usable for projects with bundlers or using import maps.
 
 ```bash
 npm i web-component-base
@@ -48,11 +48,11 @@ In your component class:
 import WebComponent from "https://unpkg.com/web-component-base/index.js";
 
 class HelloWorld extends WebComponent {
-  static properties = ["data-name", "emotion"];
+  static properties = ["my-name", "emotion"];
 
   get template() {
     return `
-        <h1>Hello ${this.props.dataName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+        <h1>Hello ${this.props.myName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
   }
 }
 
@@ -67,7 +67,7 @@ In your HTML page:
   <script type="module" src="HelloWorld.mjs"></script>
 </head>
 <body>
-  <hello-world name="Ayo" emotion="sad">
+  <hello-world my-name="Ayo" emotion="sad">
   <script>
       const helloWorld = document.querySelector('hello-world');
 
@@ -128,21 +128,21 @@ Here is an example of using a custom element in a single .html file:
     <script type="module">
       import WebComponent from "https://unpkg.com/web-component-base/index.js";
       class HelloWorld extends WebComponent {
-        static properties = ["data-name"];
+        static properties = ["my-name"];
 
         get template() {
-          return `<h1>Hello ${this.props.dataName ?? 'World'}!</h1>`;
+          return `<h1>Hello ${this.props.myName ?? 'World'}!</h1>`;
         }
       }
       customElements.define("hello-world", HelloWorld);
     </script>
   </head>
   <body>
-    <hello-world data-name="Ayo"></hello-world>
+    <hello-world my-name="Ayo"></hello-world>
     <script>
         const helloWorld = document.querySelector('hello-world');
         setTimeout(() => {
-            helloWorld.setAttribute('data-name', 'Ayo zzzZzzz');
+            helloWorld.setAttribute('my-name', 'Ayo zzzZzzz');
         }, 2500);
     </script>
   </body>

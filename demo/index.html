@@ -9,7 +9,7 @@
     <script type="module" src="BooleanPropTest.mjs"></script>
   </head>
   <body>
-    <hello-world></hello-world>
+    <hello-world emotion="sad"></hello-world>
     <p>
       <simple-text></simple-text>
     </p>
@@ -20,7 +20,7 @@
     <script type="module">
       const helloWorld = document.querySelector("hello-world");
       setTimeout(() => {
-        helloWorld.setAttribute("emotion", "excited");
+        helloWorld.props.emotion = "excited";
       }, 2500);
     </script>
   </body>

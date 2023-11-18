@@ -73,6 +73,8 @@ In your HTML page:
 
       setTimeout(() => {
         helloWorld.setAttribute('emotion', 'excited');
+        // or:
+        helloWorld.props.emotion = 'excited';
       }, 2500)
   </script>
 </body>
@@ -93,26 +95,51 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 ## Prop Access
 
-There is a `WebComponent.props` read-only property provided for easy access to *any* observed attribute. This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) except `dataset` is only for attributes prefixed with `data-*`.
+ The `WebComponent.props` read-only property is provided for easy access to *any* observed attribute. This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset), except `dataset` is only for attributes prefixed with `data-*`.
 
 A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-*` prefix.
 
-You can access attribute properties in two ways:
-1. Use the camelCase counterpart: `this.props.myProp`, which is automatically filled.
-1. Or stick with kebab-case: `this["my-prop"]`
+### Accessing props within the component
+
+This API gives us read/write access to any attribute properties:
 
 ```js
 class HelloWorld extends WebComponent {
   static properties = ["my-prop"];
-
+  onInit() {
+    let count = 0;
+    this.onclick = () => this.props.myProp = `${++count}`
+  }
   get template() {
     return `
         <h1>Hello ${this.props.myProp}</h1>
-        <h2>Hello ${this["my-prop"]}</h2>
     `;
   }
 }
 ```
+
+With this, the `this.props` object gives us an easy way to read or write property values, which also triggers the attribute change hook.
+
+The alternatives are using what `HTMLElement` provides which are
+1. `HTMLElement.dataset` for attributes prefixed with `data-*`
+1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`
+
+### Updating props in the parent
+
+Assigning value to the `props.camelCase` counterpart will trigger an attribute change too.
+
+For example, assigning a value like so:
+```
+this.props.myName = 'hello'
+```
+
+...is like calling the following:
+
+```
+this.setAttribute('my-name','hello');
+```
+
+Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provide with `static properties = ['my-name']`;
 
 ## Quick Start Example
 
@@ -142,7 +169,7 @@ Here is an example of using a custom element in a single .html file:
     <script>
         const helloWorld = document.querySelector('hello-world');
         setTimeout(() => {
-            helloWorld.setAttribute('my-name', 'Ayo zzzZzzz');
+            helloWorld.props.myName = 'Ayo zzzZzzz';
         }, 2500);
     </script>
   </body>

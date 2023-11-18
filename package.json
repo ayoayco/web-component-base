@@ -1,7 +1,7 @@
 {
   "name": "web-component-base",
   "version": "1.12.8",
-  "description": "Minimal base class for creating reactive custom elements easily",
+  "description": "A zero-dependency, ~760 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily",
   "main": "index.d.ts",
   "type": "module",
   "scripts": {
@@ -16,9 +16,9 @@
     "check:size": "npm run build && size-limit ./dist"
   },
   "repository": {
-    "type": "git",
-    "url": "https://git.sr.ht/~ayoayco/web-component-base"
+    "url": "https://github.com/ayoayco/web-component-base"
   },
+  "homepage": "https://github.com/ayoayco/web-component-base#readme",
   "keywords": [
     "web components",
     "web component",
@@ -30,7 +30,6 @@
   "bugs": {
     "url": "https://todo.sr.ht/~ayoayco/web-component-base"
   },
-  "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",
     "typescript": "^5.2.2"

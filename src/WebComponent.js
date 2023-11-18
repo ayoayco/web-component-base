@@ -4,7 +4,7 @@
  * @author Ayo Ayco <https://ayo.ayco.io>
  * @see https://www.npmjs.com/package/web-component-base#readme
  * @example
- * ```js
+ *
  * import WebComponent from "https://unpkg.com/web-component-base/index.js";
  *
  * class HelloWorld extends WebComponent {
@@ -20,26 +20,21 @@
  * }
  *
  * customElements.define('hello-world', HelloWorld);
- * ```
  */
 export class WebComponent extends HTMLElement {
   /**
    * Array of strings that tells the browsers which attributes will cause a render
-   * @type Array<string>
+   * @type {Array<string>}
    */
   static properties = [];
 
   /**
    * Read-only string property that represents how the component will be rendered
-   * @returns string
+   * @returns {string}
    * @see https://www.npmjs.com/package/web-component-base#template-vs-render
    */
   get template() {
     return "";
-  }
-
-  static get observedAttributes() {
-    return this.properties;
   }
 
   /**
@@ -65,6 +60,9 @@ export class WebComponent extends HTMLElement {
     return this.#props;
   }
 
+  /**
+   * @type {DOMStringMap}
+   */
   #props;
 
   constructor() {
@@ -77,33 +75,43 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Triggered after view is initialized. Best for querying DOM nodes that will only exist after render.
-   * @returns void
+   * @returns {void}
    */
   afterViewInit() {}
 
   /**
    * Triggered when the component is connected to the DOM. Best for initializing the component like attaching event handlers.
-   * @returns void
+   * @returns {void}
    */
   onInit() {}
 
   /**
    * Triggered when the component is disconnected from the DOM. Any initialization done in `onInit` must be undone here.
-   * @returns void
+   * @returns {void}
    */
   onDestroy() {}
 
   /**
    * Triggered when an attribute value changes
-   * @typedef {{
+   * @param {{
    *  property: string,
    *  previousValue: any,
    *  currentValue: any
-   * }} Changes
-   * @param {Changes} changes
-   * @returns void
+   * }} changes
+   * @returns {void}
    */
   onChanges(changes) {}
+
+  render() {
+    this.innerHTML = this.template;
+  }
+
+  /**
+   * start HTMLElement callbacks
+   */
+  static get observedAttributes() {
+    return this.properties;
+  }
 
   connectedCallback() {
     this.onInit();
@@ -133,10 +141,6 @@ export class WebComponent extends HTMLElement {
     }
   }
 
-  render() {
-    this.innerHTML = this.template;
-  }
-
   /**
    * Converts a kebab-cased string into camelCaps
    * @param {string} kebab string in kebab-case
@@ -148,6 +152,9 @@ export class WebComponent extends HTMLElement {
 
   #handler = (el) => ({
     set(obj, prop, newval) {
+      const oldval = obj[prop];
+      console.log(">>> old value:", oldval, typeof oldval);
+
       obj[prop] = newval;
 
       const kebabize = (str) =>
@@ -156,13 +163,15 @@ export class WebComponent extends HTMLElement {
           ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
         );
 
-      const kebab = kebabize(prop);
-      el.setAttribute(kebab, newval);
+      if (JSON.stringify(oldval) !== newval) {
+        console.log(oldval, newval);
+        const kebab = kebabize(prop);
+        el.setAttribute(kebab, newval);
+      }
 
-      // Indicate success
       return true;
     },
   });
 }
 
-export default WebComponent;
+export default WebComponent; // remove on v2

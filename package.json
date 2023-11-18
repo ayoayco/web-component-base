@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "1.12.8",
+  "version": "1.12.9",
   "description": "A zero-dependency, ~760 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily",
   "main": "index.d.ts",
   "type": "module",

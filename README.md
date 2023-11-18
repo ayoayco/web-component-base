@@ -1,4 +1,4 @@
-> **>>> TL;DR:** This provides a zero-dependency, ~760 Bytes (minified & brotlied), JS base class that aims to reduce the complexity of creating reactive custom elements. [Skip to the Quick Start Example](#quick-start-example)
+> **>>> TL;DR:** This provides a zero-dependency, ~760 Bytes (when minified & brotlied), JS base class that aims to reduce the complexity of creating reactive custom elements. [Skip to the Quick Start Example](#quick-start-example)
 
 Web Component Base
 ---

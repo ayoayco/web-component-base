@@ -269,4 +269,4 @@ class ClickableText extends WebComponent {
 
 ## Library Size 
 
-Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the library size as around 767 B, minified and brotlied. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.
+Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the library size as around 760 Bytes, minified and brotlied. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.

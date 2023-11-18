@@ -65,11 +65,6 @@ export class WebComponent extends HTMLElement {
    */
   #props;
 
-  constructor() {
-    super();
-    this.#initializeProps();
-  }
-
   /**
    * Triggered after view is initialized. Best for querying DOM nodes that will only exist after render.
    * @returns {void}
@@ -111,6 +106,7 @@ export class WebComponent extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#initializeProps();
     this.onInit();
     this.render();
     this.afterViewInit();
@@ -131,7 +127,6 @@ export class WebComponent extends HTMLElement {
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
-      this.#initializeProps();
       this.props[camelCaps] = this[property];
 
       this.render();
@@ -171,7 +166,6 @@ export class WebComponent extends HTMLElement {
         );
 
       if (oldValue != newValue) {
-        console.log("value changed", oldValue, newValue);
         const kebab = getKebab(prop);
         setter(kebab, newValue);
       }

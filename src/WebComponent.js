@@ -48,7 +48,7 @@ export class WebComponent extends HTMLElement {
    * A camelCase counterpart using `WebComponent.props` will give read/write access to any attribute, with or without the `data-*` prefix.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-   *
+   * @type {DOMStringMap}
    * @example
    *
    * class HelloWorld extends WebComponent {

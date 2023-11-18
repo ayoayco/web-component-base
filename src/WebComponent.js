@@ -67,10 +67,7 @@ export class WebComponent extends HTMLElement {
 
   constructor() {
     super();
-    if (!this.#props) {
-      const { props, ...clone } = this;
-      this.#props = new Proxy(clone, this.#handler(this));
-    }
+    this.#initializeProps();
   }
 
   /**
@@ -134,6 +131,7 @@ export class WebComponent extends HTMLElement {
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
+      this.#initializeProps();
       this.props[camelCaps] = this[property];
 
       this.render();
@@ -150,13 +148,23 @@ export class WebComponent extends HTMLElement {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 
-  #handler = (el) => ({
+  /**
+   * Proxy handler for observed attribute - property counterpart
+   * @param {(qualifiedName: string, value: string) => void} setter
+   * @returns
+   */
+  #handler = (setter) => ({
     set(obj, prop, newval) {
       const oldval = obj[prop];
       console.log(">>> old value:", oldval, typeof oldval);
 
       obj[prop] = newval;
 
+      /**
+       * Converts camelCaps string into kebab-case
+       * @param {string} str
+       * @returns {string}
+       */
       const kebabize = (str) =>
         str.replace(
           /[A-Z]+(?![a-z])|[A-Z]/g,
@@ -166,12 +174,19 @@ export class WebComponent extends HTMLElement {
       if (JSON.stringify(oldval) !== newval) {
         console.log(oldval, newval);
         const kebab = kebabize(prop);
-        el.setAttribute(kebab, newval);
+        setter(kebab, newval);
       }
 
       return true;
     },
   });
+
+  #initializeProps() {
+    if (!this.#props) {
+      const { ...clone } = this;
+      this.#props = new Proxy(clone, this.#handler(this.setAttribute));
+    }
+  }
 }
 
 export default WebComponent; // remove on v2

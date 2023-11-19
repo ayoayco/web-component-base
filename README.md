@@ -11,21 +11,30 @@ When you extend the `WebComponent` class for your component, you only have to de
 
 The result is a reactive UI on property changes.
 
-## Table of Contents
-1. [Import via unpkg](#import-via-unpkg)
-1. [Installation via npm](#installation-via-npm)
-1. [Usage](#usage)
-1. [`template` vs `render()`](#template-vs-render)
-1. [Prop access](#prop-access)
-    1. [Alternatives](#alternatives)
-1. [Quick Start Example](#quick-start-example)
-1. [Life-Cycle Hooks](#life-cycle-hooks)
-    1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
-    1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
-    1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
-    1. [`oChanges`](#onchanges) - every time an attribute value changes
-1. [Library Size](#library-size)
-
+<details>
+<summary>Table of Contents</summary>
+<ol>
+  <li><a href="#import-via-unpkg">Import via unpkg</a></li>
+  <li><a href="#installation-via-npm">Installation via npm</a></li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#template-vs-render">`template` vs `render()`</a></li>
+  <li><a href="#prop-access">Prop access</a>
+    <ol>
+      <li><a href="#alternatives">Alternatives</a></li>
+    </ol>
+  </li>
+  <li><a href="#quick-start-example">Quick Start Example</a></li>
+  <li><a href="#life-cycle-hooks">Life-Cycle Hooks</a>
+    <ol>
+      <li><a href="#oninit">`onInit`</a> - the component is connected to the DOM, before view is initialized</li>
+      <li><a href="#afterviewinit">`afterViewInit`</a> - after the view is first initialized</li>
+      <li><a href="#ondestroy">`onDestroy`</a> - the component is disconnected from the DOM</li>
+      <li><a href="#onchanges">`onChanges`</a> - every time an attribute value changes</li>
+    </ol>
+  </li>
+  <li><a href="#library-size">Library Size</a></li>
+</ol>
+</details>
 
 ## Import via unpkg
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
@@ -51,7 +60,6 @@ import WebComponent from "https://unpkg.com/web-component-base@latest/WebCompone
 
 class HelloWorld extends WebComponent {
   static properties = ["my-name", "emotion"];
-
   get template() {
     return `
         <h1>Hello ${this.props.myName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
@@ -75,8 +83,6 @@ In your HTML page:
 
       setTimeout(() => {
         helloWorld.setAttribute('emotion', 'excited');
-        // or:
-        helloWorld.props.emotion = 'excited';
       }, 2500)
   </script>
 </body>
@@ -244,10 +250,6 @@ class ClickableText extends WebComponent {
 }
 ```
 
-
-
-
-
 ### onChanges()
 - Triggered when an attribute value changed
 
@@ -269,4 +271,4 @@ class ClickableText extends WebComponent {
 
 ## Library Size 
 
-Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the library size as around 760 Bytes, minified and brotlied. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.
+Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the base class size as around 760 Bytes (minified & brotlied). Using the `WebComponent.min.js` version gets it down to 400 Bytes. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npx simple-server .",
-    "build": "npm run generate:types && npm run copy:meta && npm run copy:source && npm run minify",
+    "build": "npm run clean&& npm run generate:types && npm run copy:meta && npm run copy:source && npm run minify",
     "clean": "rm -rf dist",
     "minify": "npx uglifyjs ./dist/WebComponent.js -o ./dist/WebComponent.min.js",
     "generate:types": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
@@ -15,12 +15,10 @@
     "publish": "npm run clean && npm run build && cd ./dist && npm publish --access public",
     "publish:patch": "npm version patch && npm run publish",
     "publish:minor": "npm version minor && npm run publish",
-    "check:size": "npm run build && size-limit ./dist"
+    "check:size": "npm run build && size-limit ./dist/WebComponent.min.js"
   },
-  "repository": {
-    "url": "https://github.com/ayoayco/web-component-base"
-  },
-  "homepage": "https://github.com/ayoayco/web-component-base#readme",
+  "repository": "https://git.sr.ht/~ayoayco/web-component-base",
+  "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme",
   "keywords": [
     "web components",
     "web component",

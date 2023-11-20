@@ -1,7 +1,7 @@
 {
   "name": "web-component-base",
   "version": "1.12.18",
-  "description": "A zero-dependency, ~760 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily",
+  "description": "A zero-dependency, ~600 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily",
   "main": "WebComponent.js",
   "type": "module",
   "scripts": {

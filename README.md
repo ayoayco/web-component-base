@@ -1,11 +1,11 @@
-
 # Web Component Base
 
 [![Package information: NPM version](https://img.shields.io/npm/v/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/web-component-base)](https://bundlephobia.com/package/web-component-base)
 
-This provides a zero-dependency, ~760 Bytes (minified & brotlied), JS base class for creating reactive custom elements easily.
+> A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
@@ -271,4 +271,4 @@ class ClickableText extends WebComponent {
 
 ## Library Size 
 
-Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the base class size as around 760 Bytes (minified & brotlied). Using the `WebComponent.min.js` version gets it down to 400 Bytes. Read more about how to [minify and compress payload with brotli](https://web.dev/articles/codelab-text-compression-brotli) for your app.
+The bundle size was reported to be 587 Bytes (minified & gzipped) by [bundlephobia](https://bundlephobia.com/package/web-component-base). Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the base class size as around 760 Bytes (minified & brotlied), and using the `WebComponent.min.js` version gets it down to around 400 Bytes.

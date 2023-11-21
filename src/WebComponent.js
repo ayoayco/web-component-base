@@ -30,7 +30,7 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only string property that represents how the component will be rendered
-   * @returns {string}
+   * @returns {string | Node | (string | Node)[]}
    * @see https://www.npmjs.com/package/web-component-base#template-vs-render
    */
   get template() {
@@ -96,7 +96,7 @@ export class WebComponent extends HTMLElement {
   onChanges(changes) {}
 
   render() {
-    this.innerHTML = this.template;
+    if (typeof this.template === "string") this.innerHTML = this.template;
   }
 
   /**

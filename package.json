@@ -15,7 +15,7 @@
     "pub": "npm run clean && npm run build && cd ./dist && npm publish --access public",
     "publish:patch": "npm version patch && npm run pub",
     "publish:minor": "npm version minor && npm run pub",
-    "check:size": "npm run build && size-limit ./dist/WebComponent.min.js"
+    "check:size": "npm run build && size-limit ./dist/WebComponent.js"
   },
   "repository": "https://git.sr.ht/~ayoayco/web-component-base",
   "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme",

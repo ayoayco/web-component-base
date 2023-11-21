@@ -2,17 +2,18 @@
 import WebComponent from "../src/WebComponent.js";
 
 export class HelloWorld extends WebComponent {
-  static properties = ["my-name", "emotion"];
+  static properties = ["count", "emotion"];
 
   onInit() {
-    let count = 0;
-    this.onclick = () => (this.props.myName = `Clicked ${++count}`);
+    this.props.count = 0;
+    this.onclick = () => ++this.props.count;
   }
 
   get template() {
-    return `<button id="btn">Hello ${this.props.myName ?? "World"}${
-      this.props.emotion === "sad" ? ". 😭" : "! 🙌"
-    }</button>`;
+    const label = this.props.count ? `Clicked ${this.props.count}` : "World";
+    const emote = this.props.emotion === "sad" ? ". 😭" : "! 🙌";
+
+    return `<button id="btn">Hello ${label}${emote}</button>`;
   }
 }
 

@@ -5,16 +5,18 @@
     See more on https://ayco.io/gh/McFly
   -->
   <my-head>
-    <title>McFly: Back to the Basics. Into the Future.</title>
+    <title>WebComponent.io: Write web components in Easy Mode.</title>
+    <link rel="stylesheet" href="prism.css" />
+    <script src="prism.js" defer></script>
     <script server:setup>
       const project = {
-        name: "McFly",
-        description: "Back to the Basics. Into the Future."
+        name: "WebComponent.io",
+        description: "Write web components in <em>Easy Mode</em>.",
       };
       const author = {
         name: "Ayo Ayco",
-        url: "https://ayco.io"
-      }
+        url: "https://ayco.io",
+      };
     </script>
   </my-head>
   <body>
@@ -24,38 +26,43 @@
     </awesome-header>
     <main>
       <h2>Welcome to {{ project.name }}</h2>
+      <p>Here's a vanilla custom element: <vanilla-hello-world /></p>
+
       <p>
-        Here's a vanilla custom element: <vanilla-hello-world />
+        Our
+        <a href="https://www.npmjs.com/package/web-component-base"
+          >base class</a
+        >
+        provides zero-dependency, ~600 Bytes (minified & gzipped), JS base class
+        for creating reactive custom elements easily
       </p>
+
+      <p>
+        When you extend the WebComponent class for your component, you only have
+        to define the template and properties. Any change in any property value
+        will automatically cause just the component UI to render.
+      </p>
+
+      <p>The result is a reactive UI on property changes.</p>
       <code-block language="js">
-class HelloWorld extends HTMLElement {
-  static get observedAttributes() {
-    return [&quot;my-name&quot;];
+        <pre>
+export class Counter extends WebComponent {
+  static properties = [&quot;count&quot;];
+  onInit() {
+    this.props.count = 0;
+    this.onclick = () => ++this.props.count;
   }
-
-  connectedCallback() {
-    let count = 0;
-    const currentName = this.getAttribute(&quot;my-name&quot;);
-
-    if (!currentName) {
-      this.setAttribute(&quot;my-name&quot;, &quot;World&quot;)
-    }
-
-    this.onclick = () => {
-      this.setAttribute(&quot;my-name&quot;, `Clicked ${++count}x`);
-    };
+  get template() {
+    return `&lt;button&gt;${this.props.count}&lt;/button&gt;`;
   }
-
-  attributeChangedCallback(property, previousValue, currentValue) {
-    if (property === &quot;my-name&quot; && previousValue !== currentValue) {
-      this.innerHTML = `&lt;button style=&quot;cursor:pointer&quot;&gt;Hello ${currentValue}!&lt;/button&gt;`;
-    }
-  }
-}
+}</pre
+        >
       </code-block>
     </main>
     <my-footer>
-      <small>A project by <a href="{{ author.url }}">{{ author.name }}</a></small>
+      <small
+        >A project by <a href="{{ author.url }}">{{ author.name }}</a></small
+      >
     </my-footer>
   </body>
 </html>

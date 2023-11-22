@@ -1,0 +1,23 @@
+{
+  "name": "site",
+  "description": "McFly starter project; see more on https://ayco.io/gh/McFly",
+  "scripts": {
+    "start": "mcfly serve",
+    "prepare": "mcfly prepare",
+    "dev": "mcfly serve",
+    "build": "mcfly build",
+    "preview": "node .output/server/index.mjs",
+    "build:preview": "npm run build && npm run preview"
+  },
+  "dependencies": {
+    "@mcflyjs/cli": "latest",
+    "@mcflyjs/config": "latest",
+    "@mcflyjs/core": "latest",
+    "nitropack": "latest"
+  },
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Ayo Ayco",
+  "license": "MIT",
+  "devDependencies": {}
+}

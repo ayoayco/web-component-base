@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "npx simple-server .",
+    "demo": "npx simple-server .",
+    "site": "npm start -w site",
     "build": "npm run clean && npm run generate:types && npm run copy:meta && npm run copy:source && npm run minify",
     "clean": "rm -rf dist",
     "minify": "npx uglifyjs ./dist/WebComponent.js -o ./dist/WebComponent.min.js",
@@ -34,5 +36,8 @@
     "@size-limit/preset-small-lib": "^11.0.0",
     "typescript": "^5.2.2",
     "uglify-js": "^3.17.4"
-  }
+  },
+  "workspaces": [
+    "site"
+  ]
 }

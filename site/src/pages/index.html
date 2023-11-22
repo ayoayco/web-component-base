@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--
+    Hello! This page is an example McFly page.
+    See more on https://ayco.io/gh/McFly
+  -->
+  <my-head>
+    <title>McFly: Back to the Basics. Into the Future.</title>
+    <script server:setup>
+      const project = {
+        name: "McFly",
+        description: "Back to the Basics. Into the Future."
+      };
+      const author = {
+        name: "Ayo Ayco",
+        url: "https://ayco.io"
+      }
+    </script>
+  </my-head>
+  <body>
+    <awesome-header>
+      <span>{{ project.name }}</span>
+      <span slot="description">{{ project.description }}</span>
+    </awesome-header>
+    <main>
+      <h2>Welcome to {{ project.name }}</h2>
+      <p>
+        Here's a vanilla custom element: <vanilla-hello-world />
+      </p>
+      <code-block language="js">
+class HelloWorld extends HTMLElement {
+  static get observedAttributes() {
+    return [&quot;my-name&quot;];
+  }
+
+  connectedCallback() {
+    let count = 0;
+    const currentName = this.getAttribute(&quot;my-name&quot;);
+
+    if (!currentName) {
+      this.setAttribute(&quot;my-name&quot;, &quot;World&quot;)
+    }
+
+    this.onclick = () => {
+      this.setAttribute(&quot;my-name&quot;, `Clicked ${++count}x`);
+    };
+  }
+
+  attributeChangedCallback(property, previousValue, currentValue) {
+    if (property === &quot;my-name&quot; && previousValue !== currentValue) {
+      this.innerHTML = `&lt;button style=&quot;cursor:pointer&quot;&gt;Hello ${currentValue}!&lt;/button&gt;`;
+    }
+  }
+}
+      </code-block>
+    </main>
+    <my-footer>
+      <small>A project by <a href="{{ author.url }}">{{ author.name }}</a></small>
+    </my-footer>
+  </body>
+</html>

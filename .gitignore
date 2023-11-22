@@ -6,3 +6,9 @@ dist/
 *swo
 *swp
 
+# nitro site
+*.log*
+.nitro
+.cache
+.output
+.env

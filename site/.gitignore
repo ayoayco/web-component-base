@@ -1,0 +1,10 @@
+dist
+node_modules
+*.log*
+.nitro
+.cache
+.output
+.env
+*~
+*swp
+*swo

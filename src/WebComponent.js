@@ -3,23 +3,6 @@
  * @license MIT <https://opensource.org/licenses/MIT>
  * @author Ayo Ayco <https://ayo.ayco.io>
  * @see https://www.npmjs.com/package/web-component-base#readme
- * @example
- *
- * import WebComponent from "https://unpkg.com/web-component-base/index.js";
- *
- * class HelloWorld extends WebComponent {
- *   // tell the browser which attributes to cause a render
- *   static properties = ["data-name", "emotion"];
- *
- *   // give the component a readonly template
- *   // note: props have kebab-case & camelCase counterparts
- *   get template() {
- *     return `
- *         <h1>Hello ${this.props.dataName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
- *   }
- * }
- *
- * customElements.define('hello-world', HelloWorld);
  */
 export class WebComponent extends HTMLElement {
   /**
@@ -39,23 +22,10 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
-   * This works like HTMLElement.dataset except dataset is only for attributes prefixed with `data-`.
-   * A camelCase counterpart using `WebComponent.props` will give read/write access to any attribute, with or without the `data-*` prefix.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
    * @typedef {{[name: string]: any}} PropStringMap
    * @type {PropStringMap}
-   * @example
-   *
-   * class HelloWorld extends WebComponent {
-   *   static properties = ["my-prop"];
-   *   get template() {
-   *     return `
-   *        <h1>Hello ${this.props.myProp}</h1>
-   *        <h2>Hello ${this["my-prop"]}</h2>
-   *     `;
-   *   }
-   * }
    */
   get props() {
     return this.#props;
@@ -67,20 +37,17 @@ export class WebComponent extends HTMLElement {
   #props;
 
   /**
-   * Triggered after view is initialized. Best for querying DOM nodes that will only exist after render.
-   * @returns {void}
+   * Triggered after view is initialized
    */
   afterViewInit() {}
 
   /**
-   * Triggered when the component is connected to the DOM. Best for initializing the component like attaching event handlers.
-   * @returns {void}
+   * Triggered when the component is connected to the DOM
    */
   onInit() {}
 
   /**
-   * Triggered when the component is disconnected from the DOM. Any initialization done in `onInit` must be undone here.
-   * @returns {void}
+   * Triggered when the component is disconnected from the DOM
    */
   onDestroy() {}
 
@@ -91,7 +58,6 @@ export class WebComponent extends HTMLElement {
    *  previousValue: any,
    *  currentValue: any
    * }} changes
-   * @returns {void}
    */
   onChanges(changes) {}
 
@@ -179,6 +145,9 @@ export class WebComponent extends HTMLElement {
     },
   });
 
+  /**
+   * Initialize the `props` proxy object
+   */
   #initializeProps() {
     if (!this.#props) {
       const { ...clone } = this;
@@ -190,4 +159,4 @@ export class WebComponent extends HTMLElement {
   }
 }
 
-export default WebComponent; // remove on v2
+export default WebComponent;

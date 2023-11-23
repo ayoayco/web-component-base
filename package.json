@@ -19,8 +19,8 @@
     "publish:minor": "npm version minor && npm run pub",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js"
   },
-  "repository": "https://git.sr.ht/~ayoayco/web-component-base",
-  "homepage": "https://git.sr.ht/~ayoayco/web-component-base#readme",
+  "repository": "https://github.com/ayoayco/web-component-base",
+  "homepage": "https://WebComponent.io",
   "keywords": [
     "web components",
     "web component",
@@ -30,7 +30,7 @@
   "author": "Ayo Ayco",
   "license": "MIT",
   "bugs": {
-    "url": "https://todo.sr.ht/~ayoayco/web-component-base"
+    "url": "https://github.com/ayoayco/web-component-base/issues"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",

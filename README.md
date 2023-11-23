@@ -103,9 +103,7 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 ## Prop Access
 
- The `WebComponent.props` read-only property is provided for easy access to *any* observed attribute.
-
-This API gives us read/write access to any attribute properties:
+ The `props` property of the `WebComponent` interface is provided for easy read/write access to a camelCase counterpart of *any* observed attribute.
 
 ```js
 class HelloWorld extends WebComponent {
@@ -122,8 +120,7 @@ class HelloWorld extends WebComponent {
 }
 ```
 
-Assigning value to the `props.camelCase` counterpart will trigger an attribute change hook.
-
+Assigning a value to the `props.camelCase` counterpart of an observed attribute will trigger an "attribute change" hook.
 
 For example, assigning a value like so:
 ```
@@ -131,21 +128,20 @@ this.props.myName = 'hello'
 ```
 
 ...is like calling the following:
-
 ```
 this.setAttribute('my-name','hello');
 ```
 
 Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provided with `static properties = ['my-name']`;
 
-> This works like [`HTMLElement.dataset`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset), except `dataset` is only for attributes prefixed with `data-*`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-*` prefix.
-
+> The `props` property of `WebComponent` works like `HTMLElement.dataset`, except `dataset` is only for attributes prefixed with `data-`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-` prefix.
+> However, note that like `HTMLElement.dataset`, values assigned to properties using `WebComponent.props` is always converted into string. This will be improved in later versions.
 
 ### Alternatives
 
 The current alternatives are using what `HTMLElement` provides out-of-the-box, which are:
-1. `HTMLElement.dataset` for attributes prefixed with `data-*`
-1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows
+1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [`on MDN`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
+1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
 ## Quick Start Example
 

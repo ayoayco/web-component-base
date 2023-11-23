@@ -31,18 +31,20 @@
           tiny package
         </a>
         provides zero-dependency, ~600 Bytes (minified & gzipped), JS base class
-        for creating reactive custom elements easily
+        for creating reactive custom elements easily.
       </p>
-
+      <call-to-action></call-to-action>
       <p>
         When you extend the WebComponent class for your component, you only have
         to define the template and properties. Any change in any property value
         will automatically cause just the component UI to render.
       </p>
 
-      <p>The result is a reactive UI on property changes.</p>
+      <p>The result is a reactive UI on property changes: <my-counter></my-counter></p>
       <code-block language="js">
         <pre>
+import WebComponent from &quot;https://unpkg.com/web-component-base@1.13.0/WebComponent.min.js&quot;;
+
 export class Counter extends WebComponent {
   static properties = [&quot;count&quot;];
   onInit() {
@@ -52,7 +54,10 @@ export class Counter extends WebComponent {
   get template() {
     return `&lt;button&gt;${this.props.count}&lt;/button&gt;`;
   }
-}</pre>
+}
+
+customElements.define(&quot;my-counter&quot;, Counter);
+</pre>
       </code-block>
     </main>
     <my-footer>

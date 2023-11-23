@@ -150,9 +150,8 @@ export class WebComponent extends HTMLElement {
    */
   #initializeProps() {
     if (!this.#props) {
-      const { ...clone } = this;
       this.#props = new Proxy(
-        clone,
+        {},
         this.#handler((key, value) => this.setAttribute(key, value))
       );
     }

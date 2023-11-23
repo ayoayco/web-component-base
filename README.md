@@ -9,7 +9,7 @@
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
-The result is a reactive UI on property changes.
+The result is a reactive UI on property changes. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
 <details>
 <summary>Table of Contents</summary>
@@ -140,12 +140,12 @@ Therefore, this will tell the browser that the UI needs a render if the attribut
 ### Alternatives
 
 The current alternatives are using what `HTMLElement` provides out-of-the-box, which are:
-1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [`on MDN`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
+1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
 ## Quick Start Example
 
-Here is an example of using a custom element in a single .html file:
+Here is an example of using a custom element in a single .html file. 
 
 ```html
 <!DOCTYPE html>

@@ -1,14 +1,31 @@
-<header
-  style="
+<header class="my-header">
+  <h1><slot /></h1>
+  <slot name="description" />
+</header>
+
+<style>
+  .my-header {
     border-radius: 5px;
     background: linear-gradient(45deg, #3054bf, #416fff);
     color: white;
     margin: 1em 0;
     padding: 1em;
-  "
->
-  <a style="color: white" href="/">
-    <h1><slot /></h1>
-  </a>
-  <slot name="description" />
-</header>
+
+    & a {
+      color: white;
+    }
+  }
+
+  @media only screen and (max-device-width: 376px) {
+    .my-header {
+      & h1 {
+        font-size: 1.5em;
+        line-clamp: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+      }
+    }
+  }
+</style>

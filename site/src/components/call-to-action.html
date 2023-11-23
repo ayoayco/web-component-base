@@ -11,7 +11,6 @@
   display: flex;
   gap: 1em;
   justify-content: center;
-  padding: 1em;
   margin: 1em 0;
   width: 100%;
 
@@ -19,12 +18,27 @@
     border: 1px solid var(--color-primary);
     padding: 0.75em;
     border-radius: 5px;
+    text-align: center;
 
     &#primary {
-        background-color: var(--color-primary);
+        background: #3054bf;
         color: white;
         text-decoration: none;
+        width: 40%;
     }
+
+
   }
+
 }
+
+    @media only screen and (max-device-width: 376px) {
+      .call-to-action {
+        flex-direction: column;
+        & a:not(#primary) {
+          padding: 0.5em;
+        }
+      }
+
+    }
 </style>

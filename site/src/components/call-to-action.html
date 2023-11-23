@@ -1,18 +1,30 @@
-<div style="
-    padding: 1em;
-    margin: 1em 0;
-    text-align: center;
-    width: 100%;
-">
-  <a
-    style="
-        background-color: var(--color-primary);
-        color: white;
-        padding: 0.75em;
-        border-radius: 5px;
-        text-decoration: none;
-    "
+<div class="call-to-action">
+  <a id="primary"
     href="https://www.npmjs.com/package/web-component-base#readme">
     Learn More
   </a>
+  <a href="https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010">Playground</a>
 </div>
+
+<style>
+.call-to-action {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  padding: 1em;
+  margin: 1em 0;
+  width: 100%;
+
+  & a {
+    border: 1px solid var(--color-primary);
+    padding: 0.75em;
+    border-radius: 5px;
+
+    &#primary {
+        background-color: var(--color-primary);
+        color: white;
+        text-decoration: none;
+    }
+  }
+}
+</style>

@@ -25,24 +25,25 @@
       <span slot="description">{{ project.description }}</span>
     </awesome-header>
     <main>
-      <p>
-        Our
-        <a href="https://www.npmjs.com/package/web-component-base">
-          tiny package
-        </a>
-        provides zero-dependency, ~600 Bytes (minified & gzipped), JS base class
-        for creating reactive custom elements easily.
-      </p>
-      <call-to-action />
-      <p>
-        When you extend the WebComponent class for your component, you only have
-        to define the template and properties. Any change in any property value
-        will automatically cause just the component UI to render.
-      </p>
+      <section style="font-size: larger;">
+        <p>
+          Our
+          <a href="https://www.npmjs.com/package/web-component-base">
+            tiny package
+          </a>
+          provides zero-dependency, ~600 Bytes (minified & gzipped), JS base class
+          for creating reactive custom elements easily.
+        </p>
+        <call-to-action />
+      </section>
+      <section>
+        <p>
+          When you extend the WebComponent class for your component, you only have to define the template and properties. Any change in any property value will automatically cause just the component UI to render.
+        </p>
 
-      <p>The result is a reactive UI on property changes: <my-counter></my-counter></p>
-      <code-block language="js">
-        <pre>
+        <p>The result is a reactive UI on property changes: <my-counter></my-counter></p>
+        <code-block language="js">
+          <pre>
 import WebComponent from &quot;https://unpkg.com/web-component-base@1.13.0/WebComponent.min.js&quot;;
 
 export class Counter extends WebComponent {
@@ -57,17 +58,18 @@ export class Counter extends WebComponent {
 }
 
 customElements.define(&quot;my-counter&quot;, Counter);
-</pre>
-      </code-block>
+          </pre>
+        </code-block>
+      </section>
     </main>
     <my-footer>
       <!-- <p>View page <a href="https://github.com/ayoayco/web-component-base/blob/main/site/src/pages/index.html">source code</a></p> -->
-      <small>This site is built with
+      <span>This site is built with
         <a href="https://github.com/ayoayco/McFly">McFly</a>, the no-framework framework
-      </small><br />
-      <small>
+      </span><br />
+      <span>
         A project by <a href="{{ author.url }}">{{ author.name }}</a>
-      </small>
+      </span>
     </my-footer>
   </body>
 </html>

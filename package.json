@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
   "main": "WebComponent.js",
   "type": "module",

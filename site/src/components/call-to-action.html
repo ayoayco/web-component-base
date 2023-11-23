@@ -26,19 +26,15 @@
         text-decoration: none;
         width: 40%;
     }
-
-
   }
-
 }
 
-    @media only screen and (max-device-width: 376px) {
-      .call-to-action {
-        flex-direction: column;
-        & a:not(#primary) {
-          padding: 0.5em;
-        }
-      }
-
+@media only screen and (max-device-width: 376px) {
+  .call-to-action {
+    flex-direction: column;
+    & a {
+      width: 100% !important;
     }
+  }
+}
 </style>

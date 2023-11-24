@@ -5,13 +5,13 @@ class CodeBlockComponent extends HTMLElement {
     const inline = this.getAttribute("inline") !== null;
 
     this.innerHTML = `
-        <pre id="pre"><code id="code">${trimmed}</code></pre>
+        <pre><code id="code">${trimmed}</code></pre>
     `;
 
     /**
      * @type {HTMLPreElement}
      */
-    const pre = this.querySelector("#pre");
+    const pre = this.querySelector("pre");
 
     if (lang) {
       pre.className = `language-${lang}`;

@@ -31,7 +31,7 @@ class CodeBlockComponent extends HTMLElement {
 
     if (inline) {
       style.display = 'inline';
-      style.padding = '0.3em';
+      style.padding = '0.25em 0.3em';
     }
 
     Object.keys(style).forEach((rule) => {

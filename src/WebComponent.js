@@ -87,72 +87,74 @@ export class WebComponent extends HTMLElement {
     this.onDestroy();
   }
 
-  /**
-   * @param {string} property
-   * @param {any} previousValue
-   * @param {any} currentValue
-   */
-  attributeChangedCallback(property, previousValue, currentValue) {
+ attributeChangedCallback(property, previousValue, currentValue) {
     const camelCaps = this.#getCamelCaps(property);
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
-      this.props[camelCaps] = this[property];
+      this.props[camelCaps] = {
+        attributeChanged: true,
+        value: this[property],
+      }
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
   }
-
-  /**
-   * Converts a kebab-cased string into camelCaps
-   * @param {string} kebab string in kebab-case
-   * @returns {string}
-   */
+ 
   #getCamelCaps(kebab) {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 
-  /**
-   * Proxy handler for observed attribute - property counterpart
-   * @param {(qualifiedName: string, value: string) => void} setter
-   * @returns
-   */
-  #handler = (setter) => ({
-    set(obj, prop, newValue) {
+  #typeMap = {}
+  #handler = (setter, typeMap) => ({
+    set(obj, prop, value) {
+      const attributeChanged = value?.attributeChanged ?? false;
+      let newValue = attributeChanged ? value.value : value;
       const oldValue = obj[prop];
+      
+      console.log(">>>", newValue, oldValue);
 
-      obj[prop] = newValue;
+      if (!(prop in typeMap)) {
+        typeMap[prop] = typeof newValue;
+      }
 
-      /**
-       * Converts camelCaps string into kebab-case
-       * @param {string} str
-       * @returns {string}
-       */
-      const getKebab = (str) =>
-        str.replace(
-          /[A-Z]+(?![a-z])|[A-Z]/g,
-          ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
-        );
+      obj[prop] = restoreType(newValue, typeMap[prop])
 
-      if (oldValue != newValue) {
+      if (attributeChanged && !oldValue != newValue) {
         const kebab = getKebab(prop);
         setter(kebab, newValue);
       }
+
+
+      function getKebab(str) {
+        return str.replace(
+          /[A-Z]+(?![a-z])|[A-Z]/g,
+          ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
+        );
+      }
+
+      function restoreType(value, type) {
+        switch(type) {
+          case 'string': return value;
+          case 'number': return parseInt(value);
+          case 'boolean': return JSON.parse(value);
+          default: return value
+        }
+      }
+
+
 
       return true;
     },
   });
 
-  /**
-   * Initialize the `props` proxy object
-   */
   #initializeProps() {
     if (!this.#props) {
       this.#props = new Proxy(
         {},
-        this.#handler((key, value) => this.setAttribute(key, value))
+        this.#handler((key, value) => this.setAttribute(key, value), this.#typeMap)
       );
     }
   }

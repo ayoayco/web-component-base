@@ -94,7 +94,7 @@ export class WebComponent extends HTMLElement {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
 
-      this.#handleUpdateProp(camelCaps, currentValue)
+      this.#handleUpdateProp(camelCaps, currentValue);
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
@@ -102,11 +102,9 @@ export class WebComponent extends HTMLElement {
   }
 
   #handleUpdateProp(key, value) {
+    const restored = this.#restoreType(value, this.#typeMap[key]);
 
-    const restored = this.#restoreType(value, this.#typeMap[key])
-
-    if (restored !== this.props[key])
-      this.props[key] = value;
+    if (restored !== this.props[key]) this.props[key] = value;
   }
 
   #getCamelCaps(kebab) {
@@ -115,17 +113,17 @@ export class WebComponent extends HTMLElement {
 
   #typeMap = {};
 
-    #restoreType = (value, type) => {
-      switch (type) {
-        case "string":
-          return value;
-        case "number":
-        case "boolean":
-          return JSON.parse(value);
-        default:
-          return value;
-      }
-    };
+  #restoreType = (value, type) => {
+    switch (type) {
+      case "string":
+        return value;
+      case "number":
+      case "boolean":
+        return JSON.parse(value);
+      default:
+        return value;
+    }
+  };
 
   #handler(setter, typeMap) {
     const getKebab = (str) => {
@@ -134,7 +132,6 @@ export class WebComponent extends HTMLElement {
         ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
       );
     };
-
 
     return {
       set(obj, prop, value) {
@@ -151,7 +148,7 @@ export class WebComponent extends HTMLElement {
         }
 
         return true;
-      }
+      },
     };
   }
 

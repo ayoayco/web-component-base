@@ -87,72 +87,79 @@ export class WebComponent extends HTMLElement {
     this.onDestroy();
   }
 
-  /**
-   * @param {string} property
-   * @param {any} previousValue
-   * @param {any} currentValue
-   */
   attributeChangedCallback(property, previousValue, currentValue) {
     const camelCaps = this.#getCamelCaps(property);
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
-      this.props[camelCaps] = this[property];
+
+      this.#handleUpdateProp(camelCaps, currentValue);
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
   }
 
-  /**
-   * Converts a kebab-cased string into camelCaps
-   * @param {string} kebab string in kebab-case
-   * @returns {string}
-   */
+  #handleUpdateProp(key, value) {
+    const restored = this.#restoreType(value, this.#typeMap[key]);
+
+    if (restored !== this.props[key]) this.props[key] = value;
+  }
+
   #getCamelCaps(kebab) {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 
-  /**
-   * Proxy handler for observed attribute - property counterpart
-   * @param {(qualifiedName: string, value: string) => void} setter
-   * @returns
-   */
-  #handler = (setter) => ({
-    set(obj, prop, newValue) {
-      const oldValue = obj[prop];
+  #typeMap = {};
 
-      obj[prop] = newValue;
+  #restoreType = (value, type) => {
+    switch (type) {
+      case "string":
+        return value;
+      case "number":
+      case "boolean":
+        return JSON.parse(value);
+      default:
+        return value;
+    }
+  };
 
-      /**
-       * Converts camelCaps string into kebab-case
-       * @param {string} str
-       * @returns {string}
-       */
-      const getKebab = (str) =>
-        str.replace(
-          /[A-Z]+(?![a-z])|[A-Z]/g,
-          ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
-        );
+  #handler(setter, typeMap) {
+    const getKebab = (str) => {
+      return str.replace(
+        /[A-Z]+(?![a-z])|[A-Z]/g,
+        ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
+      );
+    };
 
-      if (oldValue != newValue) {
-        const kebab = getKebab(prop);
-        setter(kebab, newValue);
-      }
+    return {
+      set(obj, prop, value) {
+        const oldValue = obj[prop];
 
-      return true;
-    },
-  });
+        if (!(prop in typeMap)) {
+          typeMap[prop] = typeof value;
+        }
 
-  /**
-   * Initialize the `props` proxy object
-   */
+        if (oldValue !== value) {
+          obj[prop] = value;
+          const kebab = getKebab(prop);
+          setter(kebab, value);
+        }
+
+        return true;
+      },
+    };
+  }
+
   #initializeProps() {
     if (!this.#props) {
       this.#props = new Proxy(
         {},
-        this.#handler((key, value) => this.setAttribute(key, value))
+        this.#handler(
+          (key, value) => this.setAttribute(key, value),
+          this.#typeMap
+        )
       );
     }
   }

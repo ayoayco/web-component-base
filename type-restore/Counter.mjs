@@ -5,10 +5,11 @@ export class Counter extends WebComponent {
   static properties = ["count"];
   onInit() {
     this.props.count = 1;
+    let i = 1
     this.onclick = ()=> ++this.props.count
-    let double = () => this.props.count * 2;
+    let double = () => i * 2;
     console.log(double());
-    this.props.count = 3;
+    i = 3;
     console.log(double());
   }
   get template() {

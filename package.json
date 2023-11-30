@@ -2,8 +2,21 @@
   "name": "web-component-base",
   "version": "1.13.3",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
-  "main": "WebComponent.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./WebComponent.js",
+      "types": "./WebComponent.d.ts"
+    },
+    "./WebComponent.min.js": {
+      "import": "./WebComponent.min.js",
+      "types": "./WebComponent.d.ts"
+    },
+    "./attach-effect" : {
+      "import": "./attach-effect.js",
+      "types": "./attach-effect.d.ts"
+    }
+  },
   "scripts": {
     "start": "npx simple-server .",
     "demo": "npx simple-server .",

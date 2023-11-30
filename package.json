@@ -5,16 +5,16 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./WebComponent.js",
-      "types": "./WebComponent.d.ts"
+      "types": "./WebComponent.d.ts",
+      "import": "./WebComponent.js"
     },
     "./WebComponent.min.js": {
-      "import": "./WebComponent.min.js",
-      "types": "./WebComponent.d.ts"
+      "types": "./WebComponent.d.ts",
+      "import": "./WebComponent.min.js"
     },
     "./attach-effect": {
-      "import": "./attach-effect.js",
-      "types": "./attach-effect.d.ts"
+      "types": "./attach-effect.d.ts",
+      "import": "./attach-effect.js"
     }
   },
   "scripts": {

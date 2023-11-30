@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "1.13.3",
+  "version": "1.14.0",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
   "type": "module",
   "exports": {
@@ -12,7 +12,7 @@
       "import": "./WebComponent.min.js",
       "types": "./WebComponent.d.ts"
     },
-    "./attach-effect" : {
+    "./attach-effect": {
       "import": "./attach-effect.js",
       "types": "./attach-effect.d.ts"
     }

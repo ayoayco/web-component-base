@@ -27,9 +27,12 @@
     "generate:types": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
     "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist",
     "copy:source": "cp ./src/* ./dist",
-    "pub": "npm run clean && npm run build && cd ./dist && npm publish --access public",
+    "pub": "npm run clean && npm run build && cd ./dist && npm publish",
+    "pub:beta": "npm run clean && npm run build && cd ./dist && npm publish --tag beta",
     "publish:patch": "npm version patch && npm run pub",
+    "publish:patch:beta": "npm version patch && npm run pub:beta",
     "publish:minor": "npm version minor && npm run pub",
+    "publish:minor:beta": "npm version minor && npm run pub:beta",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js"
   },
   "repository": "https://github.com/ayoayco/web-component-base",

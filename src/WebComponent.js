@@ -87,74 +87,79 @@ export class WebComponent extends HTMLElement {
     this.onDestroy();
   }
 
- attributeChangedCallback(property, previousValue, currentValue) {
+  attributeChangedCallback(property, previousValue, currentValue) {
     const camelCaps = this.#getCamelCaps(property);
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
-      this.props[camelCaps] = {
-        attributeChanged: true,
-        value: this[property],
-      }
+
+      this.#handleUpdateProp(camelCaps, currentValue);
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
   }
- 
+
+  #handleUpdateProp(key, value) {
+    const restored = this.#restoreType(value, this.#typeMap[key]);
+
+    if (restored !== this.props[key]) this.props[key] = value;
+  }
+
   #getCamelCaps(kebab) {
     return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 
-  #typeMap = {}
-  #handler = (setter, typeMap) => ({
-    set(obj, prop, value) {
-      const attributeChanged = value?.attributeChanged ?? false;
-      let newValue = attributeChanged ? value.value : value;
-      const oldValue = obj[prop];
-      
-      console.log(">>>", newValue, oldValue);
+  #typeMap = {};
 
-      if (!(prop in typeMap)) {
-        typeMap[prop] = typeof newValue;
-      }
+  #restoreType = (value, type) => {
+    switch (type) {
+      case "string":
+        return value;
+      case "number":
+      case "boolean":
+        return JSON.parse(value);
+      default:
+        return value;
+    }
+  };
 
-      obj[prop] = restoreType(newValue, typeMap[prop])
+  #handler(setter, typeMap) {
+    const getKebab = (str) => {
+      return str.replace(
+        /[A-Z]+(?![a-z])|[A-Z]/g,
+        ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
+      );
+    };
 
-      if (attributeChanged && !oldValue != newValue) {
-        const kebab = getKebab(prop);
-        setter(kebab, newValue);
-      }
+    return {
+      set(obj, prop, value) {
+        const oldValue = obj[prop];
 
-
-      function getKebab(str) {
-        return str.replace(
-          /[A-Z]+(?![a-z])|[A-Z]/g,
-          ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
-        );
-      }
-
-      function restoreType(value, type) {
-        switch(type) {
-          case 'string': return value;
-          case 'number': return parseInt(value);
-          case 'boolean': return JSON.parse(value);
-          default: return value
+        if (!(prop in typeMap)) {
+          typeMap[prop] = typeof value;
         }
-      }
 
+        if (oldValue !== value) {
+          obj[prop] = value;
+          const kebab = getKebab(prop);
+          setter(kebab, value);
+        }
 
-
-      return true;
-    },
-  });
+        return true;
+      },
+    };
+  }
 
   #initializeProps() {
     if (!this.#props) {
       this.#props = new Proxy(
         {},
-        this.#handler((key, value) => this.setAttribute(key, value), this.#typeMap)
+        this.#handler(
+          (key, value) => this.setAttribute(key, value),
+          this.#typeMap
+        )
       );
     }
   }

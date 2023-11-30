@@ -5,6 +5,10 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./WebComponent": {
       "types": "./WebComponent.d.ts",
       "import": "./WebComponent.js"
     },

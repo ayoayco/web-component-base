@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WC demo</title>
+    <style>
+      * {
+        font-size: larger;
+      }
+    </style>
+    <script type="module">
+      import WebComponent from "https://unpkg.com/web-component-base@1.13.3/WebComponent.min.js";
+
+      /**
+       * @see https://ayco.io/n/web-component-base
+       */
+      class Counter extends WebComponent {
+        static properties = ["count"];
+        onInit() {
+          this.props.count = 0;
+          this.onclick = () => ++this.props.count;
+        }
+        onChanges(changes) {
+          console.log(changes);
+          // now click the button & check your devtools console
+        }
+        get template() {
+          return `<button>${this.props.count}</button>`;
+        }
+      }
+
+      class Toggle extends WebComponent {
+        static properties = ["toggle"];
+        onInit() {
+          this.props.toggle = false;
+          this.onclick = () => (this.props.toggle = !this.props.toggle);
+        }
+        get template() {
+          return `<button>${this.props.toggle ? "On" : "Off"}</button>`;
+        }
+      }
+
+      customElements.define("my-counter", Counter);
+      customElements.define("my-toggle", Toggle);
+    </script>
+  </head>
+  <body>
+    <div>
+      Counter:
+      <my-counter />
+    </div>
+    <div>
+      Toggle:
+      <my-toggle />
+    </div>
+  </body>
+</html>

@@ -1,2 +1,4 @@
 export {attachEffect} from './attach-effect.js';
-export {WebComponent} from './WebComponent.js';
+import {WebComponent} from './WebComponent.js';
+export {default as WebComponent} from './WebComponent.js';
+export default WebComponent;

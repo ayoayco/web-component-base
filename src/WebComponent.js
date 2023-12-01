@@ -22,6 +22,7 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
+   * @typedef {{[name: string]: any}} PropStringMap
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
    * @type {PropStringMap}
@@ -52,6 +53,11 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Triggered when an attribute value changes
+   * @typedef {{
+   *  property: string,
+   *  previousValue: any,
+   *  currentValue: any
+   * }} Changes
    * @param {Changes} changes
    */
   onChanges(changes) {}
@@ -173,12 +179,3 @@ export class WebComponent extends HTMLElement {
 }
 
 export default WebComponent;
-
-/**
- * @typedef {{
- *  property: string,
- *  previousValue: any,
- *  currentValue: any
- * }} Changes
- * @typedef {{[name: string]: any}} PropStringMap
- */

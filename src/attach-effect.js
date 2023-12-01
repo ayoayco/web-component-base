@@ -1,7 +1,5 @@
 /**
- *
- * @typedef { import('./WebComponent.js').Changes} Changes
- * @typedef { import('./WebComponent.js').PropStringMap} PropStringMap
+ * Attach a "side effect" function that gets triggered on property value changes
  * @param {Object} obj
  * @param {(newValue: any) => void} callback
  */

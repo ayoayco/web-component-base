@@ -3,7 +3,6 @@
   "version": "1.14.7",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
   "type": "module",
-  "main": "WebComponent.js",
   "exports": {
     ".": {
       "types": "./index.d.ts",

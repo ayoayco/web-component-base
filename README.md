@@ -40,7 +40,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 ```
 
 ## Installation via npm
@@ -56,7 +56,7 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 
 class HelloWorld extends WebComponent {
   static properties = ["my-name", "emotion"];
@@ -153,7 +153,7 @@ Here is an example of using a custom element in a single .html file.
   <head>
     <title>WC Base Test</title>
     <script type="module">
-      import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 
       class HelloWorld extends WebComponent {
         static properties = ["my-name"];
@@ -186,7 +186,7 @@ Define behavior when certain events in the component's life cycle is triggered b
 - Best for setting up the component
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
@@ -223,7 +223,7 @@ class ClickableText extends WebComponent {
 - best for undoing any setup done in `onInit()`
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 
 class ClickableText extends WebComponent {
  
@@ -250,7 +250,7 @@ class ClickableText extends WebComponent {
 - Triggered when an attribute value changed
 
 ```js
-import WebComponent from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes

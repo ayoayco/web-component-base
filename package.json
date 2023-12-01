@@ -1,9 +1,27 @@
 {
   "name": "web-component-base",
-  "version": "1.13.3",
+  "version": "1.14.6",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
-  "main": "WebComponent.js",
   "type": "module",
+  "main": "WebComponent.js",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./WebComponent": {
+      "types": "./WebComponent.d.ts",
+      "import": "./WebComponent.js"
+    },
+    "./WebComponent.min.js": {
+      "types": "./WebComponent.d.ts",
+      "import": "./WebComponent.min.js"
+    },
+    "./attach-effect": {
+      "types": "./attach-effect.d.ts",
+      "import": "./attach-effect.js"
+    }
+  },
   "scripts": {
     "start": "npx simple-server .",
     "demo": "npx simple-server .",
@@ -14,9 +32,12 @@
     "generate:types": "tsc --allowJs src/* --outDir dist --declaration --emitDeclarationOnly",
     "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist",
     "copy:source": "cp ./src/* ./dist",
-    "pub": "npm run clean && npm run build && cd ./dist && npm publish --access public",
+    "pub": "npm run clean && npm run build && cd ./dist && npm publish",
+    "pub:beta": "npm run clean && npm run build && cd ./dist && npm publish --tag beta",
     "publish:patch": "npm version patch && npm run pub",
+    "publish:patch:beta": "npm version patch && npm run pub:beta",
     "publish:minor": "npm version minor && npm run pub",
+    "publish:minor:beta": "npm version minor && npm run pub:beta",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js"
   },
   "repository": "https://github.com/ayoayco/web-component-base",

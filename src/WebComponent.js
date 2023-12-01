@@ -22,9 +22,9 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
+   * @typedef {{[name: string]: any}} PropStringMap
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-   * @typedef {{[name: string]: any}} PropStringMap
    * @type {PropStringMap}
    */
   get props() {
@@ -53,11 +53,12 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Triggered when an attribute value changes
-   * @param {{
+   * @typedef {{
    *  property: string,
    *  previousValue: any,
    *  currentValue: any
-   * }} changes
+   * }} Changes
+   * @param {Changes} changes
    */
   onChanges(changes) {}
 
@@ -94,7 +95,7 @@ export class WebComponent extends HTMLElement {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
 
-      this.#handleUpdateProp(camelCaps, currentValue);
+      this.#handleUpdateProp(camelCaps, this[property]);
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
@@ -125,7 +126,11 @@ export class WebComponent extends HTMLElement {
     }
   };
 
-  #handler(setter, typeMap) {
+  #effectsMap = {};
+
+  #handler(setter, meta) {
+    const effectsMap = meta.#effectsMap;
+    const typeMap = meta.#typeMap;
     const getKebab = (str) => {
       return str.replace(
         /[A-Z]+(?![a-z])|[A-Z]/g,
@@ -141,13 +146,27 @@ export class WebComponent extends HTMLElement {
           typeMap[prop] = typeof value;
         }
 
-        if (oldValue !== value) {
+        if (value.attach === "effect") {
+          if (!effectsMap[prop]) {
+            effectsMap[prop] = [];
+          }
+          effectsMap[prop].push(value.callback);
+        } else if (oldValue !== value) {
           obj[prop] = value;
+          effectsMap[prop]?.forEach((f) => f(value));
           const kebab = getKebab(prop);
           setter(kebab, value);
         }
 
         return true;
+      },
+      get(obj, prop) {
+        // TODO: handle non-objects
+        if(obj[prop] !== null && obj[prop] !== undefined) {
+          Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
+          Object.getPrototypeOf(obj[prop]).prop = prop;
+        }
+        return obj[prop];
       },
     };
   }
@@ -156,10 +175,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         {},
-        this.#handler(
-          (key, value) => this.setAttribute(key, value),
-          this.#typeMap
-        )
+        this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }
   }

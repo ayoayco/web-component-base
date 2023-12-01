@@ -1,4 +1,4 @@
-import WebComponent from "../src/WebComponent.js";
+import WebComponent from "../../src/WebComponent.js";
 
 export class BooleanPropTest extends WebComponent {
   static properties = ["is-inline", "anotherone"];

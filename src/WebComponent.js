@@ -95,7 +95,7 @@ export class WebComponent extends HTMLElement {
       this[property] = currentValue === "" || currentValue;
       this[camelCaps] = this[property]; // remove on v2
 
-      this.#handleUpdateProp(camelCaps, currentValue);
+      this.#handleUpdateProp(camelCaps, this[property]);
 
       this.render();
       this.onChanges({ property, previousValue, currentValue });
@@ -161,8 +161,11 @@ export class WebComponent extends HTMLElement {
         return true;
       },
       get(obj, prop) {
-        Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
-        Object.getPrototypeOf(obj[prop]).prop = prop;
+        // TODO: handle non-objects
+        if(obj[prop] !== null && obj[prop] !== undefined) {
+          Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
+          Object.getPrototypeOf(obj[prop]).prop = prop;
+        }
         return obj[prop];
       },
     };

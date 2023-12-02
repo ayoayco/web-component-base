@@ -151,6 +151,7 @@ export class WebComponent extends HTMLElement {
             effectsMap[prop] = [];
           }
           effectsMap[prop].push(value.callback);
+          console.log('>>> ', Object.getPrototypeOf(obj[prop]).prop)
         } else if (oldValue !== value) {
           obj[prop] = value;
           effectsMap[prop]?.forEach((f) => f(value));

@@ -135,6 +135,7 @@ this.setAttribute('my-name','hello');
 
 Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provided with `static properties = ['my-name']`;
 
+> [!NOTE]
 > The `props` property of `WebComponent` works like `HTMLElement.dataset`, except `dataset` is only for attributes prefixed with `data-`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-` prefix.
 > Another advantage over `HTMLElement.dataset` is that `WebComponent.props` can hold primitive types `number`, `boolean`, and `string`.
 

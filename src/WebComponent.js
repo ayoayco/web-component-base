@@ -24,7 +24,7 @@ export class WebComponent extends HTMLElement {
    * Read-only property containing camelCase counterparts of observed attributes.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-   * @typedef {{[name: string]: any}} PropStringMap
+   * @typedef {{[name: string]: string | number | boolean}} PropStringMap
    * @type {PropStringMap}
    */
   get props() {

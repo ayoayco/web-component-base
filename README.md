@@ -137,7 +137,7 @@ Therefore, this will tell the browser that the UI needs a render if the attribut
 
 > [!NOTE]
 > The `props` property of `WebComponent` works like `HTMLElement.dataset`, except `dataset` is only for attributes prefixed with `data-`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-` prefix.
-> Another advantage over `HTMLElement.dataset` is that `WebComponent.props` can hold primitive types `number`, `boolean`, and `string`.
+> Another advantage over `HTMLElement.dataset` is that `WebComponent.props` can hold primitive types 'number', 'boolean', 'object' and 'string'.
 
 ### Alternatives
 

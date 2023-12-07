@@ -1,5 +1,5 @@
 // @ts-check
-import WebComponent from "../../src/WebComponent.js";
+import { WebComponent } from "../../src/WebComponent.js";
 
 class SimpleText extends WebComponent {
   clickCallback() {

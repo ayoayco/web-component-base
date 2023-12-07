@@ -93,7 +93,7 @@ export class WebComponent extends HTMLElement {
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
-      this[camelCaps] = this[property]; // remove on v2
+      this[camelCaps] = this[property];
 
       this.#handleUpdateProp(camelCaps, this[property]);
 
@@ -102,10 +102,9 @@ export class WebComponent extends HTMLElement {
     }
   }
 
-  #handleUpdateProp(key, value) {
-    const restored = this.#restoreType(value, this.#typeMap[key]);
-
-    if (restored !== this.props[key]) this.props[key] = value;
+  #handleUpdateProp(key, stringifiedValue) {
+    const restored = this.#deserialize(stringifiedValue, this.#typeMap[key]);
+    if (restored !== this.props[key]) this.props[key] = restored;
   }
 
   #getCamelCaps(kebab) {
@@ -113,19 +112,6 @@ export class WebComponent extends HTMLElement {
   }
 
   #typeMap = {};
-
-  #restoreType = (value, type) => {
-    switch (type) {
-      case "string":
-        return value;
-      case "number":
-      case "boolean":
-        return JSON.parse(value);
-      default:
-        return value;
-    }
-  };
-
   #effectsMap = {};
 
   #handler(setter, meta) {
@@ -151,25 +137,48 @@ export class WebComponent extends HTMLElement {
             effectsMap[prop] = [];
           }
           effectsMap[prop].push(value.callback);
-          console.log('>>> ', Object.getPrototypeOf(obj[prop]).prop)
         } else if (oldValue !== value) {
           obj[prop] = value;
           effectsMap[prop]?.forEach((f) => f(value));
           const kebab = getKebab(prop);
-          setter(kebab, value);
+
+          setter(kebab, meta.#serialize(value));
         }
 
         return true;
       },
       get(obj, prop) {
         // TODO: handle non-objects
-        if(obj[prop] !== null && obj[prop] !== undefined) {
+        if (obj[prop] !== null && obj[prop] !== undefined) {
           Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
           Object.getPrototypeOf(obj[prop]).prop = prop;
         }
         return obj[prop];
       },
     };
+  }
+
+  #deserialize(value, type){
+    switch (type) {
+      case 'number':
+      case 'boolean':
+      case 'object':
+      case 'undefined':
+        return JSON.parse(value);
+      default:
+        return value;
+    }
+  };
+
+  #serialize(value) {
+    switch(typeof value) {
+      case 'number':
+      case 'boolean':
+      case 'object':
+      case 'undefined':
+        return JSON.stringify(value);
+      default: return value;
+    }
   }
 
   #initializeProps() {
@@ -181,5 +190,3 @@ export class WebComponent extends HTMLElement {
     }
   }
 }
-
-export default WebComponent;

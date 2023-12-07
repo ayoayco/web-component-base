@@ -1,5 +1,5 @@
 // @ts-check
-import WebComponent from "../../src/WebComponent.js";
+import { WebComponent } from "../../src/WebComponent.js";
 
 export class HelloWorld extends WebComponent {
   static properties = ["count", "emotion"];

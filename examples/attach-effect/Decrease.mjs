@@ -1,5 +1,5 @@
 // @ts-check
-import { WebComponent, attachEffect } from "../../src/";
+import { WebComponent, attachEffect } from "../../src/index.js";
 
 export class Decrease extends WebComponent {
   static properties = ["count"];

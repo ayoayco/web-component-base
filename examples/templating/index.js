@@ -6,14 +6,11 @@ export class Counter extends WebComponent {
   };
   get template() {
     return html`
-      <div on:click=${() => ++this.props.count}>
+      <button on:click=${() => ++this.props.count}>
         ${this.props.count}
-        <p>hey</p>
-      </div>
-      <button on:click=${() => alert('woah!')}>hey <span>you</span> sexy animal</button>
+      </button>
     `;
   }
-
 }
 
 customElements.define("my-counter", Counter);

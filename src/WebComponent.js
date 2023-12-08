@@ -181,7 +181,7 @@ export class WebComponent extends HTMLElement {
       const tree = this.template;
 
       // TODO: smart diffing
-      if (JSON.stringify(this.prev) !== JSON.stringify(tree)) {
+      if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
         // render
         const el = createElement(tree);
         if (el) {

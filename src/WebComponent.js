@@ -1,4 +1,4 @@
-import { getKebabCase, getCamelCase, serialize, deserialize } from "./utils/index.js";
+import { createElement, getKebabCase, getCamelCase, serialize, deserialize } from "./utils/index.js";
 
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements
@@ -69,11 +69,7 @@ export class WebComponent extends HTMLElement {
    */
   onChanges(changes) {}
 
-  render() {
-    if (typeof this.template === "string") this.innerHTML = this.template;
-  }
-
-  constructor() {
+    constructor() {
     super();
     this.#initializeProps();
   }
@@ -173,6 +169,27 @@ export class WebComponent extends HTMLElement {
         initialProps,
         this.#handler((key, value) => this.setAttribute(key, value), this)
       );
+    }
+  }
+
+  #prevDOM;
+  render() {
+    if (typeof this.template === "string") {
+      this.innerHTML = this.template;
+      return;
+    } else if (typeof this.template === 'object') {
+      const tree = this.template;
+
+      // TODO: smart diffing
+      if (JSON.stringify(this.prev) !== JSON.stringify(tree)) {
+        // render
+        const el = createElement(tree);
+        if (el) {
+          if (Array.isArray(el)) this.replaceChildren(...el);
+          else this.replaceChildren(el);
+        }
+        this.#prevDOM = tree;
+      }
     }
   }
 }

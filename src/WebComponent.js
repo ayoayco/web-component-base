@@ -134,9 +134,7 @@ export class WebComponent extends HTMLElement {
             effectsMap[prop] = [];
           }
           effectsMap[prop].push(value.callback);
-        } else if (typeof oldValue !== typeof value) {
-          const err = new TypeError(`[${meta.constructor.name}.props.${prop}] ${typeof value} is not assignable to ${typeof oldValue}`)
-          console.error(err);
+        } else if (typeMap[prop] !== typeof value) {
           return false;
         } else if (oldValue !== value) {
           obj[prop] = value;

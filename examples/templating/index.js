@@ -6,7 +6,7 @@ export class Counter extends WebComponent {
   };
   get template() {
     return html`
-      <button on:click=${() => ++this.props.count}>
+      <button on:click=${() => this.props.count = 'hey'}>
         ${this.props.count}
       </button>
     `;

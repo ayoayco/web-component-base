@@ -79,7 +79,7 @@ export class WebComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    const propKeys = Object.keys(this.props).map(camelCase => getKebabCase(camelCase))
+    const propKeys = this.props ? Object.keys(this.props).map(camelCase => getKebabCase(camelCase)) : [];
 
     return [...(
       new Set([

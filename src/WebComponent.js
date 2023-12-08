@@ -1,4 +1,4 @@
-import { getKebabCase, getCamelCase, serialize, deserialize } from "./utils";
+import { getKebabCase, getCamelCase, serialize, deserialize } from "./utils/index.js";
 
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements
@@ -12,6 +12,11 @@ export class WebComponent extends HTMLElement {
    * @type {Array<string>}
    */
   static properties = [];
+
+  /**
+   * Blueprint for the Proxy props
+   */
+  static props;
 
   /**
    * Read-only string property that represents how the component will be rendered
@@ -74,7 +79,14 @@ export class WebComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return this.properties;
+    const propKeys = Object.keys(this.props).map(camelCase => getKebabCase(camelCase))
+
+    return [...(
+      new Set([
+        ...this.properties,
+        ...propKeys
+      ])
+    )]
   }
 
   connectedCallback() {
@@ -147,9 +159,18 @@ export class WebComponent extends HTMLElement {
   }
 
   #initializeProps() {
+    let initialProps = {}
+    if(this.constructor.props) {
+      initialProps = this.constructor.props;
+      Object.keys(initialProps).forEach(camelCase => {
+        const value = initialProps[camelCase]
+        this.#typeMap[camelCase] = typeof value
+        this.setAttribute(getKebabCase(camelCase), serialize(value))
+      })
+    }
     if (!this.#props) {
       this.#props = new Proxy(
-        {},
+        initialProps,
         this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }

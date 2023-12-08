@@ -1,4 +1,4 @@
-import { WebComponent } from "../../src";
+import { WebComponent } from "../../src/index.js"
 
 export class BooleanPropTest extends WebComponent {
   static properties = ["is-inline", "anotherone"];

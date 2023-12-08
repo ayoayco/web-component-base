@@ -1,0 +1,15 @@
+
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "dist",
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "include": [
+    "src/*",
+  ],
+  "exclude": [
+    "src/utils"
+  ]
+}

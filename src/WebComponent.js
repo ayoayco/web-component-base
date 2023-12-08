@@ -1,3 +1,7 @@
+import { getKebabCase } from "./utils/get-kebab-case";
+import { getCamelCase } from "./utils/get-camel-case";
+import { serialize, deserialize } from "./utils/parse";
+
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements
  * @license MIT <https://opensource.org/licenses/MIT>
@@ -89,7 +93,7 @@ export class WebComponent extends HTMLElement {
   }
 
   attributeChangedCallback(property, previousValue, currentValue) {
-    const camelCaps = this.#getCamelCaps(property);
+    const camelCaps = getCamelCase(property);
 
     if (previousValue !== currentValue) {
       this[property] = currentValue === "" || currentValue;
@@ -103,12 +107,8 @@ export class WebComponent extends HTMLElement {
   }
 
   #handleUpdateProp(key, stringifiedValue) {
-    const restored = this.#deserialize(stringifiedValue, this.#typeMap[key]);
+    const restored = deserialize(stringifiedValue, this.#typeMap[key]);
     if (restored !== this.props[key]) this.props[key] = restored;
-  }
-
-  #getCamelCaps(kebab) {
-    return kebab.replace(/-./g, (x) => x[1].toUpperCase());
   }
 
   #typeMap = {};
@@ -117,12 +117,6 @@ export class WebComponent extends HTMLElement {
   #handler(setter, meta) {
     const effectsMap = meta.#effectsMap;
     const typeMap = meta.#typeMap;
-    const getKebab = (str) => {
-      return str.replace(
-        /[A-Z]+(?![a-z])|[A-Z]/g,
-        ($, ofs) => (ofs ? "-" : "") + $.toLowerCase()
-      );
-    };
 
     return {
       set(obj, prop, value) {
@@ -140,9 +134,8 @@ export class WebComponent extends HTMLElement {
         } else if (oldValue !== value) {
           obj[prop] = value;
           effectsMap[prop]?.forEach((f) => f(value));
-          const kebab = getKebab(prop);
-
-          setter(kebab, meta.#serialize(value));
+          const kebab = getKebabCase(prop);
+          setter(kebab, serialize(value));
         }
 
         return true;
@@ -156,29 +149,6 @@ export class WebComponent extends HTMLElement {
         return obj[prop];
       },
     };
-  }
-
-  #deserialize(value, type){
-    switch (type) {
-      case 'number':
-      case 'boolean':
-      case 'object':
-      case 'undefined':
-        return JSON.parse(value);
-      default:
-        return value;
-    }
-  };
-
-  #serialize(value) {
-    switch(typeof value) {
-      case 'number':
-      case 'boolean':
-      case 'object':
-      case 'undefined':
-        return JSON.stringify(value);
-      default: return value;
-    }
   }
 
   #initializeProps() {

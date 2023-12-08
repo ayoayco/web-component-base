@@ -8,8 +8,6 @@
   },
   "include": [
     "src/*",
+    "src/utils/*"
   ],
-  "exclude": [
-    "src/utils"
-  ]
 }

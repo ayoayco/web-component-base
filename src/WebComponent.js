@@ -1,6 +1,4 @@
-import { getKebabCase } from "./utils/get-kebab-case";
-import { getCamelCase } from "./utils/get-camel-case";
-import { serialize, deserialize } from "./utils/parse";
+import { getKebabCase, getCamelCase, serialize, deserialize } from "./utils";
 
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements

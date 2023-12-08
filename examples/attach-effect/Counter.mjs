@@ -1,7 +1,5 @@
 // @ts-check
-import { WebComponent } from "../../src/WebComponent.js";
-import { attachEffect } from "../../src/attach-effect.js";
-
+import { WebComponent, attachEffect } from "../../src/";
 export class Counter extends WebComponent {
   static properties = ["count"];
   onInit() {

@@ -70,9 +70,6 @@ export class WebComponent extends HTMLElement {
     if (typeof this.template === "string") this.innerHTML = this.template;
   }
 
-  /**
-   * start HTMLElement callbacks
-   */
   constructor() {
     super();
     this.#initializeProps();

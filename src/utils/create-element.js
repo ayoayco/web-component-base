@@ -7,16 +7,8 @@ export function createElement(tree) {
     return document.createTextNode(tree);
   } else {
     const el = document.createElement(tree.type);
-    const eventAttrs = tree.props
-      ? Object.keys(tree.props)
-          .filter((key) => key.startsWith("on:"))
-          .map((key) => ({ key, cb: tree.props[key] }))
-      : [];
-    eventAttrs.forEach((onEvent) => {
-      const { key, cb } = onEvent;
-      const eventId = key.replace("on:", "");
-      el.addEventListener(eventId, cb);
-    });
+    if (tree.props)
+        Object.keys(tree.props).forEach(prop => el[prop] = tree.props[prop])
     tree.children?.forEach((child) => {
       const childEl = createElement(child);
       if (childEl) {

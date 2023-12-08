@@ -9,4 +9,3 @@ function h(type, props, ...children) {
 }
 
 export const html = htm.bind(h);
-

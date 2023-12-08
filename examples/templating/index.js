@@ -6,7 +6,7 @@ export class Counter extends WebComponent {
   };
   get template() {
     return html`
-      <button onClick=${() => ++this.props.count} style="background-color: black; color: white;">
+      <button class="hey" id="btn" onclick=${() => ++this.props.count} style="background-color: black; color: white;">
         <span>${this.props.count}</span>
       </button>
     `;

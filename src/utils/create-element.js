@@ -7,8 +7,13 @@ export function createElement(tree) {
     return document.createTextNode(tree);
   } else {
     const el = document.createElement(tree.type);
-    if (tree.props)
-        Object.keys(tree.props).forEach(prop => el[prop.toLowerCase()] = tree.props[prop])
+    if (tree.props) {
+        Object.keys(tree.props).forEach(prop => {
+            let domProp = prop.startsWith('on') ? prop.toLowerCase() : prop;
+            if (domProp === 'class') domProp = 'className';
+            el[domProp] = tree.props[prop]
+        })
+    }
     tree.children?.forEach((child) => {
       const childEl = createElement(child);
       if (childEl) {

@@ -135,7 +135,7 @@ export class WebComponent extends HTMLElement {
           }
           effectsMap[prop].push(value.callback);
         } else if (typeMap[prop] !== typeof value) {
-          return false;
+            throw TypeError(`Cannot assign ${typeof value} to ${typeMap[prop]} property (setting '${prop}' of ${meta.constructor.name})`)
         } else if (oldValue !== value) {
           obj[prop] = value;
           effectsMap[prop]?.forEach((f) => f(value));

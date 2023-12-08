@@ -1,12 +1,12 @@
 import { WebComponent } from "../../src/WebComponent.js";
 
 export class ObjectText extends WebComponent {
-  static properties = ["object"];
-  onInit() {
-    this.props.object = {
-        hello: 'worldzz',
-        age: 2
-    };
+  // static properties = ["object"];
+  static props = {
+    object: {
+      hello: 'worldzz',
+      age: 2
+    }
   }
   onChanges() {
     console.log('>>> object', this.props.object)

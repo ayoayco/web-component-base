@@ -1,3 +1,5 @@
+import { getCamelCase } from "./get-camel-case.js";
+
 export function createElement(tree) {
   if (!tree.type) {
     const leaves = typeof tree === "object" ? Object.keys(tree) : [];
@@ -9,9 +11,17 @@ export function createElement(tree) {
     const el = document.createElement(tree.type);
     if (tree.props) {
         Object.keys(tree.props).forEach(prop => {
-            let domProp = prop.startsWith('on') ? prop.toLowerCase() : prop;
-            if (domProp === 'class') domProp = 'className';
-            el[domProp] = tree.props[prop]
+            let domProp = prop.toLowerCase();
+            if (domProp.startsWith('data-')) {
+              const dataProp = domProp.replace('data-', '');
+              el.dataset[getCamelCase(dataProp)] = tree.props[prop];
+            } else {
+              switch(domProp) {
+                case 'class': domProp = 'className'; break;
+                case 'for': domProp = 'htmlFor'; break;
+              }
+              el[domProp] = tree.props[prop]
+            }
         })
     }
     tree.children?.forEach((child) => {

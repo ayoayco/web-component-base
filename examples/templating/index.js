@@ -12,6 +12,8 @@ export class Counter extends WebComponent {
         onClick=${() => ++this.props.count}
         style="background-color: green; color: white;"
         about="Elephant"
+        data-name="thing"
+        aria-name="thingz"
       >
         <span>${this.props.count}</span>
       </button>

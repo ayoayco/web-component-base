@@ -10,19 +10,26 @@ export function createElement(tree) {
   } else {
     const el = document.createElement(tree.type);
     if (tree.props) {
-        Object.keys(tree.props).forEach(prop => {
-            let domProp = prop.toLowerCase();
-            if (domProp.startsWith('data-')) {
-              const dataProp = domProp.replace('data-', '');
-              el.dataset[getCamelCase(dataProp)] = tree.props[prop];
-            } else {
-              switch(domProp) {
-                case 'class': domProp = 'className'; break;
-                case 'for': domProp = 'htmlFor'; break;
-              }
-              if (domProp in el) el[domProp] = tree.props[prop]
-            }
-        })
+      Object.keys(tree.props).forEach((prop) => {
+        let domProp = prop.toLowerCase();
+        let value = tree.props[prop];
+        if (domProp.startsWith("data-")) {
+          const dataProp = domProp.replace("data-", "");
+          el.dataset[getCamelCase(dataProp)] = value;
+        } else if (domProp.startsWith("aria-")) {
+          el.setAttribute(domProp, value);
+        } else {
+          switch (domProp) {
+            case "class":
+              domProp = "className";
+              break;
+            case "for":
+              domProp = "htmlFor";
+              break;
+          }
+          if (domProp in el) el[domProp] = value;
+        }
+      });
     }
     tree.children?.forEach((child) => {
       const childEl = createElement(child);

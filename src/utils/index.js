@@ -1,5 +1,5 @@
-export { serialize } from "./serialize.js";
-export { deserialize } from "./deserialize.js";
-export { getCamelCase } from "./get-camel-case.js";
-export { getKebabCase } from "./get-kebab-case.js";
-export {createElement} from "./create-element.js";
+export { serialize } from "./serialize.mjs";
+export { deserialize } from "./deserialize.mjs";
+export { getCamelCase } from "./get-camel-case.mjs";
+export { getKebabCase } from "./get-kebab-case.mjs";
+export {createElement} from "./create-element.mjs";

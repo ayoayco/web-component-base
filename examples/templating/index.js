@@ -8,9 +8,9 @@ export class Counter extends WebComponent {
     return html`
       <button
         class="hey"
-        ID="btn"
+        id="btn"
         onClick=${() => ++this.props.count}
-        style="background-color: black; color: white;"
+        style="background-color: green; color: white;"
         about="Elephant"
       >
         <span>${this.props.count}</span>

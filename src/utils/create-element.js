@@ -20,7 +20,7 @@ export function createElement(tree) {
                 case 'class': domProp = 'className'; break;
                 case 'for': domProp = 'htmlFor'; break;
               }
-              el[domProp] = tree.props[prop]
+              if (domProp in el) el[domProp] = tree.props[prop]
             }
         })
     }

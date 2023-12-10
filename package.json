@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "2.0.0-beta.21",
+  "version": "2.0.0",
   "description": "A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily",
   "type": "module",
   "exports": {
@@ -30,11 +30,10 @@
     "start": "npx simple-server .",
     "demo": "npx simple-server .",
     "site": "npm start -w site",
-    "build": "npm run clean && tsc && npm run copy:meta && npm run copy:source && npm run minify",
+    "build": "npm run clean && tsc && npm run copy:meta && npm run copy:source",
     "clean": "rm -rf dist",
-    "minify": "npx uglifyjs ./dist/WebComponent.js -o ./dist/WebComponent.min.js",
     "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist",
-    "copy:source": "cp -r ./src/* ./dist",
+    "copy:source": "esbuild --minify --bundle ./src/*.js ./src/utils/* --outdir=\"./dist\" --format=\"esm\"",
     "pub": "npm run clean && npm run build && cd ./dist && npm publish",
     "pub:beta": "npm run clean && npm run build && cd ./dist && npm publish --tag beta",
     "publish:patch": "npm version patch && npm run pub",
@@ -59,6 +58,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",
+    "esbuild": "^0.19.9",
     "prettier": "^3.1.1",
     "typescript": "^5.2.2",
     "uglify-js": "^3.17.4"

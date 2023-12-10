@@ -13,11 +13,11 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 
 ## Features
 
-- A  props API that synchronizes your components' property values and HTML attributes
+- A robust `props` API that synchronizes your components' property values and HTML attributes
 - Sensible life-cycle hooks that you understand and remember
-- An  html tagged templates powered by preact's  html/mini
-- Attach functions as "side effects" that gets triggered on property value changes with  attachEffect (example)
-- Provided out-of-the-box with McFly, a powerful no-framework framework
+- A minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
+- Attach "side effects" that gets triggered on property value changes with `attachEffect` ([example](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011))
+- Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
 
 ## Table of Contents
 
@@ -199,7 +199,7 @@ Define behavior when certain events in the component's life cycle is triggered b
 - Best for setting up the component
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
@@ -236,7 +236,7 @@ class ClickableText extends WebComponent {
 - best for undoing any setup done in `onInit()`
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
  
@@ -263,7 +263,7 @@ class ClickableText extends WebComponent {
 - Triggered when an attribute value changed
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes
@@ -289,6 +289,6 @@ As of the major release v2.0.0, the base class is around 1.7 kB (min + gzip) acc
 >
 >I also don't want to get things in my code that I don't need (YAGNI -- You Aren't Gonna Need It)... and I want a base class for simpler use cases that don't have Proxy props or attaching effects...
 >
->To address this, I am working on a "lite" version my base class... please stay tuned.
+>To address this, I am working on a "lite" version of my base class here... please stay tuned.
 >
 > -Ayo

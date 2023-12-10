@@ -1,44 +1,47 @@
 <div class="call-to-action">
-  <a id="primary"
-    href="https://ayco.io/gh/web-component-base#readme">
+  <a id="primary" href="https://ayco.io/gh/web-component-base#readme">
     Learn More
   </a>
-  <a href="https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010">Playground &rarr;</a>
+  <a
+    href="https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010"
+    target="_blank"
+    >Playground &rarr;</a
+  >
 </div>
 
 <style>
-.call-to-action {
-  display: flex;
-  gap: 1em;
-  justify-content: center;
-  margin: 1em 0;
-  width: 100%;
+  .call-to-action {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin: 1em 0;
+    width: 100%;
 
-  & a {
-    border: 3px solid var(--color-fade);
-    padding: 0.5em 0.75em;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
+    & a {
+      border: 3px solid var(--color-fade);
+      padding: 0.5em 0.75em;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
 
-    &:hover {
-      box-shadow: 0 0 0 3px var(--color-fade);
-    }
+      &:hover {
+        box-shadow: 0 0 0 3px var(--color-fade);
+      }
 
-    &#primary {
+      &#primary {
         background: #3054bf;
         color: white;
         min-width: 35%;
+      }
     }
   }
-}
 
-@media only screen and (max-device-width: 430px) {
-  .call-to-action {
-    flex-direction: column;
-    & a {
-      width: 100% !important;
+  @media only screen and (max-device-width: 430px) {
+    .call-to-action {
+      flex-direction: column;
+      & a {
+        width: 100% !important;
+      }
     }
   }
-}
 </style>

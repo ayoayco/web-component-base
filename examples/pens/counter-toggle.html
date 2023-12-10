@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,23 +10,19 @@
       }
     </style>
     <script type="module">
-      import { WebComponent } from "https://unpkg.com/web-component-base@1.13.3/WebComponent.min.js";
+      import {
+        WebComponent,
+        html,
+      } from "https://unpkg.com/web-component-base@latest/index.js";
 
-      /**
-       * @see https://ayco.io/n/web-component-base
-       */
-      class Counter extends WebComponent {
-        static properties = ["count"];
-        onInit() {
-          this.props.count = 0;
-          this.onclick = () => ++this.props.count;
-        }
-        onChanges(changes) {
-          console.log(changes);
-          // now click the button & check your devtools console
-        }
+      export class Counter extends WebComponent {
+        static props = {
+          count: 0,
+        };
         get template() {
-          return `<button>${this.props.count}</button>`;
+          return html`<button onClick=${() => ++this.props.count}>
+            ${this.props.count}
+          </button>`;
         }
       }
 

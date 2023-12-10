@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <!--
     Hello! This page is an example McFly page.
@@ -18,6 +18,32 @@
         url: "https://ayco.io",
       };
     </script>
+    <style>
+      @counter-style publish-icons {
+        system: cyclic;
+        symbols: "️✅";
+        suffix: " ";
+      }
+      main {
+        font-size: large;
+
+        & section ul {
+          list-style: publish-icons;
+        }
+        & hr {
+          margin: 2em 0;
+        }
+
+        & section p:not(blockquote *):first-of-type::first-letter {
+          font-weight: 900;
+          font-size: 2rem;
+          line-height: 2rem;
+          float: left;
+          color: var(--color-primary);
+          margin-top: -8px;
+        }
+      }
+    </style>
   </my-head>
   <body>
     <awesome-header>
@@ -25,61 +51,100 @@
       <span slot="description">{{ project.description }}</span>
     </awesome-header>
     <main>
-      <section style="font-size: large;">
+      <section>
         <p>
-          By extending our base class, you get an easy authoring experience as you would expect in writing your components:</p>
+          By extending our base class, you get the easy authoring experience you
+          have come to expect when coming from more mature JS frameworks-- all
+          with zero-dependency, minimal tooling and very thin abstraction over
+          the vanilla web platform.
+        </p>
         <ul>
-          <li>A <code-block inline>props</code-block> API that synchronizes your components' property values and HTML attributes</li>
+          <li>
+            A robust <code-block inline>props</code-block> API that synchronizes
+            your components' property values and HTML attributes
+          </li>
           <li>Sensible life-cycle hooks that you understand and remember</li>
-          <li>Extensible templates & renderer (examples in-progress)</li>
-          <li>Provided out-of-the-box with <a href="https://ayco.io/gh/McFly">McFly</a>, a powerful no-framework framework</li>
+          <li>
+            A minimal <code-block inline>html</code-block> function for tagged
+            templates powered by Preact's tiny (450 Bytes)
+            <a href="http://github.com/developit/htm" target="_blank"
+              >html/mini</a
+            >
+          </li>
+          <li>
+            Attach "side effects" that gets triggered on property value changes
+            with <code-block inline>attachEffect</code-block> (<a
+              href="https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011"
+              target="_blank"
+              >example</a
+            >)
+          </li>
+          <li>
+            Provided out-of-the-box with
+            <a href="https://ayco.io/gh/McFly">McFly</a>, a powerful
+            no-framework framework
+          </li>
         </ul>
         <call-to-action></call-to-action>
-        <warning-block>See this issue for FAQs or comment your own: <a href="https://github.com/ayoayco/web-component-base/issues/3">Issue #3</a></warning-block>
-        <my-quote type="info">
-          <p>
-            Version 2.0.0-beta is out! 🎉
-          </p>
-          <p>
-            We are now able to attach "side effects" to property value changes, from inside the component and outside.
-          </p>
-          <p>
-            Play on <a href="https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011">CodePen</a>.
-          </p>
-        </my-quote>
       </section>
-      <hr style="margin: 2em 0;" />
-      <section style="font-size: large;">
+      <hr />
+      <section>
+        <p>Why use this base class?</p>
         <p>
-          When you extend the WebComponent class for your component, you only have to define the template and properties. Any change in any property value will automatically cause just the component UI to render.
+          Writing Web Components from the vanilla
+          <code-block inline>HTMLElement</code-block> can easily get confusing
+          and hard to maintain, especially when coming from JS frameworks with
+          advanced tooling.
+        </p>
+        <p>
+          This project aims to ease this with the thinnest possible abstraction
+          from vanilla and virtually zero need for advanced tooling. It works
+          without bundlers, transpilers, or polyfills.
+        </p>
+        <p>
+          When you extend the <code-block inline>WebComponent</code-block> class
+          for your component, you only have to define the template and
+          properties. Any change in any property value will automatically cause
+          just the component UI to render.
         </p>
 
-        <p>The result is a reactive UI on property changes: <my-counter></my-counter></p>
+        <p>
+          The result is a reactive UI on property changes:
+          <my-counter></my-counter>
+        </p>
         <code-block language="js">
           <pre>
-import { WebComponent } from &quot;https://unpkg.com/web-component-base@1.13.3/WebComponent.min.js&quot;;
+import { WebComponent, html } from &quot;https://unpkg.com/web-component-base@2.0.0/index.js&quot;;
 
 export class Counter extends WebComponent {
-  static properties = [&quot;count&quot;];
-  onInit() {
-    this.props.count = 0;
-    this.onclick = () => ++this.props.count;
+  static props = {
+    count: 0
   }
   get template() {
-    return `&lt;button&gt;${this.props.count}&lt;/button&gt;`;
+    return html`
+      &lt;button onClick=${() => ++this.props.count}&gt;
+        ${this.props.count}
+      &lt;/button&gt;
+    `;
   }
 }
 
-customElements.define(&quot;my-counter&quot;, Counter);
-          </pre>
+customElements.define(&quot;my-counter&quot;, Counter);</pre
+          >
         </code-block>
       </section>
     </main>
     <my-footer>
-      <span>This site is built with <a href="https://github.com/ayoayco/McFly">McFly</a>, the no-framework framework;
-      </span><br />
-      <span>✨ Star on <a href="https://github.com/ayoayco/web-component-base">GitHub</a> to support;
-      </span><br />
+      <span
+        >This site is built with
+        <a href="https://github.com/ayoayco/McFly">McFly</a>, the no-framework
+        framework; </span
+      ><br />
+      <span
+        >✨ Star on
+        <a href="https://github.com/ayoayco/web-component-base">GitHub</a> to
+        support; </span
+      ><br />
       <span>
         A project by <a href="{{ author.url }}">{{ author.name }}</a>
       </span>

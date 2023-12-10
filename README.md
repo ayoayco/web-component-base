@@ -5,46 +5,53 @@
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/web-component-base)](https://bundlephobia.com/package/web-component-base)
 
-> A zero-dependency, ~600 Bytes (minified & gzipped), JS base class for creating reactive custom elements easily
+🤷‍♂️ zero-dependency, 🤏 tiny JS base class for creating reactive custom elements easily ✨
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
 The result is a reactive UI on property changes. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
-<details>
-<summary>Table of Contents</summary>
-<ol>
-  <li><a href="#import-via-unpkg">Import via unpkg</a></li>
-  <li><a href="#installation-via-npm">Installation via npm</a></li>
-  <li><a href="#usage">Usage</a></li>
-  <li><a href="#template-vs-render">`template` vs `render()`</a></li>
-  <li><a href="#prop-access">Prop access</a>
-    <ol>
-      <li><a href="#alternatives">Alternatives</a></li>
-    </ol>
-  </li>
-  <li><a href="#quick-start-example">Quick Start Example</a></li>
-  <li><a href="#life-cycle-hooks">Life-Cycle Hooks</a>
-    <ol>
-      <li><a href="#oninit">`onInit`</a> - the component is connected to the DOM, before view is initialized</li>
-      <li><a href="#afterviewinit">`afterViewInit`</a> - after the view is first initialized</li>
-      <li><a href="#ondestroy">`onDestroy`</a> - the component is disconnected from the DOM</li>
-      <li><a href="#onchanges">`onChanges`</a> - every time an attribute value changes</li>
-    </ol>
-  </li>
-  <li><a href="#library-size">Library Size</a></li>
-</ol>
-</details>
+## Features
 
-## Import via unpkg
+- A  props API that synchronizes your components' property values and HTML attributes
+- Sensible life-cycle hooks that you understand and remember
+- An  html tagged templates powered by preact's  html/mini
+- Attach functions as "side effects" that gets triggered on property value changes with  attachEffect (example)
+- Provided out-of-the-box with McFly, a powerful no-framework framework
+
+## Table of Contents
+
+1. [Installation](#installation)
+    1. [Import via unpkg](#import-via-unpkg)
+    2. [Installation via npm](#installation-via-npm)
+3. [Usage](#usage)
+4. [`template` vs `render()`](#template-vs-render)
+5. [Prop access](#prop-access)
+    1. [Alternatives](#alternatives)
+6. [Quick Start Example](#quick-start-example)
+7. [Life-Cycle Hooks](#life-cycle-hooks)
+    1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
+    2. [`afterViewInit`](#afterviewinit) - after the view is first initialized
+    3. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
+    4. [`onChanges`](#onchanges) - every time an attribute value changes
+8. [Library Size](#library-size)
+
+
+## Installation
+
+The library is distributed as complete ESM modules, published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
+
+### Import via unpkg (no bundlers needed!)
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
 
+Please check
+
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 ```
 
-## Installation via npm
-Usable for projects with bundlers or using import maps.
+### Installation via npm
+Usable for projects with bundlers or using import maps pointing to to the specific files in downloaded in your `node_modules/web-component-base`.
 
 ```bash
 npm i web-component-base
@@ -56,13 +63,17 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class HelloWorld extends WebComponent {
-  static properties = ["my-name", "emotion"];
+  static props ={
+    myName: 'World',
+    emotion: 'sad'
+  }
   get template() {
     return `
-        <h1>Hello ${this.props.myName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>`;
+      <h1>Hello ${this.props.myName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>
+    `;
   }
 }
 
@@ -108,13 +119,11 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 
 ```js
 class HelloWorld extends WebComponent {
-  static properties = ["my-prop"];
-  onInit() {
-    let count = 0;
-    this.onclick = () => this.props.myProp = `${++count}`
+  static props = {
+    myProp: 'World'
   }
   get template() {
-    return `
+    return html`
         <h1>Hello ${this.props.myProp}</h1>
     `;
   }
@@ -133,7 +142,7 @@ this.props.myName = 'hello'
 this.setAttribute('my-name','hello');
 ```
 
-Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provided with `static properties = ['my-name']`;
+Therefore, this will tell the browser that the UI needs a render if the attribute is one of the component's observed attributes we explicitly provided with `static props`;
 
 > [!NOTE]
 > The `props` property of `WebComponent` works like `HTMLElement.dataset`, except `dataset` is only for attributes prefixed with `data-`. A camelCase counterpart using `props` will give read/write access to any attribute, with or without the `data-` prefix.
@@ -155,10 +164,12 @@ Here is an example of using a custom element in a single .html file.
   <head>
     <title>WC Base Test</title>
     <script type="module">
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
       class HelloWorld extends WebComponent {
-        static properties = ["my-name"];
+        static props = {
+          myName: 'World'
+        }
         get template() {
           return `<h1>Hello ${this.props.myName}!</h1>`;
         }
@@ -188,7 +199,7 @@ Define behavior when certain events in the component's life cycle is triggered b
 - Best for setting up the component
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
@@ -225,7 +236,7 @@ class ClickableText extends WebComponent {
 - best for undoing any setup done in `onInit()`
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
  
@@ -252,7 +263,7 @@ class ClickableText extends WebComponent {
 - Triggered when an attribute value changed
 
 ```js
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/WebComponent.min.js";
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes
@@ -269,4 +280,15 @@ class ClickableText extends WebComponent {
 
 ## Library Size 
 
-The bundle size was reported to be 587 Bytes (minified & gzipped) by [bundlephobia](https://bundlephobia.com/package/web-component-base). Running [size-limit](https://npmjs.com/package/@size-limit/preset-small-lib) reports the base class size as around 760 Bytes (minified & brotlied), and using the `WebComponent.min.js` version gets it down to around 400 Bytes.
+All the functions and the base class in the library are minimalist by design and only contains what is needed for their purpose.
+
+As of the major release v2.0.0, the base class is around 1.7 kB (min + gzip) according to [bundlephobia.com](https://bundlephobia.com/package/web-component-base@2.0.0) and 1.1 kB (min + brotli) according to [size-limit](http://github.com/ai/size-limit). There is an increase in size before this release -- primarily for advanced features in building complex applications.
+
+> [!NOTE]
+> As a builder of both simple sites and complex web apps, I recognize that not all custom elements need advanced features for reactivity.
+>
+>I also don't want to get things in my code that I don't need (YAGNI -- You Aren't Gonna Need It)... and I want a base class for simpler use cases that don't have Proxy props or attaching effects...
+>
+>To address this, I am working on a "lite" version my base class... please stay tuned.
+>
+> -Ayo

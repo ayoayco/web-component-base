@@ -5,10 +5,10 @@ class HelloWorld extends HTMLElement {
 
   connectedCallback() {
     let count = 0;
-    const currentName = this.getAttribute('my-name');
+    const currentName = this.getAttribute("my-name");
 
     if (!currentName) {
-      this.setAttribute('my-name', 'World')
+      this.setAttribute("my-name", "World");
     }
 
     this.onclick = () => this.setAttribute("my-name", `Clicked ${++count}x`);

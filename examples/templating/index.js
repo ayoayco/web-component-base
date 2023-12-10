@@ -6,18 +6,17 @@ export class Counter extends WebComponent {
     count: 123,
   };
   get template() {
-
-    const list =  ['a', 'b', 'c', 'what']
+    const list = ["a", "b", "c", "what"];
     const links = [
       {
-        url: 'https://ayco.io',
-        text: 'Ayo Ayco'
+        url: "https://ayco.io",
+        text: "Ayo Ayco",
       },
       {
-        url: 'https://ayco.io/gh/McFly',
-        text: 'McFly'
-      }
-    ]
+        url: "https://ayco.io/gh/McFly",
+        text: "McFly",
+      },
+    ];
 
     return html`
       <button
@@ -35,14 +34,13 @@ export class Counter extends WebComponent {
         <label data-my-name="Ayo" for="the-input">Name</label>
         <input id="the-input" type="foo" value="Name:" />
       </form>
-      ${
-        list.map(item => html`<p>${item}</p>`)
-      }
+      ${list.map((item) => html`<p>${item}</p>`)}
       <h3 about="Elephant">Links</h3>
       <ul>
-        ${
-          links.map(link => html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`)
-        }
+        ${links.map(
+          (link) =>
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
+        )}
       </ul>
     `;
   }

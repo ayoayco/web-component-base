@@ -6,13 +6,10 @@ export class Decrease extends WebComponent {
   onInit() {
     this.props.count = 999;
     this.onclick = () => --this.props.count;
-    attachEffect(
-      this.props.count,
-      (count) => console.log(count)
-    );
+    attachEffect(this.props.count, (count) => console.log(count));
   }
 
-  afterViewInit(){
+  afterViewInit() {
     attachEffect(this.props.count, (count) => console.log(count + 100));
   }
 

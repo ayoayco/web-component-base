@@ -41,7 +41,8 @@
     "publish:patch:beta": "npm version patch && npm run pub:beta",
     "publish:minor": "npm version minor && npm run pub",
     "publish:minor:beta": "npm version minor && npm run pub:beta",
-    "check:size": "npm run build && size-limit ./dist/WebComponent.js"
+    "check:size": "npm run build && size-limit ./dist/WebComponent.js",
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },
   "repository": "https://github.com/ayoayco/web-component-base",
   "homepage": "https://WebComponent.io",
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",
+    "prettier": "^3.1.1",
     "typescript": "^5.2.2",
     "uglify-js": "^3.17.4"
   },

@@ -1,1 +1,1 @@
-export default defineNitroConfig({ extends: '@mcflyjs/config' });
+export default defineNitroConfig({ extends: "@mcflyjs/config" });

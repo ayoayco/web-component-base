@@ -26,12 +26,12 @@ class CodeBlockComponent extends HTMLElement {
       margin: "1em 0",
       fontSize: "large",
       overflow: "auto",
-      borderRadius: '5px'
+      borderRadius: "5px",
     };
 
     if (inline) {
-      style.display = 'inline';
-      style.padding = '0.25em 0.3em';
+      style.display = "inline";
+      style.padding = "0.25em 0.3em";
     }
 
     Object.keys(style).forEach((rule) => {

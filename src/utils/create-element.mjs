@@ -2,7 +2,7 @@ export function createElement(tree) {
   if (tree.type === undefined) {
     if (Array.isArray(tree)) {
       const frag = document.createDocumentFragment();
-      frag.replaceChildren(...tree.map(leaf => createElement(leaf)))
+      frag.replaceChildren(...tree.map((leaf) => createElement(leaf)));
       return frag;
     }
     return document.createTextNode(tree);
@@ -14,7 +14,7 @@ export function createElement(tree) {
         if (domProp in el) {
           el[domProp] = tree.props[prop];
         } else {
-          el.setAttribute(prop, tree.props[prop])
+          el.setAttribute(prop, tree.props[prop]);
         }
       });
     }

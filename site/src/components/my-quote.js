@@ -1,11 +1,11 @@
 class MyQuote extends WebComponent {
-  static properties = ['type'];
+  static properties = ["type"];
 
   /**
    * @type {HTMLElement}
    */
   get wrapper() {
-    return this.querySelector('#wrapper');
+    return this.querySelector("#wrapper");
   }
 
   afterViewInit() {
@@ -18,13 +18,12 @@ class MyQuote extends WebComponent {
       margin: "1em 0",
       fontSize: "large",
       overflow: "auto",
-      borderRadius: '5px'
+      borderRadius: "5px",
     };
 
     Object.keys(style).forEach((rule) => {
       this.wrapper.style[rule] = style[rule];
     });
-
   }
 
   get template() {

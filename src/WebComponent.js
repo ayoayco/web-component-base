@@ -1,4 +1,10 @@
-import { createElement, getKebabCase, getCamelCase, serialize, deserialize } from "./utils/index.js";
+import {
+  createElement,
+  getKebabCase,
+  getCamelCase,
+  serialize,
+  deserialize,
+} from "./utils/index.js";
 
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements
@@ -69,20 +75,17 @@ export class WebComponent extends HTMLElement {
    */
   onChanges(changes) {}
 
-    constructor() {
+  constructor() {
     super();
     this.#initializeProps();
   }
 
   static get observedAttributes() {
-    const propKeys = this.props ? Object.keys(this.props).map(camelCase => getKebabCase(camelCase)) : [];
+    const propKeys = this.props
+      ? Object.keys(this.props).map((camelCase) => getKebabCase(camelCase))
+      : [];
 
-    return [...(
-      new Set([
-        ...this.properties,
-        ...propKeys
-      ])
-    )]
+    return [...new Set([...this.properties, ...propKeys])];
   }
 
   connectedCallback() {
@@ -135,7 +138,11 @@ export class WebComponent extends HTMLElement {
           }
           effectsMap[prop].push(value.callback);
         } else if (typeMap[prop] !== typeof value) {
-            throw TypeError(`Cannot assign ${typeof value} to ${typeMap[prop]} property (setting '${prop}' of ${meta.constructor.name})`)
+          throw TypeError(
+            `Cannot assign ${typeof value} to ${
+              typeMap[prop]
+            } property (setting '${prop}' of ${meta.constructor.name})`,
+          );
         } else if (oldValue !== value) {
           obj[prop] = value;
           effectsMap[prop]?.forEach((f) => f(value));
@@ -157,19 +164,19 @@ export class WebComponent extends HTMLElement {
   }
 
   #initializeProps() {
-    let initialProps = {}
-    if(this.constructor.props) {
+    let initialProps = {};
+    if (this.constructor.props) {
       initialProps = this.constructor.props;
-      Object.keys(initialProps).forEach(camelCase => {
-        const value = initialProps[camelCase]
-        this.#typeMap[camelCase] = typeof value
-        this.setAttribute(getKebabCase(camelCase), serialize(value))
-      })
+      Object.keys(initialProps).forEach((camelCase) => {
+        const value = initialProps[camelCase];
+        this.#typeMap[camelCase] = typeof value;
+        this.setAttribute(getKebabCase(camelCase), serialize(value));
+      });
     }
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this)
+        this.#handler((key, value) => this.setAttribute(key, value), this),
       );
     }
   }
@@ -179,7 +186,7 @@ export class WebComponent extends HTMLElement {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
       return;
-    } else if (typeof this.template === 'object') {
+    } else if (typeof this.template === "object") {
       const tree = this.template;
 
       // TODO: smart diffing

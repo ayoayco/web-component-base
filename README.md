@@ -51,7 +51,7 @@ import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.
 ```
 
 ### Installation via npm
-Usable for projects with bundlers or using import maps pointing to to the specific files in downloaded in your `node_modules/web-component-base`.
+Usable for projects with bundlers or using import maps pointing to the specific files downloaded in `node_modules/web-component-base`.
 
 ```bash
 npm i web-component-base

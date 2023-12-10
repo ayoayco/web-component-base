@@ -282,7 +282,9 @@ class ClickableText extends WebComponent {
 
 All the functions and the base class in the library are minimalist by design and only contains what is needed for their purpose.
 
-As of the major release v2.0.0, the base class is around 1.7 kB (min + gzip) according to [bundlephobia.com](https://bundlephobia.com/package/web-component-base@2.0.0) and 1.1 kB (min + brotli) according to [size-limit](http://github.com/ai/size-limit). There is an increase in size before this release -- primarily for advanced features in building complex applications.
+As of v2.0.0, the main export (with `WebComponent` + `html` + `attachEffect`) is 1.7 kB (min + gzip) according to [bundlephobia.com](https://bundlephobia.com/package/web-component-base@2.0.0), and the `WebComponent` base class is just 1.1 kB (min + brotli) according to [size-limit](http://github.com/ai/size-limit).
+
+There is an increase in size compared to that of before this release, primarily because of advanced features (e.g., effects, html tagged templates, and props blueprints) in building complex applications.
 
 > [!NOTE]
 > As a builder of both simple sites and complex web apps, I recognize that not all custom elements need advanced features for reactivity.

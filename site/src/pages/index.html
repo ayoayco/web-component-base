@@ -29,18 +29,21 @@
 
         & section ul {
           list-style: publish-icons;
+
+          & li {
+            margin-bottom: 0.5em;
+          }
         }
         & hr {
           margin: 2em 0;
         }
 
         & section p:not(blockquote *):first-of-type::first-letter {
-          font-weight: 900;
+          font-weight: bold;
           font-size: 2rem;
-          line-height: 2rem;
+          line-height: 1rem;
           float: left;
           color: var(--color-primary);
-          margin-top: -8px;
         }
       }
     </style>

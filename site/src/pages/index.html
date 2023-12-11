@@ -56,9 +56,8 @@
     <main>
       <section>
         <p>
-          By extending our base class, you get the easy authoring experience you
-          have come to expect when coming from more mature JS frameworks-- all
-          with zero-dependency, minimal tooling and very thin abstraction over
+          Get the easy authoring experience you have come to love from popular
+          JS frameworks -- with minimal tooling and very thin abstraction over
           the vanilla web platform.
         </p>
         <ul>
@@ -90,24 +89,19 @@
         <p>Why use this base class?</p>
         <p>
           Writing Web Components from the vanilla
-          <code-block inline>HTMLElement</code-block> can easily get confusing
-          and hard to maintain, especially when coming from JS frameworks with
-          advanced tooling.
+          <code-block inline>HTMLElement</code-block> can seem confusing and
+          hard to maintain especially when coming from JS frameworks; and other
+          projects will even recommend complex setups before you can get
+          started... often resulting to code your components don't even need.
         </p>
         <p>
-          This project aims to ease this with the thinnest possible abstraction
-          from vanilla and virtually zero need for advanced tooling. It works
-          without bundlers, transpilers, or polyfills.
+          This project aims to ease this with virtually zero need for advanced
+          setups and working closest to vanilla custom element APIs. It works on
+          current-day browsers without needing compilers, transpilers, or
+          polyfills.
         </p>
         <p>
-          When you extend the <code-block inline>WebComponent</code-block> class
-          for your component, you only have to define the template and
-          properties. Any change in any property value will automatically cause
-          just the component UI to render.
-        </p>
-
-        <p>
-          The result is a reactive UI on property changes:
+          Here's an interactive custom element:
           <my-counter></my-counter>
         </p>
         <code-block language="js">

@@ -1,10 +1,14 @@
 class Counter extends WebComponent {
-  static properties = ["count"];
-  onInit() {
-    this.props.count = 0;
+  static props = {
+    count: 0,
+  };
+
+  increment() {
     this.onclick = () => ++this.props.count;
   }
   get template() {
-    return `<button>${this.props.count}</button>`;
+    return html`<button onClick=${() => this.increment()}>
+      ${this.props.count}
+    </button>`;
   }
 }

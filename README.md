@@ -25,18 +25,19 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 
 1. [Installation](#installation)
     1. [Import via unpkg](#import-via-unpkg)
-    2. [Installation via npm](#installation-via-npm)
-3. [Usage](#usage)
-4. [`template` vs `render()`](#template-vs-render)
-5. [Prop access](#prop-access)
+    1. [Installation via npm](#installation-via-npm)
+1. [Usage](#usage)
+1. [`template` vs `render()`](#template-vs-render)
+1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
-6. [Quick Start Example](#quick-start-example)
-7. [Life-Cycle Hooks](#life-cycle-hooks)
+1. [Just the Templating](#just-the-templating)
+1. [Quick Start Example](#quick-start-example)
+1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
-    2. [`afterViewInit`](#afterviewinit) - after the view is first initialized
-    3. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
-    4. [`onChanges`](#onchanges) - every time an attribute value changes
-8. [Library Size](#library-size)
+    1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
+    1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
+    1. [`onChanges`](#onchanges) - every time an attribute value changes
+1. [Library Size](#library-size)
 
 
 ## Installation
@@ -156,9 +157,32 @@ The current alternatives are using what `HTMLElement` provides out-of-the-box, w
 1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
+## Just the Templating
+
+You don't have to extend the whole base class just to use some features. All internals are exposed and usable separately so you can practically build the behavior on your own classes.
+
+Here's an example of using the `html` tag template on a class that extends from vanilla `HTMLElement`... also [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
+
+```js
+import {html} from 'https://unpkg.com/web-component-base/html'
+import {createElement} from 'https://unpkg.com/web-component-base/utils'
+
+class MyQuote extends HTMLElement {
+  connectedCallback() {
+    const el = createElement(html`
+      <button onClick=${() => alert('hey')}>
+        hey
+      </button>`);
+    this.appendChild(el)
+  }
+}
+
+customElements.define('my-quote', MyQuote)
+```
+
 ## Quick Start Example
 
-Here is an example of using a custom element in a single .html file. 
+Here is an example of using a custom element in a single .html file. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
 ```html
 <!DOCTYPE html>

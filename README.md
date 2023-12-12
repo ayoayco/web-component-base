@@ -7,6 +7,8 @@
 
 🤷‍♂️ zero-dependency, 🤏 tiny JS base class for creating reactive custom elements easily ✨
 
+![counter example code snippet](https://raw.githubusercontent.com/ayoayco/web-component-base/main/assets/IMG_0682.png)
+
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
 The result is a reactive UI on property changes. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)

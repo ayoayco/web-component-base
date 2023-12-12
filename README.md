@@ -319,4 +319,4 @@ There is an increase in size compared to that of before this release, primarily 
 >
 >To address this, I am working on a "lite" version of my base class here... please stay tuned.
 >
-> -Ayo Ayco
+> - Ayo Ayco

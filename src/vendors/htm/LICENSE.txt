@@ -1,3 +1,5 @@
+This license applies to parts of the `html` function originating from https://github.com/developit/htm project:
+
 
                                  Apache License
                            Version 2.0, January 2004

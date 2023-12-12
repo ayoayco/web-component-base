@@ -1,6 +1,6 @@
 {
   "name": "web-component-base",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A zero-dependency & tiny JS base class for creating reactive custom elements easily",
   "type": "module",
   "exports": {
@@ -32,7 +32,7 @@
     "site": "npm start -w site",
     "build": "npm run clean && tsc && npm run copy:meta && npm run copy:source",
     "clean": "rm -rf dist",
-    "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist",
+    "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist && cp -r ./src/vendors ./dist",
     "copy:source": "esbuild --minify --bundle ./src/*.js ./src/utils/* --outdir=\"./dist\" --format=\"esm\"",
     "pub": "npm run clean && npm run build && cd ./dist && npm publish",
     "pub:beta": "npm run clean && npm run build && cd ./dist && npm publish --tag beta",

@@ -1,3 +1,8 @@
+/**
+ * @license MIT <https://opensource.org/licenses/MIT>
+ * @author Ayo Ayco <https://ayo.ayco.io>
+ */
+
 import {
   createElement,
   getKebabCase,
@@ -8,9 +13,7 @@ import {
 
 /**
  * A minimal base class to reduce the complexity of creating reactive custom elements
- * @license MIT <https://opensource.org/licenses/MIT>
- * @author Ayo Ayco <https://ayo.ayco.io>
- * @see https://www.npmjs.com/package/web-component-base#readme
+ * @see https://WebComponent.io
  */
 export class WebComponent extends HTMLElement {
   /**
@@ -21,6 +24,8 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Blueprint for the Proxy props
+   * @typedef {{[name: string]: any}} PropStringMap
+   * @type {PropStringMap}
    */
   static props;
 
@@ -35,7 +40,6 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
-   * @typedef {{[name: string]: any}} PropStringMap
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
    * @type {PropStringMap}
@@ -141,7 +145,7 @@ export class WebComponent extends HTMLElement {
           throw TypeError(
             `Cannot assign ${typeof value} to ${
               typeMap[prop]
-            } property (setting '${prop}' of ${meta.constructor.name})`,
+            } property (setting '${prop}' of ${meta.constructor.name})`
           );
         } else if (oldValue !== value) {
           obj[prop] = value;
@@ -176,7 +180,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this),
+        this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }
   }
@@ -185,13 +189,11 @@ export class WebComponent extends HTMLElement {
   render() {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
-      return;
     } else if (typeof this.template === "object") {
       const tree = this.template;
 
       // TODO: smart diffing
       if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
-        // render
         const el = createElement(tree);
         if (el) {
           if (Array.isArray(el)) this.replaceChildren(...el);

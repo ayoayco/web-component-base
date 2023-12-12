@@ -2,7 +2,10 @@
 import { WebComponent } from "../../src/index.js";
 
 export class HelloWorld extends WebComponent {
-  static properties = ["count", "emotion"];
+  static props = {
+    count: 0,
+    emotion: "sad",
+  };
 
   onInit() {
     this.props.count = 0;

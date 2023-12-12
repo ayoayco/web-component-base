@@ -1,7 +1,6 @@
 import { WebComponent } from "../../src/index.js";
 
 export class ObjectText extends WebComponent {
-  // static properties = ["object"];
   static props = {
     object: {
       hello: "worldzz",

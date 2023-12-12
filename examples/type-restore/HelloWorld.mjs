@@ -1,9 +1,10 @@
 import { WebComponent } from "../../src/index.js";
 
 export class HelloWorld extends WebComponent {
-  static properties = ["name"];
+  static props = {
+    name: "a",
+  };
   onInit() {
-    this.props.name = "a";
     this.onclick = () => (this.props.name += "a");
   }
   get template() {

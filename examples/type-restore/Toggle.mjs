@@ -2,9 +2,10 @@
 import { WebComponent } from "../../src/index.js";
 
 export class Toggle extends WebComponent {
-  static properties = ["toggle"];
+  static props = {
+    toggle: false,
+  };
   onInit() {
-    this.props.toggle = false;
     this.onclick = () => this.handleToggle();
   }
   handleToggle() {

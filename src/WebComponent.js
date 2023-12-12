@@ -14,13 +14,9 @@ import {
  */
 export class WebComponent extends HTMLElement {
   /**
-   * Array of strings that tells the browsers which attributes will cause a render
-   * @type {Array<string>}
-   */
-  static properties = [];
-
-  /**
    * Blueprint for the Proxy props
+   * @typedef {{[name: string]: any}} PropStringMap
+   * @type {PropStringMap}
    */
   static props;
 
@@ -35,9 +31,7 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
-   * @typedef {{[name: string]: any}} PropStringMap
    * @see https://www.npmjs.com/package/web-component-base#prop-access
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
    * @type {PropStringMap}
    */
   get props() {
@@ -81,11 +75,9 @@ export class WebComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    const propKeys = this.props
+    return this.props
       ? Object.keys(this.props).map((camelCase) => getKebabCase(camelCase))
       : [];
-
-    return [...new Set([...this.properties, ...propKeys])];
   }
 
   connectedCallback() {
@@ -102,11 +94,8 @@ export class WebComponent extends HTMLElement {
     const camelCaps = getCamelCase(property);
 
     if (previousValue !== currentValue) {
-      this[property] = currentValue === "" || currentValue;
-      this[camelCaps] = this[property];
-
-      this.#handleUpdateProp(camelCaps, this[property]);
-
+      const newValue = currentValue === "" || currentValue;
+      this.#handleUpdateProp(camelCaps, newValue);
       this.render();
       this.onChanges({ property, previousValue, currentValue });
     }
@@ -141,7 +130,7 @@ export class WebComponent extends HTMLElement {
           throw TypeError(
             `Cannot assign ${typeof value} to ${
               typeMap[prop]
-            } property (setting '${prop}' of ${meta.constructor.name})`,
+            } property (setting '${prop}' of ${meta.constructor.name})`
           );
         } else if (oldValue !== value) {
           obj[prop] = value;
@@ -176,7 +165,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this),
+        this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }
   }

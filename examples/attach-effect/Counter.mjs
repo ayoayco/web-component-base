@@ -1,9 +1,10 @@
 // @ts-check
 import { WebComponent, attachEffect } from "../../src/index.js";
 export class Counter extends WebComponent {
-  static properties = ["count"];
+  static props = {
+    count: 0,
+  };
   onInit() {
-    this.props.count = 0;
     this.onclick = () => ++this.props.count;
     attachEffect(this.props.count, (count) => console.log(count));
   }

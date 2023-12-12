@@ -1,10 +1,11 @@
 // @ts-check
-import { WebComponent, html } from "../../src/index.js";
+import { WebComponent } from "../../src/index.js";
 
 export class Counter extends WebComponent {
-  static properties = ["count"];
+  static props = {
+    count: 1,
+  };
   onInit() {
-    this.props.count = 1;
     let i = 1;
     this.onclick = () => ++this.props.count;
     let double = () => i * 2;

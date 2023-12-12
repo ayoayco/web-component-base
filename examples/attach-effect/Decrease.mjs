@@ -2,9 +2,11 @@
 import { WebComponent, attachEffect } from "../../src/index.js";
 
 export class Decrease extends WebComponent {
-  static properties = ["count"];
+  static props = {
+    count: 999,
+  };
+
   onInit() {
-    this.props.count = 999;
     this.onclick = () => --this.props.count;
     attachEffect(this.props.count, (count) => console.log(count));
   }

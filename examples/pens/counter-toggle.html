@@ -27,9 +27,10 @@
       }
 
       class Toggle extends WebComponent {
-        static properties = ["toggle"];
+        static props = {
+          toggle: false,
+        };
         onInit() {
-          this.props.toggle = false;
           this.onclick = () => (this.props.toggle = !this.props.toggle);
         }
         get template() {

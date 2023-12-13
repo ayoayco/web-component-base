@@ -15,10 +15,10 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 
 ## Table of Contents
 1. [Project Status](#project-status)
-1. [Features](#features)
 1. [Installation](#installation)
     1. [Import via unpkg](#import-via-unpkg)
     1. [Installation via npm](#installation-via-npm)
+1. [Exports](#exports)
     1. [Main Exports](#main-exports)
     1. [Utilities](#utilities)
 1. [Usage](#usage)
@@ -37,19 +37,11 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 ## Project Status
 It is ready for majority of cases people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! Please [open an issue](https://github.com/ayoayco/web-component-base/issues/new) or reach out to [Ayo](https://ayco.io/@ayo) if you want to be featured on the project website :)
 
-For building some complex interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
+For building some advanced interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
 
 In the mean time, if you have some complex needs, we recommend using the `WebComponent` base class with a more mature rendering approach like `lit-html`... and here's a demo for that: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010).
 
-...or you can even [use just parts](#just-the-templating) of it for your own base class: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
-
-## Features
-- A robust `props` API that synchronizes your components' property values and HTML attributes
-- Sensible life-cycle hooks that you understand and remember
-- Use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
-- Built-in minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
-- Attach "side effects" that gets triggered on property value changes with `attachEffect` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
-- Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
+...or you can even [use just parts](#just-the-templating) of it for your own base class.
 
 ## Installation
 The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
@@ -67,6 +59,10 @@ Usable for projects with bundlers or using import maps pointing to the specific 
 ```bash
 npm i web-component-base
 ```
+
+## Exports
+
+You can import everything separately, or in a single file each for the main exports and utilities.
 
 ### Main Exports
 

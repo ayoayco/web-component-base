@@ -17,8 +17,9 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 
 - A robust `props` API that synchronizes your components' property values and HTML attributes
 - Sensible life-cycle hooks that you understand and remember
-- A minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
-- Attach "side effects" that gets triggered on property value changes with `attachEffect` ([example](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011))
+- Built-in minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
+- Or just use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
+- Attach "side effects" that gets triggered on property value changes with `attachEffect` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
 - Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
 
 ## Table of Contents

@@ -114,7 +114,7 @@ This mental model attempts to reduce the cognitive complexity of authoring compo
 1. There is a `render()` method that triggers a view render.
 1. This `render()` method is *automatically* called under the hood every time an attribute value changed.
 1. You can *optionally* call this `render()` method at any point to trigger a render if you need (eg, if you have private unobserved properties that need to manually trigger a render)
-1. Overriding the `render()` function for handling a custom `template`--where you can return `string | Node | (string | Node)[]` is also an option. More examples on this to follow.
+1. Overriding the `render()` function for handling a custom `template` is also possible. Here's an example of using `lit-html`: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
 
 ## Prop Access
 

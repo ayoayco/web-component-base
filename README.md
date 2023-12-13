@@ -47,9 +47,9 @@ It is ready for majority of cases people use custom elements for. If you have a 
 
 For building some complex interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
 
-In the mean time, it if you have some complex needs, the `WebComponent` base class can work with `lit-html` (or any custom templating)... and here's a demo for that: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
+In the mean time, if you have some complex needs, we recommend using the `WebComponent` base class with more mature templating and rendering approach like `lit-html`... and here's a demo for that: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010).
 
-...or you can even [use just parts](#just-the-templating) of it (like templating) for your own base class: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
+...or you can even [use just parts](#just-the-templating) of it for your own base class: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
 
 ## Installation
 The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.

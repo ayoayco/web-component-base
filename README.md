@@ -17,16 +17,18 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 
 - A robust `props` API that synchronizes your components' property values and HTML attributes
 - Sensible life-cycle hooks that you understand and remember
+- Use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
 - Built-in minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
-- Or just use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
 - Attach "side effects" that gets triggered on property value changes with `attachEffect` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
 - Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
 
 ## Table of Contents
-
+1. [Project Status](#project-status)
 1. [Installation](#installation)
     1. [Import via unpkg](#import-via-unpkg)
     1. [Installation via npm](#installation-via-npm)
+    1. [Main Exports](#main-exports)
+    1. [Utilities](#utilities)
 1. [Usage](#usage)
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
@@ -40,18 +42,23 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
     1. [`onChanges`](#onchanges) - every time an attribute value changes
 1. [Library Size](#library-size)
 
+## Project Status
+It is ready for majority of cases people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! Please [open an issue](https://github.com/ayoayco/web-component-base/issues/new) or reach out to [Ayo](https://ayco.io/@ayo) if you want to be featured on the project website :)
+
+For building some complex interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
+
+In the mean time, it if you have some complex needs, the `WebComponent` base class can work with `lit-html` (or any custom templating)... and here's a demo for that: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
+
+...or you can even [use just parts](#just-the-templating) of it (like templating) for your own base class: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
 
 ## Installation
-
-The library is distributed as complete ESM modules, published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
+The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
 
 ### Import via unpkg (no bundlers needed!)
-Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. We will use this in the rest of our [usage examples](#usage).
-
-Please check
+Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. You can replace the version `@latest` in the URL with specific versions. We will use this in the rest of our [usage examples](#usage).
 
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js"
 ```
 
 ### Installation via npm
@@ -60,6 +67,39 @@ Usable for projects with bundlers or using import maps pointing to the specific 
 ```bash
 npm i web-component-base
 ```
+
+### Main Exports
+
+```js
+// all in a single file
+
+import { WebComponent, html, attachEffect } from "web-component-base";
+
+// in separate files
+
+import { WebComponent } from "web-component-base/WebComponent.js";
+
+import { html } from "web-component-base/html.js";
+
+import { attachEffect } from "web-component-base/attachEffect.js";
+```
+
+### Utilities
+```js
+// in a single file
+
+import { serialize, deserialize, getCamelCase, getKebabCase, createElement } from "web-component-base/utils";
+
+// or separate files
+
+import { serialize } from "web-component-base/utils/serialize.js";
+
+import { createElement } from "web-component-base/utils/serialize.js";
+
+// etc...
+
+```
+
 
 ## Usage
 

@@ -81,7 +81,7 @@ import { WebComponent } from "web-component-base/WebComponent.js";
 
 import { html } from "web-component-base/html.js";
 
-import { attachEffect } from "web-component-base/attachEffect.js";
+import { attachEffect } from "web-component-base/attach-effect.js";
 ```
 
 ### Utilities
@@ -94,7 +94,7 @@ import { serialize, deserialize, getCamelCase, getKebabCase, createElement } fro
 
 import { serialize } from "web-component-base/utils/serialize.js";
 
-import { createElement } from "web-component-base/utils/serialize.js";
+import { createElement } from "web-component-base/utils/create-element.js";
 
 // etc...
 

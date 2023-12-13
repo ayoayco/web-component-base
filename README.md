@@ -13,17 +13,9 @@ When you extend the `WebComponent` class for your component, you only have to de
 
 The result is a reactive UI on property changes. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
-## Features
-
-- A robust `props` API that synchronizes your components' property values and HTML attributes
-- Sensible life-cycle hooks that you understand and remember
-- Use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
-- Built-in minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
-- Attach "side effects" that gets triggered on property value changes with `attachEffect` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
-- Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
-
 ## Table of Contents
 1. [Project Status](#project-status)
+1. [Features](#features)
 1. [Installation](#installation)
     1. [Import via unpkg](#import-via-unpkg)
     1. [Installation via npm](#installation-via-npm)
@@ -51,10 +43,18 @@ In the mean time, if you have some complex needs, we recommend using the `WebCom
 
 ...or you can even [use just parts](#just-the-templating) of it for your own base class: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
 
+## Features
+- A robust `props` API that synchronizes your components' property values and HTML attributes
+- Sensible life-cycle hooks that you understand and remember
+- Use a custom templating syntax you are already familiar with, like `lit-html` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
+- Built-in minimal `html` function for tagged templates powered by preact's tiny (450 Bytes) [htm/mini](http://github.com/developit/htm)
+- Attach "side effects" that gets triggered on property value changes with `attachEffect` • [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
+- Provided out-of-the-box with [McFly](https://ayco.io/gh/McFly), a powerful no-framework framework
+
 ## Installation
 The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
 
-### Import via unpkg (no bundlers needed!)
+### Use on the browser via unpkg (no bundlers needed!)
 Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. You can replace the version `@latest` in the URL with specific versions. We will use this in the rest of our [usage examples](#usage).
 
 ```js

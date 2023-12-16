@@ -19,31 +19,14 @@
       };
     </script>
     <style>
-      @counter-style publish-icons {
-        system: cyclic;
-        symbols: "️✅";
-        suffix: " ";
-      }
       main {
         font-size: large;
 
-        & section ul {
-          list-style: publish-icons;
-
-          & li {
-            margin-bottom: 0.5em;
+        & section.jumbo {
+          & .hero-statement {
+            font-size: 2em;
+            text-align: center;
           }
-        }
-        & hr {
-          margin: 2em 0;
-        }
-
-        & section p:not(blockquote *):first-of-type::first-letter {
-          font-weight: bold;
-          font-size: 2rem;
-          line-height: 1rem;
-          float: left;
-          color: var(--color-primary);
         }
       }
     </style>
@@ -51,47 +34,22 @@
   <body>
     <awesome-header>
       <span>{{ project.name }}</span>
-      <span slot="description">{{ project.description }}</span>
     </awesome-header>
     <main>
-      <section>
-        <p>
-          Get the easy authoring experience you have come to love and build
-          standard custom elements with zero bundlers, transpilers or polyfills.
+      <section class="jumbo">
+        <p class="hero-statement">
+          The simple reactivity system for web components
         </p>
-        <ul>
-          <li>
-            A robust <code-block inline>props</code-block> API that synchronizes
-            your components' property values and HTML attributes
-          </li>
-          <li>Sensible life-cycle hooks that you understand and remember</li>
-          <li>
-            Use a custom templating syntax you are already familiar with, like
-            <code-block inline>lit-html</code-block> (<a
-              href="https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010"
-              target="_blank"
-              >example</a
-            >)
-          </li>
-          <li>
-            Built-in minimal <code-block inline>html</code-block> function for
-            tagged templates powered by Preact's tiny (450 Bytes)
-            <code-block inline>htm/mini</code-block>
-          </li>
-          <li>
-            Attach "side effects" that gets triggered on property value changes
-            with <code-block inline>attachEffect</code-block> (<a
-              href="https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011"
-              target="_blank"
-              >example</a
-            >)
-          </li>
-        </ul>
+        <!-- <p>
+          Get the easy authoring experience you have come to love and build
+        </p> -->
         <call-to-action></call-to-action>
+        <div>
+          <feature-set features="{{ features }}"></feature-set>
+        </div>
       </section>
-      <hr />
       <section>
-        <p>Why use this base class?</p>
+        <h2>Why use this base class?</h2>
         <p>
           Writing Web Components directly from
           <code-block inline>HTMLElement</code-block> can seem confusing and

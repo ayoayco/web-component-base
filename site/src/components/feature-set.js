@@ -4,7 +4,7 @@ class FeatureSet extends WebComponent {
       icon: "️🔄",
       title: "Reactive.",
       description:
-        "A robust API for synchronizing your component's UI and property values",
+        "A robust API for synchronizing your component's UI and properties",
     },
     {
       icon: "😌",
@@ -16,7 +16,7 @@ class FeatureSet extends WebComponent {
       icon: "️💡",
       title: "Familiar.",
       description:
-        "Use the built-in JSX-like syntax or bring your own custom templating syntax",
+        "Use the built-in JSX-like syntax or bring your own custom templating",
       url: "https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010",
     },
     {

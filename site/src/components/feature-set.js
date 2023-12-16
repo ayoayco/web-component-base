@@ -50,6 +50,7 @@ class FeatureSet extends WebComponent {
       borderRadius: "5px",
       padding: "30px",
       margin: "0 auto 1em",
+      boxShadow: "5px 25px 10px -25px rgba(34, 34, 34, 0.15)",
     };
     Object.keys(articleStyles).forEach((rule) =>
       this.articleEl.forEach((el) => (el.style[rule] = articleStyles[rule]))

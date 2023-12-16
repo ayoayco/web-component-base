@@ -43,7 +43,6 @@ class FeatureSet extends WebComponent {
       border: "1px solid #ccc",
       borderRadius: "5px",
       padding: "30px",
-      width: "80%",
       margin: "0 auto 1em",
     };
     Object.keys(articleStyles).forEach((rule) =>

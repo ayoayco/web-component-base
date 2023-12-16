@@ -11,7 +11,7 @@
     <script server:setup>
       const project = {
         name: "WebComponent.io",
-        description: "A simple reactivity system for web components",
+        description: "The simple reactivity system for web components",
       };
       const author = {
         name: "Ayo Ayco",
@@ -34,14 +34,16 @@
   <body>
     <awesome-header>
       <span>{{ project.name }}</span>
+      <span slot="description">{{ project.description }}</span>
     </awesome-header>
     <main>
       <section class="jumbo">
         <p class="hero-statement">
-          The simple reactivity system for web components
+          Build lightweight custom elements that browsers &
+          <em>you</em> understand.
         </p>
         <!-- <p>
-          Get the easy authoring experience you have come to love and build
+          The simple reactivity system for web components
         </p> -->
         <call-to-action></call-to-action>
         <div>

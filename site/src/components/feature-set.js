@@ -7,6 +7,12 @@ class FeatureSet extends WebComponent {
         "A robust API for synchronizing your component's UI and properties",
     },
     {
+      icon: "️🤏",
+      title: "Tiny.",
+      description:
+        "A 1 kB base class (minified, compressed) with versatile utilities",
+    },
+    {
       icon: "😌",
       title: "Easy.",
       description: "Sensible life-cycle hooks that you understand and remember",

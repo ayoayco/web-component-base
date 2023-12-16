@@ -10,7 +10,7 @@ class FeatureSet extends WebComponent {
       icon: "️🤏",
       title: "Tiny.",
       description:
-        "A 1 kB base class (minified, compressed) with versatile utilities",
+        "~1 kB base class (minified, compressed) with versatile utilities",
     },
     {
       icon: "😌",

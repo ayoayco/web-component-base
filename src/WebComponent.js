@@ -168,15 +168,12 @@ export class WebComponent extends HTMLElement {
   }
 
   #initializeProps() {
-    let initialProps = {};
-    if (this.constructor.props) {
-      initialProps = this.constructor.props;
-      Object.keys(initialProps).forEach((camelCase) => {
-        const value = initialProps[camelCase];
-        this.#typeMap[camelCase] = typeof value;
-        this.setAttribute(getKebabCase(camelCase), serialize(value));
-      });
-    }
+    let initialProps = structuredClone(this.constructor.props) ?? {};
+    Object.keys(initialProps).forEach((camelCase) => {
+      const value = initialProps[camelCase];
+      this.#typeMap[camelCase] = typeof value;
+      this.setAttribute(getKebabCase(camelCase), serialize(value));
+    });
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,

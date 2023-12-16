@@ -35,11 +35,8 @@
     "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist && cp -r ./src/vendors ./dist",
     "copy:source": "esbuild --minify --bundle ./src/*.js ./src/utils/* --outdir=\"./dist\" --format=\"esm\"",
     "pub": "npm run clean && npm run build && cd ./dist && npm publish",
-    "pub:beta": "npm run clean && npm run build && cd ./dist && npm publish --tag beta",
-    "publish:patch": "npm version patch && npm run pub",
-    "publish:patch:beta": "npm version patch && npm run pub:beta",
-    "publish:minor": "npm version minor && npm run pub",
-    "publish:minor:beta": "npm version minor && npm run pub:beta",
+    "pub:patch": "npm version patch && npm run pub",
+    "pub:minor": "npm version minor && npm run pub",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },

@@ -1,6 +1,7 @@
 node_modules/
 examples/
 assets/
+src/
 .vscode/
 tsconfig.json
 

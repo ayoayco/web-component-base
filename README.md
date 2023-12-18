@@ -3,7 +3,7 @@
 [![Package information: NPM version](https://img.shields.io/npm/v/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM license](https://img.shields.io/npm/l/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/web-component-base)](https://bundlephobia.com/package/web-component-base)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/web-component-base)](#library-size)
 
 🤷‍♂️ zero-dependency, 🤏 tiny JS base class for creating reactive custom elements easily ✨
 

@@ -25,6 +25,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
+1. [Styling](#styling)
 1. [Just the Templating](#just-the-templating)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
@@ -193,6 +194,47 @@ Therefore, this will tell the browser that the UI needs a render if the attribut
 The current alternatives are using what `HTMLElement` provides out-of-the-box, which are:
 1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
+
+## Styling
+
+When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration)
+
+```js
+import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+
+class StyledElements extends WebComponent {
+  static props = {
+    condition: false,
+    type: "warn",
+  };
+
+  #typeStyles = {
+    warn: {
+      backgroundColor: "yellow",
+      border: "1px solid orange",
+    },
+    error: {
+      backgroundColor: "orange",
+      border: "1px solid red",
+    },
+  };
+
+  get template() {
+    return html`
+      <div
+        style=${{
+          ...this.#typeStyles[this.props.type],
+          padding: "1em",
+        }}
+      >
+        <p style=${{ fontStyle: this.props.condition && "italic" }}>Wow!</p>
+      </div>
+    `;
+  }
+}
+
+customElements.define("styled-elements", StyledElements);
+```
 
 ## Just the Templating
 

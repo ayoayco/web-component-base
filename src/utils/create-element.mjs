@@ -2,9 +2,9 @@ import { serialize } from "./serialize.mjs";
 export function createElement(tree) {
   if (!tree.type) {
     if (Array.isArray(tree)) {
-      return document
-        .createDocumentFragment()
-        .replaceChildren(...tree.map((leaf) => createElement(leaf)));
+      const frag = document.createDocumentFragment();
+      frag.replaceChildren(...tree.map((leaf) => createElement(leaf)));
+      return frag;
     }
     return document.createTextNode(tree);
   } else {

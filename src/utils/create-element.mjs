@@ -41,6 +41,6 @@ export function createElement(tree) {
 
 function applyStyles(el, styleObj) {
   Object.entries(styleObj).forEach(([rule, value]) => {
-    el.style[rule] = value;
+    if (rule in el.style && value) el.style[rule] = value;
   });
 }

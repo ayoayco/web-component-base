@@ -31,7 +31,7 @@ export class WebComponent extends HTMLElement {
 
   /**
    * Read-only string property that represents how the component will be rendered
-   * @returns {string | Node | (string | Node)[]}
+   * @returns {string | any}
    * @see https://www.npmjs.com/package/web-component-base#template-vs-render
    */
   get template() {

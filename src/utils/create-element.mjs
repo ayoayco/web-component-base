@@ -15,7 +15,7 @@ export function createElement(tree) {
     if (tree.props) {
       Object.entries(tree.props).forEach(([prop, value]) => {
         const domProp = prop.toLowerCase();
-        if (domProp === "style" && typeof value === "object") {
+        if (domProp === "style" && typeof value === "object" && !!value) {
           applyStyles(el, value);
         } else if (prop in el) {
           el[prop] = value;

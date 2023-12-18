@@ -1,0 +1,19 @@
+node_modules/
+examples/
+assets/
+src/
+.vscode/
+tsconfig.json
+
+# temporary files
+*~
+*swo
+*swp
+
+# nitro site
+site/
+*.log*
+.nitro
+.cache
+.output
+.env

@@ -1,40 +1,37 @@
 {
   "name": "web-component-base",
-  "version": "2.1.0-beta",
+  "version": "2.1.0-beta.1",
   "description": "A zero-dependency & tiny JS base class for creating reactive custom elements easily",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
-      "import": "./index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./*": {
-      "types": "./*.d.ts",
-      "import": "./*.js"
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
     },
     "./utils": {
-      "types": "./utils/index.d.ts",
-      "import": "./utils/index.js"
+      "types": "./dist/utils/index.d.ts",
+      "import": "./dist/utils/index.js"
     },
     "./utils/*": {
-      "types": "./utils/*.d.ts",
-      "import": "./utils/*.js"
-    },
-    "./WebComponent.min.js": {
-      "types": "./WebComponent.d.ts",
-      "import": "./WebComponent.min.js"
+      "types": "./dist/utils/*.d.ts",
+      "import": "./dist/utils/*.js"
     },
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "start": "npx simple-server .",
     "demo": "npx simple-server .",
     "site": "npm start -w site",
-    "build": "npm run clean && tsc && npm run copy:meta && npm run copy:source",
+    "build": "npm run clean && tsc && npm run copy:source",
     "clean": "rm -rf dist",
-    "copy:meta": "node prepare.js && cp README.md ./dist && cp LICENSE ./dist && cp -r ./src/vendors ./dist",
     "copy:source": "esbuild --minify --bundle ./src/*.js ./src/utils/* --outdir=\"./dist\" --format=\"esm\"",
-    "pub": "npm run clean && npm run build && cd ./dist && npm publish",
+    "pub": "npm run clean && npm run build && npm publish",
     "pub:patch": "npm version patch && npm run pub",
     "pub:minor": "npm version minor && npm run pub",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js",
@@ -57,8 +54,7 @@
     "@size-limit/preset-small-lib": "^11.0.0",
     "esbuild": "^0.19.9",
     "prettier": "^3.1.1",
-    "typescript": "^5.2.2",
-    "uglify-js": "^3.17.4"
+    "typescript": "^5.2.2"
   },
   "workspaces": [
     "site"

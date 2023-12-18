@@ -30,7 +30,7 @@ class StyledElements extends WebComponent {
           padding: "1em",
         }}
       >
-        <p style=${{ fontStyle: "italic" }}>Wow!</p>
+        <p style=${{ fontStyle: this.props.condition && "italic" }}>Wow!</p>
       </div>
     `;
   }

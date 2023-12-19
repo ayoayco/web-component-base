@@ -25,7 +25,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
-1. [Styling](#styling)
+1. [Styling](#styling-beta)
 1. [Just the Templating](#just-the-templating)
 1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)

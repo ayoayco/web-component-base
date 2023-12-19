@@ -195,16 +195,17 @@ The current alternatives are using what `HTMLElement` provides out-of-the-box, w
 1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
-## Styling
+## Styling (beta)
 
-When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration)
+Upcoming on **v2.1.0**: When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration).
 
+Try it now with this [example on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzXjwQ?editors=1010)
 ```js
 import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
 
 class StyledElements extends WebComponent {
   static props = {
-    condition: false,
+    emphasize: false,
     type: "warn",
   };
 
@@ -227,7 +228,7 @@ class StyledElements extends WebComponent {
           padding: "1em",
         }}
       >
-        <p style=${{ fontStyle: this.props.condition && "italic" }}>Wow!</p>
+        <p style=${{ fontStyle: this.props.emphasize && "italic" }}>Wow!</p>
       </div>
     `;
   }

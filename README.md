@@ -36,7 +36,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 1. [Library Size](#library-size)
 
 ## Project Status
-It is ready for majority of cases people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! Please [open an issue](https://github.com/ayoayco/web-component-base/issues/new) or reach out to [Ayo](https://ayco.io/@ayo) if you want to be featured on the project website :)
+It is ready for many cases we see people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! Please [open an issue](https://github.com/ayoayco/web-component-base/issues/new) or reach out to [Ayo](https://ayco.io/@ayo) if you want to be featured on the project website :)
 
 For building some advanced interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
 

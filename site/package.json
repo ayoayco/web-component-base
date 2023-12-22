@@ -12,12 +12,11 @@
   "dependencies": {
     "@mcflyjs/cli": "latest",
     "@mcflyjs/config": "latest",
-    "@mcflyjs/core": "latest",
+    "@mcflyjs/core": "^0.5.2",
     "nitropack": "latest"
   },
   "version": "0.0.1",
   "main": "index.js",
   "author": "Ayo Ayco",
-  "license": "MIT",
-  "devDependencies": {}
+  "license": "MIT"
 }

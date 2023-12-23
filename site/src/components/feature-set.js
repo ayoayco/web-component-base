@@ -53,7 +53,7 @@ class FeatureSet extends WebComponent {
       boxShadow: "5px 25px 10px -25px rgba(34, 34, 34, 0.15)",
     };
     Object.keys(articleStyles).forEach((rule) =>
-      this.articleEl.forEach((el) => (el.style[rule] = articleStyles[rule]))
+      this.articleEl.forEach((el) => (el.style[rule] = articleStyles[rule])),
     );
 
     /**
@@ -67,7 +67,7 @@ class FeatureSet extends WebComponent {
     };
     const featureWrapper = this.querySelector(".feature-wrapper");
     Object.keys(ftrStyles).forEach(
-      (rule) => (featureWrapper.style[rule] = ftrStyles[rule])
+      (rule) => (featureWrapper.style[rule] = ftrStyles[rule]),
     );
   }
 
@@ -84,7 +84,7 @@ class FeatureSet extends WebComponent {
                 ${feature.description}
               </p>
             </article>
-          `
+          `,
         )}
       </div>
     `;

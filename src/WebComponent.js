@@ -145,7 +145,7 @@ export class WebComponent extends HTMLElement {
           throw TypeError(
             `Cannot assign ${typeof value} to ${
               typeMap[prop]
-            } property (setting '${prop}' of ${meta.constructor.name})`
+            } property (setting '${prop}' of ${meta.constructor.name})`,
           );
         } else if (oldValue !== value) {
           obj[prop] = value;
@@ -177,7 +177,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this)
+        this.#handler((key, value) => this.setAttribute(key, value), this),
       );
     }
   }

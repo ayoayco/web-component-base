@@ -42,7 +42,7 @@ export class LitCounter extends WebComponent {
       <ul>
         ${links.map(
           (link) =>
-            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
         )}
       </ul>
     `;

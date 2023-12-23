@@ -77,6 +77,7 @@ export class WebComponent extends HTMLElement {
    * }} Changes
    * @param {Changes} changes
    */
+  // eslint-disable-next-line no-unused-vars
   onChanges(changes) {}
 
   constructor() {

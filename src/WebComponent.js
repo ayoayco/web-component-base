@@ -39,6 +39,13 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
+   * @returns {undefined | string}
+   */
+  get shadowMode() {
+    return undefined;
+  }
+
+  /**
    * Read-only property containing camelCase counterparts of observed attributes.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
@@ -189,12 +196,10 @@ export class WebComponent extends HTMLElement {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
       let host = this;
-      let template = this.template;
-      if (this.template.shadow) {
-        host = this.attachShadow({ mode: this.template.shadow });
-        template = this.template.template;
+      if (this.shadowMode) {
+        host = this.attachShadow({ mode: this.shadowMode });
       }
-      const tree = template;
+      const tree = this.template;
 
       // TODO: smart diffing
       if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {

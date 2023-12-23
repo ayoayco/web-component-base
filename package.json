@@ -35,7 +35,9 @@
     "pub:patch": "npm version patch && npm run pub",
     "pub:minor": "npm version minor && npm run pub",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js",
-    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
+    "pretty": "prettier --write \"./**/*.{js,mjs,json}\"",
+    "lint": "eslint --fix \"./**/*.{js,mjs}\"",
+    "prepare": "husky install"
   },
   "repository": "https://github.com/ayoayco/web-component-base",
   "homepage": "https://WebComponent.io",
@@ -53,8 +55,10 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^11.0.0",
     "esbuild": "^0.19.9",
+    "eslint": "^8.56.0",
     "prettier": "^3.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "husky": "^8.0.0"
   },
   "workspaces": [
     "site"

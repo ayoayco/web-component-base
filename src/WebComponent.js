@@ -188,14 +188,20 @@ export class WebComponent extends HTMLElement {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
-      const tree = this.template;
+      let host = this;
+      let template = this.template;
+      if (this.template.shadow) {
+        host = this.attachShadow({ mode: this.template.shadow });
+        template = this.template.template;
+      }
+      const tree = template;
 
       // TODO: smart diffing
       if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
         const el = createElement(tree);
         if (el) {
-          if (Array.isArray(el)) this.replaceChildren(...el);
-          else this.replaceChildren(el);
+          if (Array.isArray(el)) host.replaceChildren(...el);
+          else host.replaceChildren(el);
         }
         this.#prevDOM = tree;
       }

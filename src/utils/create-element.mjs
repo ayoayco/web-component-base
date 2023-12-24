@@ -30,7 +30,6 @@ export function createElement(tree, watchList = [], selector = []) {
     }
 
     const node = document.createTextNode(value);
-    // if (tree.dynamic) {
     const watchObj = {
       selector: selector.join(" "),
       type: "textContent",
@@ -38,7 +37,6 @@ export function createElement(tree, watchList = [], selector = []) {
       value,
     };
     watchList.push(watchObj);
-    // }
 
     return node;
   } else {
@@ -46,16 +44,6 @@ export function createElement(tree, watchList = [], selector = []) {
     const elSelector = tree.type;
     const selectorIndex = selector.length;
     selector.push(elSelector);
-
-    /**
-     * handle children
-     */
-    tree.children?.forEach((child) => {
-      const childEl = createElement(child, watchList, selector);
-      if (childEl instanceof Node) {
-        el.appendChild(childEl);
-      }
-    });
 
     /**
      * handle props
@@ -79,6 +67,16 @@ export function createElement(tree, watchList = [], selector = []) {
         watchList.push(watchObj2);
       });
     }
+
+    /**
+     * handle children
+     */
+    tree.children?.forEach((child) => {
+      const childEl = createElement(child, watchList, selector);
+      if (childEl instanceof Node) {
+        el.appendChild(childEl);
+      }
+    });
 
     return el;
   }

@@ -19,6 +19,10 @@ export class Counter extends WebComponent {
     ];
 
     return html`
+      <div><a>hey</a></div>
+      <div><a>${this.props.count}</a></div>
+      <div><a>hey</a></div>
+      <div><a>hey</a></div>
       <button
         class="hey"
         id="btn"

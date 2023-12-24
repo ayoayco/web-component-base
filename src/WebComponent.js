@@ -200,14 +200,20 @@ export class WebComponent extends HTMLElement {
         if (d?.length) {
           console.log(d);
           d.forEach((change) => {
-            const changedElement = this.querySelector(change.selector);
+            const all = this.querySelectorAll(change.selector);
+            let changedElement = all[0];
+
+            if (changedElement?.length > 1) {
+              console.log(">>> multiple!", changedElement);
+            }
+
             if (!!changedElement && change.type === "textContent") {
               changedElement.textContent = change.value;
             }
             if (!!changedElement && change.type === "prop") {
               handleProp(change.key, change.value, changedElement);
             }
-            if (change.type === "replace") {
+            if (!!changedElement && change.type === "replace") {
               changedElement.parentNode.replaceChild(
                 change.node.parentNode,
                 changedElement

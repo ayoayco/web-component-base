@@ -1,7 +1,6 @@
 import { serialize } from "./serialize.mjs";
 export function createElement(tree, watchList = []) {
   if (!tree && tree !== 0) {
-    console.log(tree);
     const div = document.createElement("div");
     const watchObj = {
       type: "replace",

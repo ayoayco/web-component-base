@@ -69,16 +69,13 @@ You can import everything separately, or in a single file each for the main expo
 
 ```js
 // all in a single file
-
-import { WebComponent, html, attachEffect } from "web-component-base";
+import { WebComponent, html, attachEffect, render } from "web-component-base";
 
 // in separate files
-
 import { WebComponent } from "web-component-base/WebComponent.js";
-
-import { html } from "web-component-base/html.js";
-
 import { attachEffect } from "web-component-base/attach-effect.js";
+import { html } from "web-component-base/html.js";
+import { render } from "web-component-base/render.js";
 ```
 
 ### Utilities

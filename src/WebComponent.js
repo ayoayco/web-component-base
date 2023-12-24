@@ -3,9 +3,8 @@
  * @author Ayo Ayco <https://ayo.ayco.io>
  */
 
-import { handleProp } from "./utils/create-element.mjs";
+import { render as r } from "./render.js/index.js";
 import {
-  createElement,
   getKebabCase,
   getCamelCase,
   serialize,
@@ -112,15 +111,17 @@ export class WebComponent extends HTMLElement {
       this[camelCaps] = this[property];
 
       this.#handleUpdateProp(camelCaps, this[property]);
-
       this.render();
+
       this.onChanges({ property, previousValue, currentValue });
     }
   }
 
   #handleUpdateProp(key, stringifiedValue) {
     const restored = deserialize(stringifiedValue, this.#typeMap[key]);
-    if (restored !== this.props[key]) this.props[key] = restored;
+    if (restored !== this.props[key]) {
+      this.props[key] = restored;
+    }
   }
 
   #typeMap = {};
@@ -184,71 +185,7 @@ export class WebComponent extends HTMLElement {
     }
   }
 
-  #prevWatchList = [];
   render() {
-    if (typeof this.template === "string") {
-      this.innerHTML = this.template;
-    } else if (typeof this.template === "object") {
-      const tree = this.template;
-      const watchList = [];
-
-      const el = createElement(tree, watchList);
-      if (this.#prevWatchList?.length === 0) {
-        if (el) this.replaceChildren(el);
-        this.#prevWatchList = watchList;
-      } else {
-        const d = diff(watchList, this.#prevWatchList);
-        if (d?.length) {
-          console.log(d);
-          d.forEach((change) => {
-            const oldNode = change.prevNode?.parentNode;
-            const newNode = change.node?.parentNode;
-
-            if (change.type === "prop") {
-              console.log(">>> prop changed", change);
-              handleProp(change.key, change.value, change.prevNode);
-              this.#prevWatchList[change.index] = watchList[change.index];
-            }
-            if (change.type === "textContent") {
-              console.log(">>> text changed", change);
-              oldNode?.parentNode?.replaceChild(newNode, oldNode);
-              this.#prevWatchList[change.index] = watchList[change.index];
-            }
-            if (change.type === "replace") {
-              console.log(">>> replace placeholder", change);
-              oldNode?.replaceChild(newNode, change.prevNode);
-              this.#prevWatchList[change.index] = watchList[change.index];
-            }
-          });
-        }
-      }
-    }
+    r(this.template, this);
   }
-}
-
-function diff(change, prev) {
-  const diff = prev
-    .map((dom, index) => {
-      if (
-        !(
-          dom.value instanceof Function &&
-          dom.value.toString() !== change[index]?.value.toString()
-        ) &&
-        JSON.stringify(dom.value) !== JSON.stringify(change[index]?.value)
-      ) {
-        return {
-          ...dom,
-          prevNode: dom.node,
-          value: change[index]?.value,
-          node: change[index]?.node,
-          index,
-        };
-      } else {
-        prev.node = change.node;
-      }
-      return null;
-    })
-    .filter((d) => d !== null);
-
-  return diff;
 }

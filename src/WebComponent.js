@@ -146,7 +146,7 @@ export class WebComponent extends HTMLElement {
           throw TypeError(
             `Cannot assign ${typeof value} to ${
               typeMap[prop]
-            } property (setting '${prop}' of ${meta.constructor.name})`,
+            } property (setting '${prop}' of ${meta.constructor.name})`
           );
         } else if (oldValue !== value) {
           obj[prop] = value;
@@ -157,13 +157,14 @@ export class WebComponent extends HTMLElement {
 
         return true;
       },
-      get(obj, prop) {
+      get(obj, prop, receiver) {
         // TODO: handle non-objects
+        // console.log(">>> receiver", arguments);
         if (obj[prop] !== null && obj[prop] !== undefined) {
-          Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
+          Object.getPrototypeOf(obj[prop]).proxy = receiver;
           Object.getPrototypeOf(obj[prop]).prop = prop;
         }
-        return obj[prop];
+        return Reflect.get(...arguments);
       },
     };
   }
@@ -178,7 +179,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this),
+        this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }
   }
@@ -190,15 +191,32 @@ export class WebComponent extends HTMLElement {
     } else if (typeof this.template === "object") {
       const tree = this.template;
 
-      // TODO: smart diffing
-      if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
+      if (!this.#prevDOM) {
         const el = createElement(tree);
-        if (el) {
-          if (Array.isArray(el)) this.replaceChildren(...el);
-          else this.replaceChildren(el);
-        }
-        this.#prevDOM = tree;
+        if (el) this.replaceChildren(el);
+      } else {
+        const d = diff(tree, this.#prevDOM);
+        console.log(">>> dif", d);
       }
+
+      this.#prevDOM = tree;
     }
   }
+}
+
+function diff(tree, prevDOM) {
+  // console.log({ tree, prevDOM });
+  const d = [];
+  prevDOM;
+
+  if (!tree.type) {
+    if (Array.isArray(tree)) {
+      // array
+    }
+    // text node
+  } else {
+    // tree
+  }
+
+  return d;
 }

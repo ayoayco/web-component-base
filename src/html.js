@@ -1,76 +1,114 @@
-const htm =
-  (new Map(),
-  function (n) {
-    for (
-      var e,
-        l,
-        s = arguments,
-        t = 1,
-        u = "",
-        r = "",
-        o = [0],
-        f = function (n) {
-          1 === t && (n || (u = u.replace(/^\s*\n\s*|\s*\n\s*$/g, "")))
-            ? o.push(n ? s[n] : u)
-            : 3 === t && (n || u)
-              ? ((o[1] = n ? s[n] : u), (t = 2))
-              : 2 === t && "..." === u && n
-                ? (o[2] = Object.assign(o[2] || {}, s[n]))
-                : 2 === t && u && !n
-                  ? ((o[2] = o[2] || {})[u] = !0)
-                  : t >= 5 &&
-                    (5 === t
-                      ? (((o[2] = o[2] || {})[l] = n
-                          ? u
-                            ? u + s[n]
-                            : s[n]
-                          : u),
-                        (t = 6))
-                      : (n || u) && (o[2][l] += n ? u + s[n] : u)),
-            (u = "");
-        },
-        i = 0;
-      i < n.length;
-      i++
-    ) {
-      i && (1 === t && f(), f(i));
-      for (var p = 0; p < n[i].length; p++)
-        (e = n[i][p]),
-          1 === t
-            ? "<" === e
-              ? (f(), (o = [o, "", null]), (t = 3))
-              : (u += e)
-            : 4 === t
-              ? "--" === u && ">" === e
-                ? ((t = 1), (u = ""))
-                : (u = e + u[0])
-              : r
-                ? e === r
-                  ? (r = "")
-                  : (u += e)
-                : '"' === e || "'" === e
-                  ? (r = e)
-                  : ">" === e
-                    ? (f(), (t = 1))
-                    : t &&
-                      ("=" === e
-                        ? ((t = 5), (l = u), (u = ""))
-                        : "/" === e && (t < 5 || ">" === n[i][p + 1])
-                          ? (f(),
-                            3 === t && (o = o[0]),
-                            (t = o),
-                            (o = o[0]).push(this.apply(null, t.slice(1))),
-                            (t = 0))
-                          : " " === e || "\t" === e || "\n" === e || "\r" === e
-                            ? (f(), (t = 2))
-                            : (u += e)),
-          3 === t && "!--" === u && ((t = 4), (o = o[0]));
+var n = function (t, s, r, e) {
+    var u;
+    s[0] = 0;
+    for (var h = 1; h < s.length; h++) {
+      var p = s[h++],
+        a = s[h] ? ((s[0] |= p ? 1 : 2), r[s[h++]]) : s[++h];
+      3 === p
+        ? (e[0] = a)
+        : 4 === p
+          ? (e[1] = Object.assign(e[1] || {}, a))
+          : 5 === p
+            ? ((e[1] = e[1] || {})[s[++h]] = a)
+            : 6 === p
+              ? (e[1][s[++h]] += a + "")
+              : p
+                ? ((u = t.apply(a, n(t, a, r, ["", null]))),
+                  e.push(u),
+                  a[0] ? (s[0] |= 2) : ((s[h - 2] = 0), (s[h] = u)))
+                : e.push(a);
     }
-    return f(), o.length > 2 ? o.slice(1) : o[1];
-  });
+    return e;
+  },
+  t = new Map();
+
+const htm = function (s) {
+  var r = t.get(this);
+  return (
+    r || ((r = new Map()), t.set(this, r)),
+    (r = n(
+      this,
+      r.get(s) ||
+        (r.set(
+          s,
+          (r = (function (n) {
+            for (
+              var t,
+                s,
+                r = 1,
+                e = "",
+                u = "",
+                h = [0],
+                p = function (n) {
+                  1 === r && (n || (e = e.replace(/^\s*\n\s*|\s*\n\s*$/g, "")))
+                    ? h.push(0, n, e)
+                    : 3 === r && (n || e)
+                      ? (h.push(3, n, e), (r = 2))
+                      : 2 === r && "..." === e && n
+                        ? h.push(4, n, 0)
+                        : 2 === r && e && !n
+                          ? h.push(5, 0, !0, e)
+                          : r >= 5 &&
+                            ((e || (!n && 5 === r)) &&
+                              (h.push(r, 0, e, s), (r = 6)),
+                            n && (h.push(r, n, 0, s), (r = 6))),
+                    (e = "");
+                },
+                a = 0;
+              a < n.length;
+              a++
+            ) {
+              a && (1 === r && p(), p(a));
+              for (var l = 0; l < n[a].length; l++)
+                (t = n[a][l]),
+                  1 === r
+                    ? "<" === t
+                      ? (p(), (h = [h]), (r = 3))
+                      : (e += t)
+                    : 4 === r
+                      ? "--" === e && ">" === t
+                        ? ((r = 1), (e = ""))
+                        : (e = t + e[0])
+                      : u
+                        ? t === u
+                          ? (u = "")
+                          : (e += t)
+                        : '"' === t || "'" === t
+                          ? (u = t)
+                          : ">" === t
+                            ? (p(), (r = 1))
+                            : r &&
+                              ("=" === t
+                                ? ((r = 5), (s = e), (e = ""))
+                                : "/" === t && (r < 5 || ">" === n[a][l + 1])
+                                  ? (p(),
+                                    3 === r && (h = h[0]),
+                                    (r = h),
+                                    (h = h[0]).push(2, 0, r),
+                                    (r = 0))
+                                  : " " === t ||
+                                      "\t" === t ||
+                                      "\n" === t ||
+                                      "\r" === t
+                                    ? (p(), (r = 2))
+                                    : (e += t)),
+                  3 === r && "!--" === e && ((r = 4), (h = h[0]));
+            }
+            return p(), h;
+          })(s))
+        ),
+        r),
+      arguments,
+      []
+    )).length > 1
+      ? r
+      : r[0]
+  );
+};
 
 function h(type, props, ...children) {
-  return { type, props, children };
+  const r = { type, props, children };
+  return r;
 }
 
 /**
@@ -78,4 +116,9 @@ function h(type, props, ...children) {
  * @license Apache <https://www.apache.org/licenses/LICENSE-2.0>
  * @author Jason Miller <jason@developit.ca>
  */
-export const html = htm.bind(h);
+export const html = (strings, ...values) => {
+  return htm.bind(h)(
+    strings,
+    ...values.map((v) => ({ value: v, dynamic: true }))
+  );
+};

@@ -1,12 +1,23 @@
 import { serialize } from "./serialize.mjs";
 export function createElement(tree) {
   if (!tree.type) {
-    if (Array.isArray(tree)) {
+    const value = tree.dynamic ? tree.value : tree;
+
+    if (Array.isArray(value)) {
       const frag = document.createDocumentFragment();
-      frag.replaceChildren(...tree.map((leaf) => createElement(leaf)));
+      frag.replaceChildren(
+        ...value.map((leaf) =>
+          leaf.dynamic ? createElement(leaf.value) : createElement(leaf)
+        )
+      );
       return frag;
     }
-    return document.createTextNode(tree);
+
+    const node = document.createTextNode(value);
+    if (tree.dynamic)
+      console.log(">>> node", { node, type: "textContent", value });
+
+    return node;
   } else {
     const el = document.createElement(tree.type);
     /**
@@ -14,16 +25,15 @@ export function createElement(tree) {
      */
     if (tree.props) {
       Object.entries(tree.props).forEach(([prop, value]) => {
-        const domProp = prop.toLowerCase();
-        if (domProp === "style" && typeof value === "object" && !!value) {
-          applyStyles(el, value);
-        } else if (prop in el) {
-          el[prop] = value;
-        } else if (domProp in el) {
-          el[domProp] = value;
-        } else {
-          el.setAttribute(prop, serialize(value));
-        }
+        const v = value.dynamic ? value.value : value;
+        handleProp(prop, v, el);
+        if (value.dynamic)
+          console.log(">>> prop", {
+            node: el,
+            type: "prop",
+            key: prop,
+            value: v,
+          });
       });
     }
     /**
@@ -36,6 +46,19 @@ export function createElement(tree) {
       }
     });
     return el;
+  }
+}
+
+function handleProp(prop, value, el) {
+  const domProp = prop.toLowerCase();
+  if (domProp === "style" && typeof value === "object" && !!value) {
+    applyStyles(el, value);
+  } else if (prop in el) {
+    el[prop] = value;
+  } else if (domProp in el) {
+    el[domProp] = value;
+  } else {
+    el.setAttribute(prop, serialize(value));
   }
 }
 

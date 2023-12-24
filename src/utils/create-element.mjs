@@ -1,67 +1,50 @@
 import { serialize } from "./serialize.mjs";
-export function createElement(tree, watchList = [], selector = []) {
-  if (!tree) {
+export function createElement(tree, watchList = []) {
+  if (!tree && tree !== 0) {
+    console.log(tree);
     const div = document.createElement("div");
-    div.className = `__placeholder__`;
-    selector.push(`div.${div.className}`);
     const watchObj = {
-      selector: selector.join(" "),
       type: "replace",
       node: div,
-      value: null,
+      value: "__replace__",
     };
     watchList.push(watchObj);
     return div;
   }
   if (!tree.type) {
-    const value = tree.dynamic ? tree.value : tree;
-
-    if (Array.isArray(value)) {
+    if (Array.isArray(tree)) {
       const frag = document.createDocumentFragment();
       frag.replaceChildren(
-        ...value.map((leaf) =>
-          leaf.dynamic
-            ? createElement(leaf.value, watchList)
-            : createElement(leaf, watchList)
-        )
+        ...tree.map((leaf, index) => {
+          return createElement(leaf, watchList, undefined, index);
+        })
       );
 
       return frag;
     }
 
-    const node = document.createTextNode(value);
+    const node = document.createTextNode(tree);
     const watchObj = {
-      selector: selector.join(" "),
       type: "textContent",
       node,
-      value,
+      value: tree,
     };
     watchList.push(watchObj);
 
     return node;
   } else {
     const el = document.createElement(tree.type);
-    const elSelector = tree.type;
-    const selectorIndex = selector.length;
-    selector.push(elSelector);
 
     /**
      * handle props
      */
     if (tree.props) {
       Object.entries(tree.props).forEach(([prop, value]) => {
-        if (prop === "id") {
-          selector[selectorIndex] += `#${value}`;
-        }
-        if (prop === "class") {
-          selector[selectorIndex] += `.${value}`;
-        }
         handleProp(prop, value, el);
         const watchObj2 = {
-          selector: selector.join(" "),
           type: "prop",
           key: prop,
-          value: value,
+          value,
           node: el,
         };
         watchList.push(watchObj2);
@@ -72,7 +55,7 @@ export function createElement(tree, watchList = [], selector = []) {
      * handle children
      */
     tree.children?.forEach((child) => {
-      const childEl = createElement(child, watchList, selector);
+      const childEl = createElement(child, watchList);
       if (childEl instanceof Node) {
         el.appendChild(childEl);
       }

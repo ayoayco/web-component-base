@@ -195,35 +195,33 @@ export class WebComponent extends HTMLElement {
       const el = createElement(tree, watchList);
       if (this.#prevWatchList?.length === 0) {
         if (el) this.replaceChildren(el);
+        this.#prevWatchList = watchList;
       } else {
         const d = diff(watchList, this.#prevWatchList);
         if (d?.length) {
           console.log(d);
           d.forEach((change) => {
-            const all = this.querySelectorAll(change.selector);
-            let changedElement = all[0];
+            const oldNode = change.prevNode?.parentNode;
+            const newNode = change.node?.parentNode;
 
-            if (changedElement?.length > 1) {
-              console.log(">>> multiple!", changedElement);
+            if (change.type === "prop") {
+              console.log(">>> prop changed", change);
+              handleProp(change.key, change.value, change.prevNode);
+              this.#prevWatchList[change.index] = watchList[change.index];
             }
-
-            if (!!changedElement && change.type === "textContent") {
-              changedElement.textContent = change.value;
+            if (change.type === "textContent") {
+              console.log(">>> text changed", change);
+              oldNode?.parentNode?.replaceChild(newNode, oldNode);
+              this.#prevWatchList[change.index] = watchList[change.index];
             }
-            if (!!changedElement && change.type === "prop") {
-              handleProp(change.key, change.value, changedElement);
-            }
-            if (!!changedElement && change.type === "replace") {
-              changedElement.parentNode.replaceChild(
-                change.node.parentNode,
-                changedElement
-              );
+            if (change.type === "replace") {
+              console.log(">>> replace placeholder", change);
+              oldNode?.replaceChild(newNode, change.prevNode);
+              this.#prevWatchList[change.index] = watchList[change.index];
             }
           });
         }
       }
-
-      this.#prevWatchList = watchList;
     }
   }
 }
@@ -240,9 +238,13 @@ function diff(change, prev) {
       ) {
         return {
           ...dom,
+          prevNode: dom.node,
           value: change[index]?.value,
           node: change[index]?.node,
+          index,
         };
+      } else {
+        prev.node = change.node;
       }
       return null;
     })

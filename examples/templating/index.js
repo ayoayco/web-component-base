@@ -3,7 +3,7 @@ import { WebComponent, html } from "../../src/index.js";
 
 export class Counter extends WebComponent {
   static props = {
-    count: 123,
+    count: 129,
   };
   get template() {
     const list = ["a", "b", "c", "what"];
@@ -39,6 +39,7 @@ export class Counter extends WebComponent {
           value="Name:"
         />
       </form>
+      ${this.props.count > 130 && html`<h1>Too much!</h1>`}
       ${list.map((item) => html`<p>${item}</p>`)}
       <h3 about="Elephant">Links</h3>
       <ul>
@@ -47,6 +48,7 @@ export class Counter extends WebComponent {
             html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
         )}
       </ul>
+      <div>${this.props.count > 130 && html`<h1>Too much!</h1>`}</div>
     `;
   }
 }

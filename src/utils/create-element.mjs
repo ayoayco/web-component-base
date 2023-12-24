@@ -1,5 +1,18 @@
 import { serialize } from "./serialize.mjs";
 export function createElement(tree, watchList = [], selector = []) {
+  if (!tree) {
+    const div = document.createElement("div");
+    div.className = `__placeholder__`;
+    selector.push(`div.${div.className}`);
+    const watchObj = {
+      selector: selector.join(" "),
+      type: "replace",
+      node: div,
+      value: null,
+    };
+    watchList.push(watchObj);
+    return div;
+  }
   if (!tree.type) {
     const value = tree.dynamic ? tree.value : tree;
 
@@ -17,14 +30,15 @@ export function createElement(tree, watchList = [], selector = []) {
     }
 
     const node = document.createTextNode(value);
-    if (tree.dynamic) {
-      const watchObj = {
-        selector: selector.join(" "),
-        type: "textContent",
-        value,
-      };
-      watchList.push(watchObj);
-    }
+    // if (tree.dynamic) {
+    const watchObj = {
+      selector: selector.join(" "),
+      type: "textContent",
+      node,
+      value,
+    };
+    watchList.push(watchObj);
+    // }
 
     return node;
   } else {
@@ -32,30 +46,7 @@ export function createElement(tree, watchList = [], selector = []) {
     const elSelector = tree.type;
     const selectorIndex = selector.length;
     selector.push(elSelector);
-    /**
-     * handle props
-     */
-    if (tree.props) {
-      Object.entries(tree.props).forEach(([prop, value]) => {
-        const v = value.dynamic ? value.value : value;
-        if (prop === "id") {
-          selector[selectorIndex] += `#${value}`;
-        }
-        if (prop === "class") {
-          selector[selectorIndex] += `.${value}`;
-        }
-        handleProp(prop, v, el);
-        if (value.dynamic) {
-          const watchObj2 = {
-            selector: selector.join(" "),
-            type: "prop",
-            key: prop,
-            value: v,
-          };
-          watchList.push(watchObj2);
-        }
-      });
-    }
+
     /**
      * handle children
      */
@@ -65,6 +56,29 @@ export function createElement(tree, watchList = [], selector = []) {
         el.appendChild(childEl);
       }
     });
+
+    /**
+     * handle props
+     */
+    if (tree.props) {
+      Object.entries(tree.props).forEach(([prop, value]) => {
+        if (prop === "id") {
+          selector[selectorIndex] += `#${value}`;
+        }
+        if (prop === "class") {
+          selector[selectorIndex] += `.${value}`;
+        }
+        handleProp(prop, value, el);
+        const watchObj2 = {
+          selector: selector.join(" "),
+          type: "prop",
+          key: prop,
+          value: value,
+          node: el,
+        };
+        watchList.push(watchObj2);
+      });
+    }
 
     return el;
   }

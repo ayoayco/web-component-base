@@ -116,9 +116,4 @@ function h(type, props, ...children) {
  * @license Apache <https://www.apache.org/licenses/LICENSE-2.0>
  * @author Jason Miller <jason@developit.ca>
  */
-export const html = (strings, ...values) => {
-  return htm.bind(h)(
-    strings,
-    ...values.map((v) => ({ value: v, dynamic: true }))
-  );
-};
+export const html = htm.bind(h);

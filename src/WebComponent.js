@@ -198,13 +198,20 @@ export class WebComponent extends HTMLElement {
       } else {
         const d = diff(watchList, this.#prevWatchList);
         if (d?.length) {
+          console.log(d);
           d.forEach((change) => {
-            const el = this.querySelector(change.selector);
-            if (!!el && change.type === "textContent") {
-              el.textContent = change.value;
+            const changedElement = this.querySelector(change.selector);
+            if (!!changedElement && change.type === "textContent") {
+              changedElement.textContent = change.value;
             }
-            if (!!el && change.type === "prop") {
-              handleProp(change.key, change.value, el);
+            if (!!changedElement && change.type === "prop") {
+              handleProp(change.key, change.value, changedElement);
+            }
+            if (change.type === "replace") {
+              changedElement.parentNode.replaceChild(
+                change.node.parentNode,
+                changedElement
+              );
             }
           });
         }
@@ -216,14 +223,24 @@ export class WebComponent extends HTMLElement {
 }
 
 function diff(change, prev) {
-  const diff = change.filter((dom, index) => {
-    return (
-      !(
-        dom.value instanceof Function &&
-        dom.value.toString() !== prev[index].value.toString()
-      ) && JSON.stringify(dom.value) !== JSON.stringify(prev[index].value)
-    );
-  });
+  const diff = prev
+    .map((dom, index) => {
+      if (
+        !(
+          dom.value instanceof Function &&
+          dom.value.toString() !== change[index]?.value.toString()
+        ) &&
+        JSON.stringify(dom.value) !== JSON.stringify(change[index]?.value)
+      ) {
+        return {
+          ...dom,
+          value: change[index]?.value,
+          node: change[index]?.node,
+        };
+      }
+      return null;
+    })
+    .filter((d) => d !== null);
 
   return diff;
 }

@@ -23,7 +23,6 @@ export function createElement(tree, watchList = [], selector = []) {
         type: "textContent",
         value,
       };
-      // console.log(">>> node", watchObj);
       watchList.push(watchObj);
     }
 
@@ -53,7 +52,6 @@ export function createElement(tree, watchList = [], selector = []) {
             key: prop,
             value: v,
           };
-          // console.log(">>> prop", watchObj2);
           watchList.push(watchObj2);
         }
       });

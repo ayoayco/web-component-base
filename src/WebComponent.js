@@ -160,7 +160,6 @@ export class WebComponent extends HTMLElement {
       },
       get(obj, prop, receiver) {
         // TODO: handle non-objects
-        // console.log(">>> receiver", arguments);
         if (obj[prop] !== null && obj[prop] !== undefined) {
           Object.getPrototypeOf(obj[prop]).proxy = receiver;
           Object.getPrototypeOf(obj[prop]).prop = prop;
@@ -200,7 +199,6 @@ export class WebComponent extends HTMLElement {
         const d = diff(watchList, this.#prevWatchList);
         if (d?.length) {
           d.forEach((change) => {
-            console.log(change);
             const el = this.querySelector(change.selector);
             if (!!el && change.type === "textContent") {
               el.textContent = change.value;

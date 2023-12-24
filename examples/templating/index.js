@@ -32,14 +32,19 @@ export class Counter extends WebComponent {
       </button>
       <form style="margin: 1em 0;">
         <label data-my-name="Ayo" for="the-input">Name</label>
-        <input id="the-input" type="foo" value="Name:" />
+        <input
+          onkeyup=${() => ++this.props.count}
+          id="the-input"
+          type="foo"
+          value="Name:"
+        />
       </form>
       ${list.map((item) => html`<p>${item}</p>`)}
       <h3 about="Elephant">Links</h3>
       <ul>
         ${links.map(
           (link) =>
-            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
         )}
       </ul>
     `;

@@ -1,5 +1,3 @@
 {
-  "js/ts.implicitProjectConfig.checkJs": true,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  "js/ts.implicitProjectConfig.checkJs": true
 }

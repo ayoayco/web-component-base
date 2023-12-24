@@ -3,7 +3,7 @@
  * @author Ayo Ayco <https://ayo.ayco.io>
  */
 
-import { render as r } from "./render.js/index.js";
+import { render as r } from "./render.js";
 import {
   getKebabCase,
   getCamelCase,

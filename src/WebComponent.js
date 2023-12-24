@@ -3,6 +3,7 @@
  * @author Ayo Ayco <https://ayo.ayco.io>
  */
 
+import { handleProp } from "./utils/create-element.mjs";
 import {
   createElement,
   getKebabCase,
@@ -184,39 +185,47 @@ export class WebComponent extends HTMLElement {
     }
   }
 
-  #prevDOM;
+  #prevWatchList = [];
   render() {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
       const tree = this.template;
+      const watchList = [];
 
-      if (!this.#prevDOM) {
-        const el = createElement(tree);
+      const el = createElement(tree, watchList);
+      if (this.#prevWatchList?.length === 0) {
         if (el) this.replaceChildren(el);
       } else {
-        const d = diff(tree, this.#prevDOM);
-        console.log(">>> dif", d);
+        const d = diff(watchList, this.#prevWatchList);
+        if (d?.length) {
+          d.forEach((change) => {
+            console.log(change);
+            const el = this.querySelector(change.selector);
+            if (!!el && change.type === "textContent") {
+              el.textContent = change.value;
+            }
+            if (!!el && change.type === "prop") {
+              handleProp(change.key, change.value, el);
+            }
+          });
+        }
       }
 
-      this.#prevDOM = tree;
+      this.#prevWatchList = watchList;
     }
   }
 }
 
-function diff(tree, prevDOM) {
-  // console.log({ tree, prevDOM });
-  const d = [];
-  prevDOM;
+function diff(change, prev) {
+  const diff = change.filter((dom, index) => {
+    return (
+      !(
+        dom.value instanceof Function &&
+        dom.value.toString() !== prev[index].value.toString()
+      ) && JSON.stringify(dom.value) !== JSON.stringify(prev[index].value)
+    );
+  });
 
-  if (!tree.type) {
-    if (Array.isArray(tree)) {
-      // array
-    }
-    // text node
-  } else {
-    // tree
-  }
-
-  return d;
+  return diff;
 }

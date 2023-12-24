@@ -1,5 +1,5 @@
 import { serialize } from "./serialize.mjs";
-export function createElement(tree) {
+export function createElement(tree, watchList = [], selector = []) {
   if (!tree.type) {
     const value = tree.dynamic ? tree.value : tree;
 
@@ -7,49 +7,72 @@ export function createElement(tree) {
       const frag = document.createDocumentFragment();
       frag.replaceChildren(
         ...value.map((leaf) =>
-          leaf.dynamic ? createElement(leaf.value) : createElement(leaf)
+          leaf.dynamic
+            ? createElement(leaf.value, watchList)
+            : createElement(leaf, watchList)
         )
       );
+
       return frag;
     }
 
     const node = document.createTextNode(value);
-    if (tree.dynamic)
-      console.log(">>> node", { node, type: "textContent", value });
+    if (tree.dynamic) {
+      const watchObj = {
+        selector: selector.join(" "),
+        type: "textContent",
+        value,
+      };
+      // console.log(">>> node", watchObj);
+      watchList.push(watchObj);
+    }
 
     return node;
   } else {
     const el = document.createElement(tree.type);
+    const elSelector = tree.type;
+    const selectorIndex = selector.length;
+    selector.push(elSelector);
     /**
      * handle props
      */
     if (tree.props) {
       Object.entries(tree.props).forEach(([prop, value]) => {
         const v = value.dynamic ? value.value : value;
+        if (prop === "id") {
+          selector[selectorIndex] += `#${value}`;
+        }
+        if (prop === "class") {
+          selector[selectorIndex] += `.${value}`;
+        }
         handleProp(prop, v, el);
-        if (value.dynamic)
-          console.log(">>> prop", {
-            node: el,
+        if (value.dynamic) {
+          const watchObj2 = {
+            selector: selector.join(" "),
             type: "prop",
             key: prop,
             value: v,
-          });
+          };
+          // console.log(">>> prop", watchObj2);
+          watchList.push(watchObj2);
+        }
       });
     }
     /**
      * handle children
      */
     tree.children?.forEach((child) => {
-      const childEl = createElement(child);
+      const childEl = createElement(child, watchList, selector);
       if (childEl instanceof Node) {
         el.appendChild(childEl);
       }
     });
+
     return el;
   }
 }
 
-function handleProp(prop, value, el) {
+export function handleProp(prop, value, el) {
   const domProp = prop.toLowerCase();
   if (domProp === "style" && typeof value === "object" && !!value) {
     applyStyles(el, value);

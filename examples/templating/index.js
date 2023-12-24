@@ -1,10 +1,16 @@
 // @ts-check
-import { WebComponent, html } from "../../src/index.js";
+import { WebComponent, attachEffect, html } from "../../src/index.js";
 
 export class Counter extends WebComponent {
   static props = {
     count: 129,
+    sum: 0,
   };
+
+  onInit() {
+    attachEffect(this.props.count, (count) => (this.props.sum = 3 + count));
+  }
+
   get template() {
     const list = ["a", "b", "c", "what"];
     const links = [
@@ -19,7 +25,15 @@ export class Counter extends WebComponent {
     ];
 
     return html`
-      <div><a>hey</a></div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div><a>${this.props.sum}</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div><a>${this.props.count}</a></div>
       <div><a>hey</a></div>
       <div><a>hey</a></div>

@@ -17,7 +17,6 @@ import {
  */
 export class WebComponent extends HTMLElement {
   #host;
-  #prevDOM;
   #props;
   #typeMap = {};
   #effectsMap = {};

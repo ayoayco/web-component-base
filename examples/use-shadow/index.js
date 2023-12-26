@@ -5,9 +5,10 @@ export class Counter extends WebComponent {
   static props = {
     count: 123,
   };
-  get shadowMode() {
-    return "closed";
-  }
+  static shadowRootInit = {
+    mode: "closed",
+  };
+
   get template() {
     const list = ["a", "b", "c", "what"];
     const links = [

@@ -39,11 +39,10 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
-   * @returns {undefined | string}
+   * Shadow root initialization options
+   * @type {ShadowRootInit}
    */
-  get shadowMode() {
-    return undefined;
-  }
+  static shadowRootInit;
 
   /**
    * Read-only property containing camelCase counterparts of observed attributes.
@@ -196,8 +195,8 @@ export class WebComponent extends HTMLElement {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
       let host = this;
-      if (this.shadowMode) {
-        host = this.attachShadow({ mode: this.shadowMode });
+      if (this.constructor.shadowRootInit) {
+        host = this.attachShadow(this.constructor.shadowRootInit);
       }
       const tree = this.template;
 

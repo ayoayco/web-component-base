@@ -25,6 +25,7 @@ export class Counter extends WebComponent {
     ];
 
     return html`
+      <h1>false</h1>
       <div>
         <div>
           <div>

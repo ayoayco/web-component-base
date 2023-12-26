@@ -1,7 +1,7 @@
 import { serialize } from "./serialize.mjs";
 export function createElement(tree, watchList = []) {
   if (!tree && tree !== 0) {
-    const div = document.createElement("div");
+    const div = document.createComment("placeholder");
     const watchObj = {
       type: "replace",
       node: div,
@@ -65,6 +65,7 @@ export function createElement(tree, watchList = []) {
 }
 
 export function handleProp(prop, value, el) {
+  if (!el) return;
   const domProp = prop.toLowerCase();
   if (domProp === "style" && typeof value === "object" && !!value) {
     applyStyles(el, value);
@@ -72,7 +73,7 @@ export function handleProp(prop, value, el) {
     el[prop] = value;
   } else if (domProp in el) {
     el[domProp] = value;
-  } else {
+  } else if ("setAttribute" in el) {
     el.setAttribute(prop, serialize(value));
   }
 }

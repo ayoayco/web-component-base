@@ -16,6 +16,12 @@ import {
  * @see https://WebComponent.io
  */
 export class WebComponent extends HTMLElement {
+  #host;
+  #prevDOM;
+  #props;
+  #typeMap = {};
+  #effectsMap = {};
+
   /**
    * Array of strings that tells the browsers which attributes will cause a render
    * @type {Array<string>}
@@ -55,11 +61,6 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
-   * @type {PropStringMap}
-   */
-  #props;
-
-  /**
    * Triggered after view is initialized
    */
   afterViewInit() {}
@@ -89,6 +90,7 @@ export class WebComponent extends HTMLElement {
   constructor() {
     super();
     this.#initializeProps();
+    this.#initializeHost();
   }
 
   static get observedAttributes() {
@@ -127,9 +129,6 @@ export class WebComponent extends HTMLElement {
     const restored = deserialize(stringifiedValue, this.#typeMap[key]);
     if (restored !== this.props[key]) this.props[key] = restored;
   }
-
-  #typeMap = {};
-  #effectsMap = {};
 
   #handler(setter, meta) {
     const effectsMap = meta.#effectsMap;
@@ -188,24 +187,25 @@ export class WebComponent extends HTMLElement {
       );
     }
   }
+  #initializeHost() {
+    this.#host = this;
+    if (this.constructor.shadowRootInit) {
+      this.#host = this.attachShadow(this.constructor.shadowRootInit);
+    }
+  }
 
-  #prevDOM;
   render() {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
-      let host = this;
-      if (this.constructor.shadowRootInit) {
-        host = this.attachShadow(this.constructor.shadowRootInit);
-      }
       const tree = this.template;
 
       // TODO: smart diffing
       if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
         const el = createElement(tree);
         if (el) {
-          if (Array.isArray(el)) host.replaceChildren(...el);
-          else host.replaceChildren(el);
+          if (Array.isArray(el)) this.#host.replaceChildren(...el);
+          else this.#host.replaceChildren(el);
         }
         this.#prevDOM = tree;
       }

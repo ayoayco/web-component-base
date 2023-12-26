@@ -16,6 +16,12 @@ import {
  * @see https://WebComponent.io
  */
 export class WebComponent extends HTMLElement {
+  #host;
+  #prevDOM;
+  #props;
+  #typeMap = {};
+  #effectsMap = {};
+
   /**
    * Array of strings that tells the browsers which attributes will cause a render
    * @type {Array<string>}
@@ -39,6 +45,12 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
+   * Shadow root initialization options
+   * @type {ShadowRootInit}
+   */
+  static shadowRootInit;
+
+  /**
    * Read-only property containing camelCase counterparts of observed attributes.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
@@ -47,11 +59,6 @@ export class WebComponent extends HTMLElement {
   get props() {
     return this.#props;
   }
-
-  /**
-   * @type {PropStringMap}
-   */
-  #props;
 
   /**
    * Triggered after view is initialized
@@ -83,6 +90,7 @@ export class WebComponent extends HTMLElement {
   constructor() {
     super();
     this.#initializeProps();
+    this.#initializeHost();
   }
 
   static get observedAttributes() {
@@ -123,9 +131,6 @@ export class WebComponent extends HTMLElement {
       this.props[key] = restored;
     }
   }
-
-  #typeMap = {};
-  #effectsMap = {};
 
   #handler(setter, meta) {
     const effectsMap = meta.#effectsMap;
@@ -184,8 +189,14 @@ export class WebComponent extends HTMLElement {
       );
     }
   }
+  #initializeHost() {
+    this.#host = this;
+    if (this.constructor.shadowRootInit) {
+      this.#host = this.attachShadow(this.constructor.shadowRootInit);
+    }
+  }
 
   render() {
-    r(this.template, this);
+    r(this.template, this.#host);
   }
 }

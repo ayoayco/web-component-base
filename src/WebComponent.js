@@ -39,6 +39,12 @@ export class WebComponent extends HTMLElement {
   }
 
   /**
+   * Shadow root initialization options
+   * @type {ShadowRootInit}
+   */
+  static shadowRootInit;
+
+  /**
    * Read-only property containing camelCase counterparts of observed attributes.
    * @see https://www.npmjs.com/package/web-component-base#prop-access
    * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
@@ -146,7 +152,7 @@ export class WebComponent extends HTMLElement {
           throw TypeError(
             `Cannot assign ${typeof value} to ${
               typeMap[prop]
-            } property (setting '${prop}' of ${meta.constructor.name})`,
+            } property (setting '${prop}' of ${meta.constructor.name})`
           );
         } else if (oldValue !== value) {
           obj[prop] = value;
@@ -178,7 +184,7 @@ export class WebComponent extends HTMLElement {
     if (!this.#props) {
       this.#props = new Proxy(
         initialProps,
-        this.#handler((key, value) => this.setAttribute(key, value), this),
+        this.#handler((key, value) => this.setAttribute(key, value), this)
       );
     }
   }
@@ -188,14 +194,18 @@ export class WebComponent extends HTMLElement {
     if (typeof this.template === "string") {
       this.innerHTML = this.template;
     } else if (typeof this.template === "object") {
+      let host = this;
+      if (this.constructor.shadowRootInit) {
+        host = this.attachShadow(this.constructor.shadowRootInit);
+      }
       const tree = this.template;
 
       // TODO: smart diffing
       if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
         const el = createElement(tree);
         if (el) {
-          if (Array.isArray(el)) this.replaceChildren(...el);
-          else this.replaceChildren(el);
+          if (Array.isArray(el)) host.replaceChildren(...el);
+          else host.replaceChildren(el);
         }
         this.#prevDOM = tree;
       }

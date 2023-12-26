@@ -38,7 +38,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 ## Project Status
 It is ready for many cases we see people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! :)
 
-For building some advanced interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#33 shadow DOM opt-in](https://github.com/ayoayco/web-component-base/issues/33), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
+For building some advanced interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24), [#15 memoization](https://github.com/ayoayco/web-component-base/issues/15), [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
 
 In the mean time, if you have some complex needs, we recommend using the `WebComponent` base class with a more mature rendering approach like `lit-html`... and here's a demo for that: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010).
 

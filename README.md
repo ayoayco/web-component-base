@@ -22,6 +22,9 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
     1. [Main Exports](#main-exports)
     1. [Utilities](#utilities)
 1. [Usage](#usage)
+1. [Examples](#Examples)
+    1. [To-Do App](#1-to-do-app)
+    1. [Single HTML file](#2-single-html-file-example)
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
@@ -33,9 +36,6 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
     1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
     1. [`onChanges`](#onchanges) - every time an attribute value changes
-1. [Examples](#Examples)
-    1. [To-Do App](#1-to-do-app)
-    1. [Single HTML file](#2-single-html-file-example)
 1. [Library Size](#library-size)
 
 ## Project Status
@@ -100,7 +100,6 @@ import { createElement } from "web-component-base/utils/create-element.js";
 
 ```
 
-
 ## Usage
 
 In your component class:
@@ -124,7 +123,6 @@ class HelloWorld extends WebComponent {
 customElements.define('hello-world', HelloWorld);
 ```
 
-
 In your HTML page:
 
 ```html
@@ -146,6 +144,53 @@ In your HTML page:
 The result is a reactive UI that updates on attribute changes:
 
 <img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-base-demo.gif" width="400" />
+
+## Examples
+
+### 1. To-Do App
+
+A simple app that allows adding / completing tasks:
+[View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/GRegyVe?editors=1010)
+
+![To-Do App screen recording](https://raw.githubusercontent.com/ayoayco/web-component-base/main/assets/todo-app.gif)
+
+### 2. Single HTML file Example
+
+Here is an example of using a custom element in a single .html file. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WC Base Test</title>
+    <script type="module">
+      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+
+      class HelloWorld extends WebComponent {
+        static props = {
+          myName: 'World'
+        }
+        get template() {
+          return `<h1>Hello ${this.props.myName}!</h1>`;
+        }
+      }
+
+      customElements.define("hello-world", HelloWorld);
+    </script>
+  </head>
+  <body>
+    <hello-world my-name="Ayo"></hello-world>
+    <script>
+        const helloWorld = document.querySelector('hello-world');
+        setTimeout(() => {
+            helloWorld.props.myName = 'Ayo zzzZzzz';
+        }, 2500);
+    </script>
+  </body>
+</html>
+```
+
+
 
 ## `template` vs `render()`
 
@@ -275,52 +320,6 @@ class MyQuote extends HTMLElement {
 
 customElements.define('my-quote', MyQuote)
 ```
-
-## Examples
-
-### 1. To-Do App
-
-A simple app that allows adding / completing tasks:
-[View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/GRegyVe?editors=1010)
-
-![To-Do App screen recording](https://raw.githubusercontent.com/ayoayco/web-component-base/main/assets/todo-app.gif)
-
-### 2. Single HTML file Example
-
-Here is an example of using a custom element in a single .html file. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>WC Base Test</title>
-    <script type="module">
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
-
-      class HelloWorld extends WebComponent {
-        static props = {
-          myName: 'World'
-        }
-        get template() {
-          return `<h1>Hello ${this.props.myName}!</h1>`;
-        }
-      }
-
-      customElements.define("hello-world", HelloWorld);
-    </script>
-  </head>
-  <body>
-    <hello-world my-name="Ayo"></hello-world>
-    <script>
-        const helloWorld = document.querySelector('hello-world');
-        setTimeout(() => {
-            helloWorld.props.myName = 'Ayo zzzZzzz';
-        }, 2500);
-    </script>
-  </body>
-</html>
-```
-
 ## Life-Cycle Hooks
 
 Define behavior when certain events in the component's life cycle is triggered by providing hook methods

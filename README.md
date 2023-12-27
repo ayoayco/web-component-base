@@ -28,12 +28,14 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 1. [Styling](#styling-beta)
 1. [Shadow DOM Opt-In](#shadow-dom-opt-in-beta)
 1. [Just the Templating](#just-the-templating)
-1. [Quick Start Example](#quick-start-example)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
     1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
     1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
     1. [`onChanges`](#onchanges) - every time an attribute value changes
+1. [Examples](#Examples)
+    1. [To-Do App](#1-to-do-app)
+    1. [Single HTML file](#2-single-html-file-example)
 1. [Library Size](#library-size)
 
 ## Project Status
@@ -274,7 +276,16 @@ class MyQuote extends HTMLElement {
 customElements.define('my-quote', MyQuote)
 ```
 
-## Quick Start Example
+## Examples
+
+### 1. To-Do App
+
+A simple app that allows adding / completing tasks:
+[View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/GRegyVe?editors=1010)
+
+![To-Do App screen recording](https://raw.githubusercontent.com/ayoayco/web-component-base/main/assets/todo-app.gif)
+
+### 2. Single HTML file Example
 
 Here is an example of using a custom element in a single .html file. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
@@ -405,12 +416,3 @@ All the functions and the base class in the library are minimalist by design and
 As of v2.0.0, the main export (with `WebComponent` + `html` + `attachEffect`) is 1.7 kB (min + gzip) according to [bundlephobia.com](https://bundlephobia.com/package/web-component-base@2.0.0), and the `WebComponent` base class is just 1.1 kB (min + brotli) according to [size-limit](http://github.com/ai/size-limit).
 
 There is an increase in size compared to that of before this release, primarily because of advanced features (e.g., effects, html tagged templates, and props blueprints) in building complex applications.
-
-> [!NOTE]
-> As a builder of both simple sites and complex web apps, I recognize that not all custom elements need advanced features for reactivity.
->
->I also don't want to get things in my code that I don't need (YAGNI -- You Aren't Gonna Need It)... and I want a base class for simpler use cases that don't have Proxy props or attaching effects...
->
->To address this, I am working on a "lite" version of my base class here... please stay tuned.
->
-> - Ayo Ayco

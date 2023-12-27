@@ -36,7 +36,7 @@
     "pub:minor": "npm version minor && npm run pub",
     "check:size": "npm run build && size-limit ./dist/WebComponent.js",
     "pretty": "prettier --write \"./**/*.{js,mjs,json}\"",
-    "lint": "eslint --fix \"./**/*.{js,mjs}\"",
+    "lint": "eslint . --config .eslintrc.cjs --ext .js,.mjs",
     "prepare": "husky install"
   },
   "repository": "https://github.com/ayoayco/web-component-base",

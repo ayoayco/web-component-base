@@ -25,6 +25,7 @@ The result is a reactive UI on property changes. [View on CodePen ↗](https://c
 1. [Examples](#Examples)
     1. [To-Do App](#1-to-do-app)
     1. [Single HTML file](#2-single-html-file-example)
+    1. [Feature Demos](#3-feature-demos)
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
@@ -156,7 +157,7 @@ A simple app that allows adding / completing tasks:
 
 ### 2. Single HTML file Example
 
-Here is an example of using a custom element in a single .html file. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
+Here is an example of using a custom element in a single .html file.
 
 ```html
 <!DOCTYPE html>
@@ -190,7 +191,15 @@ Here is an example of using a custom element in a single .html file. [View on Co
 </html>
 ```
 
-
+### 3. Feature Demos
+Some feature-specific demos:
+1. [Simple reactive property](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
+1. [Counter & Toggle](https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010)
+1. [Using custom templating (lit-html)](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
+1. [Using dynamic style objects](https://codepen.io/ayoayco-the-styleful/pen/bGzXjwQ?editors=1010)
+1. [Using the Shadow DOM](https://codepen.io/ayoayco-the-styleful/pen/VwRYVPv?editors=1010)
+1. [Using tagged templates in your vanilla custom element](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010)
+1. [Using attachEffect (experimental)](https://codepen.io/ayoayco-the-styleful/pen/ExrdWPv?editors=1011)
 
 ## `template` vs `render()`
 

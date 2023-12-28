@@ -16,11 +16,25 @@
       const author = {
         name: "Ayo Ayco",
         url: "https://ayco.io",
+        year: "2023",
       };
     </script>
     <style>
+      @counter-style publish-icons {
+        system: cyclic;
+        symbols: "️✅";
+        suffix: " ";
+      }
       main {
         font-size: large;
+
+        & section ul {
+          list-style: publish-icons;
+
+          & li {
+            margin-bottom: 0.5em;
+          }
+        }
 
         & section.jumbo {
           & .hero-statement {
@@ -44,7 +58,29 @@
         </p>
         <call-to-action></call-to-action>
         <div>
-          <feature-set features="{{ features }}"></feature-set>
+          <feature-set>
+            <h2>Features</h2>
+            <ul>
+              <li>
+                A robust API for synchronizing your component's UI and
+                properties
+              </li>
+              <li>
+                ~1 kB base class (minified, compressed) with versatile utilities
+              </li>
+              <li>
+                Sensible life-cycle hooks that you understand and remember
+              </li>
+              <li>
+                Use the built-in JSX-like syntax or bring your own custom
+                templating
+              </li>
+              <li>
+                Attach 'side effects' that gets triggered on property value
+                changes
+              </li>
+            </ul>
+          </feature-set>
         </div>
       </section>
       <section>
@@ -70,7 +106,7 @@
         </p>
         <code-block language="js">
           <pre>
-import { WebComponent, html } from &quot;https://unpkg.com/web-component-base@2.0.0/index.js&quot;;
+import { WebComponent, html } from &quot;https://esm.sh/web-component-base&quot;;
 
 export class Counter extends WebComponent {
   static props = {
@@ -91,19 +127,11 @@ customElements.define(&quot;my-counter&quot;, Counter);</pre
       </section>
     </main>
     <my-footer>
-      <span
-        >This site is built with
-        <a href="https://github.com/ayoayco/McFly">McFly</a>, the no-framework
-        framework; </span
-      ><br />
-      <span
-        >✨ Star on
-        <a href="https://github.com/ayoayco/web-component-base">GitHub</a> to
-        support; </span
-      ><br />
-      <span>
-        A project by <a href="{{ author.url }}">{{ author.name }}</a>
-      </span>
+      <small>
+        Released under the
+        <a href="https://opensource.org/licenses/MIT">MIT License</a>. Copyright
+        &copy; {{author.year}} <a href="{{ author.url }}">{{ author.name }}</a>
+      </small>
     </my-footer>
   </body>
 </html>

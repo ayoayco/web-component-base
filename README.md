@@ -142,10 +142,6 @@ In your HTML page:
 </body>
 ```
 
-The result is a reactive UI that updates on attribute changes:
-
-<img alt="UI showing feeling toward Web Components changing from SAD to EXCITED" src="https://git.sr.ht/~ayoayco/web-component-base/blob/main/assets/wc-base-demo.gif" width="400" />
-
 ## Examples
 
 ### 1. To-Do App

@@ -89,15 +89,27 @@
       <section>
         <h2>Why use this base class?</h2>
         <p>
-          Writing Web Components directly from
-          <code-block inline>HTMLElement</code-block> can seem confusing and
-          hard to maintain, especially when coming from popular JS frameworks
-          and other projects that recommend complex setups.
+          Often times, when simple websites need a quick
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements"
+            target="_blank"
+            >custom element</a
+          >, the best way is still to create one extending from
+          <code-block inline>HTMLElement</code-block>. However, it can quickly
+          reach a point where writing the code from scratch can seem confusing
+          and hard to maintain especially when compared to other projects with
+          more advanced setups.
         </p>
         <p>
-          This project aims to address this with virtually zero tooling required
-          and thin abstractions from vanilla custom element APIs – giving you
-          only the bare minimum code to be productive.
+          Also, when coming from frameworks with an easy declarative coding
+          experience (using templates), the default imperative way (e.g.,
+          declaring elements, manually attaching event handlers, and other DOM
+          manipulations) is a frequent pain point we see.
+        </p>
+        <p>
+          This project aims to address these with virtually zero tooling
+          required and thin abstractions from vanilla custom element APIs –
+          giving you only the bare minimum code to be productive.
         </p>
         <p>
           It works on current-day browsers without needing compilers,

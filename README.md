@@ -5,7 +5,7 @@
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/web-component-base)](https://www.npmjs.com/package/web-component-base)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/web-component-base)](#library-size)
 
-🤷‍♂️ zero-dependency, 🤏 tiny JS base class for creating reactive custom elements easily ✨
+🤷‍♂️ zero-dependency, 🤏 tiny JS base class for creating reactive [custom elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements) easily ✨
 
 ![counter example code snippet](https://raw.githubusercontent.com/ayoayco/web-component-base/main/assets/IMG_0682.png)
 

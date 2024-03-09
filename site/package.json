@@ -7,7 +7,7 @@
     "dev": "mcfly serve",
     "build": "mcfly build",
     "preview": "node .output/server/index.mjs",
-    "build:preview": "npm run build && npm run preview"
+    "build:preview": "pnpm run build && pnpm run preview"
   },
   "dependencies": {
     "@mcflyjs/cli": "latest",

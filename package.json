@@ -25,16 +25,17 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "npx simple-server .",
     "demo": "npx simple-server .",
-    "site": "npm start -w site",
-    "build": "npm run clean && tsc && npm run copy:source",
+    "site": "pnpm --filter site start",
+    "build": "pnpm run clean && tsc && pnpm run copy:source",
+    "size-limit": "pnpm run build && size-limit",
     "clean": "rm -rf dist",
     "copy:source": "esbuild --minify --bundle ./src/*.js ./src/utils/* --outdir=\"./dist\" --format=\"esm\"",
-    "pub": "npm run clean && npm run build && npm publish",
-    "pub:patch": "npm version patch && npm run pub",
-    "pub:minor": "npm version minor && npm run pub",
-    "check:size": "npm run build && size-limit ./dist/WebComponent.js",
+    "pub": "pnpm run clean && pnpm run build && npm publish",
+    "pub:patch": "npm version patch && pnpm run pub",
+    "pub:minor": "npm version minor && pnpm run pub",
     "pretty": "prettier --write \"./**/*.{js,mjs,json}\"",
     "lint": "eslint . --config .eslintrc.cjs --ext .js,.mjs",
     "prepare": "husky install"
@@ -56,11 +57,42 @@
     "@size-limit/preset-small-lib": "^11.0.0",
     "esbuild": "^0.19.9",
     "eslint": "^8.56.0",
+    "husky": "^8.0.0",
     "prettier": "^3.1.1",
-    "typescript": "^5.2.2",
-    "husky": "^8.0.0"
+    "size-limit": "^11.0.2",
+    "typescript": "^5.2.2"
   },
-  "workspaces": [
-    "site"
+  "size-limit": [
+    {
+      "path": "./dist/WebComponent.js",
+      "limit": "1.5 KB"
+    },
+    {
+      "path": "./dist/html.js",
+      "limit": "0.6 KB"
+    },
+    {
+      "path": "./dist/attach-effect.js",
+      "limit": "0.1 KB"
+    }, {
+      "path": "./dist/utils/create-element.js",
+      "limit": "0.5 KB"
+    },
+    {
+      "path": "./dist/utils/deserialize.js",
+      "limit": "0.5 KB"
+    },
+    {
+      "path": "./dist/utils/serialize.js",
+      "limit": "0.5 KB"
+    },
+    {
+      "path": "./dist/utils/get-camel-case.js",
+      "limit": "0.5 KB"
+    },
+    {
+      "path": "./dist/utils/get-kebab-case.js",
+      "limit": "0.5 KB"
+    }
   ]
 }

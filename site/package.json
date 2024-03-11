@@ -13,7 +13,7 @@
     "@mcflyjs/cli": "latest",
     "@mcflyjs/config": "latest",
     "@mcflyjs/core": "^0.5.2",
-    "nitropack": "latest"
+    "nitropack": "2.8"
   },
   "version": "0.0.1",
   "main": "index.js",

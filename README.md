@@ -11,7 +11,11 @@
 
 When you extend the `WebComponent` class for your component, you only have to define the `template` and `properties`. Any change in any property value will automatically cause just the component UI to render.
 
-The result is a reactive UI on property changes. [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
+The result is a reactive UI on property changes.
+
+Links:
+- [Read a blog explaining the reactivity](https://ayos.blog/reactive-custom-elements-with-html-dataset/)
+- [View demo on CodePen](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
 ## Table of Contents
 1. [Project Status](#project-status)

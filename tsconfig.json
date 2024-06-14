@@ -5,5 +5,10 @@
     "declaration": true,
     "emitDeclarationOnly": true
   },
-  "include": ["src/*", "src/utils/*"]
+  "include": [
+    "src/*",
+    "src/utils/*",
+    "src/render.js",
+    "src/html.js"
+  ]
 }

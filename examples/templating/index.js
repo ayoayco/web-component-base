@@ -1,10 +1,16 @@
 // @ts-check
-import { WebComponent, html } from "../../src/index.js";
+import { WebComponent, attachEffect, html } from "../../src/index.js";
 
 export class Counter extends WebComponent {
   static props = {
-    count: 123,
+    count: 129,
+    sum: 0,
   };
+
+  onInit() {
+    attachEffect(this.props.count, (count) => (this.props.sum = 3 + count));
+  }
+
   get template() {
     const list = ["a", "b", "c", "what"];
     const links = [
@@ -19,6 +25,19 @@ export class Counter extends WebComponent {
     ];
 
     return html`
+      <h1>false</h1>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div><a>${this.props.sum}</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div><a>${this.props.count}</a></div>
+      <div><a>hey</a></div>
+      <div><a>hey</a></div>
       <button
         class="hey"
         id="btn"
@@ -32,16 +51,23 @@ export class Counter extends WebComponent {
       </button>
       <form style="margin: 1em 0;">
         <label data-my-name="Ayo" for="the-input">Name</label>
-        <input id="the-input" type="foo" value="Name:" />
+        <input
+          onkeyup=${() => ++this.props.count}
+          id="the-input"
+          type="foo"
+          value="Name:"
+        />
       </form>
+      ${this.props.count > 130 && html`<h1>Too much!</h1>`}
       ${list.map((item) => html`<p>${item}</p>`)}
       <h3 about="Elephant">Links</h3>
       <ul>
         ${links.map(
           (link) =>
-            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
         )}
       </ul>
+      <div>${this.props.count > 130 && html`<h1>Too much!</h1>`}</div>
     `;
   }
 }

@@ -54,13 +54,13 @@
     "url": "https://github.com/ayoayco/web-component-base/issues"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^11.0.0",
-    "esbuild": "^0.19.9",
-    "eslint": "^8.56.0",
-    "husky": "^8.0.0",
-    "prettier": "^3.1.1",
-    "size-limit": "^11.0.2",
-    "typescript": "^5.2.2"
+    "@size-limit/preset-small-lib": "^11.1.4",
+    "esbuild": "^0.19.12",
+    "eslint": "^8.57.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.3.3",
+    "size-limit": "^11.1.4",
+    "typescript": "^5.5.3"
   },
   "size-limit": [
     {
@@ -74,7 +74,8 @@
     {
       "path": "./dist/attach-effect.js",
       "limit": "0.1 KB"
-    }, {
+    },
+    {
       "path": "./dist/utils/create-element.js",
       "limit": "0.5 KB"
     },

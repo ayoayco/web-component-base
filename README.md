@@ -20,7 +20,7 @@ Links:
 ## Table of Contents
 1. [Project Status](#project-status)
 1. [Installation](#installation)
-    1. [Import via unpkg](#import-via-unpkg)
+    1. [Import via CDN](#import-via-cdn)
     1. [Installation via npm](#installation-via-npm)
 1. [Exports](#exports)
     1. [Main Exports](#main-exports)
@@ -55,8 +55,11 @@ In the mean time, if you have some complex needs, we recommend using the `WebCom
 ## Installation
 The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
 
-### Use on the browser via unpkg (no bundlers needed!)
-Import using [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component. You can replace the version `@latest` in the URL with specific versions. We will use this in the rest of our [usage examples](#usage).
+### Import via CDN
+
+It is possible to import directly using a CDN like [esm.sh](https://esm.sh/web-component-base) or [unpkg](https://unpkg.com/web-component-base) in your vanilla JS component or HTML files. In all examples in this document, we use `unpkg` but you can find on CodePen examples that `esm.sh` also works well.
+
+Additionally, we use `@latest` in the rest of our [usage examples](#usage) here for simplicity, but take note that this incurs additional resolution steps for CDNs to find the actual latest published version. You may replace the `@latest` in the URL with specific versions as shown in our CodePen examples, and this will typically be better for performance.
 
 ```js
 import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js"

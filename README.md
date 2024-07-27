@@ -33,7 +33,7 @@ Links:
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
-1. [Styling](#styling-beta)
+1. [Styling](#styling)
 1. [Shadow DOM Opt-In](#shadow-dom-opt-in-beta)
 1. [Just the Templating](#just-the-templating)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
@@ -252,9 +252,9 @@ The current alternatives are using what `HTMLElement` provides out-of-the-box, w
 1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
-## Styling (beta)
+## Styling
 
-Upcoming on **v2.1.0**: When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration).
+When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration).
 
 Try it now with this [example on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzXjwQ?editors=1010)
 ```js
@@ -294,7 +294,7 @@ class StyledElements extends WebComponent {
 customElements.define("styled-elements", StyledElements);
 ```
 
-## Shadow DOM Opt-In (beta)
+## Shadow DOM Opt-In
 Add a static property `shadowRootInit` with object value of type `ShadowRootInit` (see [options on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#options)) to opt-in to using shadow dom for the whole component.
 
 Try it now [on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/VwRYVPv?editors=1010)

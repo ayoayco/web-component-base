@@ -1,4 +1,27 @@
-module.exports = {
+export default [
+  // "eslint:recommended",
+  // {
+  //   rules: {
+  //     semi: ["warn", "always"]
+  //   }
+  // },
+  // {
+  //   files: ["./src/*.js"],
+  //   rules: {
+  //     "semi": "error",
+  //     "no-unused-vars": "error"
+  //   }
+  // },
+  // {
+  //   files: ["./site/***js"],
+  //   rules: {
+  //     "no-undef": "off",
+  //     "no-unused-vars": "off",
+  //   },
+  // }
+]
+/*
+ {
   env: {
     browser: true,
     es2021: true,
@@ -15,7 +38,7 @@ module.exports = {
       },
     },
     {
-      files: ["./site/**/*js"],
+      files: ["./site/***js"],
       rules: {
         "no-undef": "off",
         "no-unused-vars": "off",
@@ -27,3 +50,4 @@ module.exports = {
     sourceType: "module",
   },
 };
+*/

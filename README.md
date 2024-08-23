@@ -196,6 +196,7 @@ Here is an example of using a custom element in a single .html file.
 
 ### 3. Feature Demos
 Some feature-specific demos:
+1. [Context-Aware Post-Apocalyptic Human](https://codepen.io/ayoayco-the-styleful/pen/WNqJMNG?editors=1010) 
 1. [Simple reactive property](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 1. [Counter & Toggle](https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010)
 1. [Using custom templating (lit-html)](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)

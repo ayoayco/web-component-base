@@ -7,7 +7,7 @@ class Toggle extends WebComponent {
   get template() {
     return html`
       <button onClick=${() => (this.props.toggle = !this.props.toggle)}>
-        ${this.props.toggle}
+        ${this.props.toggle ? "On" : "Off"}
       </button>
     `;
   }

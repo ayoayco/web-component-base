@@ -3,8 +3,8 @@
  * @author Ayo Ayco <https://ayo.ayco.io>
  */
 
+import { render as r } from "./render.js";
 import {
-  createElement,
   getKebabCase,
   getCamelCase,
   serialize,
@@ -17,7 +17,6 @@ import {
  */
 export class WebComponent extends HTMLElement {
   #host;
-  #prevDOM;
   #props;
   #typeMap = {};
   #effectsMap = {};
@@ -118,15 +117,17 @@ export class WebComponent extends HTMLElement {
       this[camelCaps] = this[property];
 
       this.#handleUpdateProp(camelCaps, this[property]);
-
       this.render();
+
       this.onChanges({ property, previousValue, currentValue });
     }
   }
 
   #handleUpdateProp(key, stringifiedValue) {
     const restored = deserialize(stringifiedValue, this.#typeMap[key]);
-    if (restored !== this.props[key]) this.props[key] = restored;
+    if (restored !== this.props[key]) {
+      this.props[key] = restored;
+    }
   }
 
   #handler(setter, meta) {
@@ -160,13 +161,13 @@ export class WebComponent extends HTMLElement {
 
         return true;
       },
-      get(obj, prop) {
+      get(obj, prop, receiver) {
         // TODO: handle non-objects
         if (obj[prop] !== null && obj[prop] !== undefined) {
-          Object.getPrototypeOf(obj[prop]).proxy = meta.#props;
+          Object.getPrototypeOf(obj[prop]).proxy = receiver;
           Object.getPrototypeOf(obj[prop]).prop = prop;
         }
-        return obj[prop];
+        return Reflect.get(...arguments);
       },
     };
   }
@@ -193,20 +194,6 @@ export class WebComponent extends HTMLElement {
   }
 
   render() {
-    if (typeof this.template === "string") {
-      this.innerHTML = this.template;
-    } else if (typeof this.template === "object") {
-      const tree = this.template;
-
-      // TODO: smart diffing
-      if (JSON.stringify(this.#prevDOM) !== JSON.stringify(tree)) {
-        const el = createElement(tree);
-        if (el) {
-          if (Array.isArray(el)) this.#host.replaceChildren(...el);
-          else this.#host.replaceChildren(el);
-        }
-        this.#prevDOM = tree;
-      }
-    }
+    r(this.template, this.#host);
   }
 }

@@ -1,12 +1,9 @@
 // @ts-check
-import { WebComponent } from "../../src/index.js";
+import { html, WebComponent } from "../../src/index.js";
 
 class SimpleText extends WebComponent {
   clickCallback() {
     console.log(">>> click!");
-  }
-  onInit() {
-    this.onclick = this.clickCallback;
   }
 
   onDestroy() {
@@ -15,7 +12,7 @@ class SimpleText extends WebComponent {
   }
 
   get template() {
-    return `<span style="cursor:pointer">Click me!</span>`;
+    return html`<span onclick=${this.clickCallback} style="cursor:pointer">Click me!</span>`;
   }
 }
 

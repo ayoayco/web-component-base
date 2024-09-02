@@ -1,5 +1,8 @@
-import { WebComponent } from "../../src/index.js";
+import { html, WebComponent } from "../../src/index.js";
 
+/**
+ * TODO: rendering currently wipes all children so focus gets removed on fields
+ */
 export class ObjectText extends WebComponent {
   static props = {
     object: {
@@ -11,38 +14,37 @@ export class ObjectText extends WebComponent {
     console.log(">>> object", this.props.object);
   }
   get template() {
-    const greeting = document.createElement("textarea");
-    greeting.innerHTML = this.props.object.hello;
-    greeting.setAttribute("id", "greeting-field");
-    const greetingLabel = document.createElement("label");
-    greetingLabel.setAttribute("for", "greeting-field");
-    greetingLabel.textContent = "Hello";
-    greeting.onkeyup = () => {
-      this.props.object = {
-        ...this.props.object,
-        hello: greeting.value,
-      };
-    };
-    const ageField = document.createElement("input");
-    ageField.value = this.props.object.age;
-    ageField.setAttribute("id", "age-field");
-    const ageLabel = document.createElement("label");
-    ageLabel.setAttribute("for", "age-field");
-    ageLabel.textContent = "Age";
-    ageField.onkeyup = () => {
-      this.props.object = {
-        ...this.props.object,
-        age: ageField.value,
-      };
-    };
-    const form = document.createElement("form");
-    form.append(greetingLabel, greeting, ageLabel, ageField);
-    return form;
+    return html`
+      <form>
+        <label for="greeting-field">Hello</label>
+        <textarea
+          onkeyup=${
+            (event) => {
+              this.props.object = {
+                ...this.props.object,
+                hello: event.target.value,
+              };
+            }
+          }
+          id="greeting-field">
+            ${this.props.object.hello}
+        </textarea>
+        <label for="age-field">Age</label>
+        <input
+          onkeyup=${
+            (event) => {
+              this.props.object = {
+                ...this.props.object,
+                age: event.target.value,
+              };
+            }
+          }
+        id="age-field" value=${this.props.object.age} />
+      </form>
+    `;
   }
 
-  render() {
-    if (this.children.length === 0) this.replaceChildren(this.template);
-  }
+
 }
 
 customElements.define("my-object", ObjectText);

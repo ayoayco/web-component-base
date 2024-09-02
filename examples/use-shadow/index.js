@@ -6,7 +6,7 @@ export class Counter extends WebComponent {
     count: 123,
   };
   static shadowRootInit = {
-    mode: "closed",
+    mode: "open",
   };
 
   get template() {

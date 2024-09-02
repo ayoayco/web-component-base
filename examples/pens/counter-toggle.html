@@ -13,7 +13,7 @@
       import {
         WebComponent,
         html,
-      } from "https://unpkg.com/web-component-base@latest/index.js";
+      } from "https://esm.sh/web-component-base@latest";
 
       export class Counter extends WebComponent {
         static props = {
@@ -30,11 +30,11 @@
         static props = {
           toggle: false,
         };
-        onInit() {
-          this.onclick = () => (this.props.toggle = !this.props.toggle);
-        }
+
+        clickFn = () => (this.props.toggle = !this.props.toggle);
+
         get template() {
-          return `<button>${this.props.toggle ? "On" : "Off"}</button>`;
+          return html`<button onclick=${this.clickFn}>${this.props.toggle ? "On" : "Off"}</button>`;
         }
       }
 

@@ -1,4 +1,4 @@
-import { WebComponent } from "../../src/index.js";
+import { html, WebComponent } from "../../src/index.js";
 
 export class BooleanPropTest extends WebComponent {
   static props = {
@@ -7,7 +7,9 @@ export class BooleanPropTest extends WebComponent {
   };
 
   get template() {
-    return `<p>is-inline: ${this.props.isInline}</p><p>another-one: ${this.props.anotherone}</p>`;
+    return html`
+      <p>is-inline: ${this.props.isInline}</p><p>another-one: ${this.props.anotherone}</p>
+    `;
   }
 }
 

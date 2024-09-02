@@ -1,11 +1,11 @@
 // @ts-check
-import { WebComponent, attachEffect } from "../../src/index.js";
+import { WebComponent, attachEffect, html } from "../../src/index.js";
 export class Counter extends WebComponent {
   static props = {
     count: 0,
   };
+
   onInit() {
-    this.onclick = () => ++this.props.count;
     attachEffect(this.props.count, (count) => console.log(count));
   }
 
@@ -14,7 +14,7 @@ export class Counter extends WebComponent {
   }
 
   get template() {
-    return `<button id="btn">${this.props.count}</button>`;
+    return html`<button onclick=${() => ++this.props.count} id="btn">${this.props.count}</button>`;
   }
 }
 

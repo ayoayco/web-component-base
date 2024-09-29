@@ -34,7 +34,7 @@ Links:
 1. [Prop access](#prop-access)
     1. [Alternatives](#alternatives)
 1. [Styling](#styling)
-1. [Shadow DOM Opt-In](#shadow-dom-opt-in-beta)
+1. [Shadow DOM Opt-In](#shadow-dom-opt-in)
 1. [Just the Templating](#just-the-templating)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
     1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized

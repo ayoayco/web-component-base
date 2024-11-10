@@ -27,6 +27,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "npx simple-server .",
+    "test": "vitest",
     "demo": "npx simple-server .",
     "site": "pnpm --filter site start",
     "build": "pnpm run clean && tsc && pnpm run copy:source",
@@ -60,7 +61,8 @@
     "husky": "^9.1.6",
     "prettier": "^3.3.3",
     "size-limit": "^11.1.6",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
   },
   "size-limit": [
     {

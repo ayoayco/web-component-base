@@ -1,0 +1,6 @@
+# Ignore artifacts:
+
+site
+vendors
+build
+coverage

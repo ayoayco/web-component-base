@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,33 +10,27 @@
     <script type="module" src="./Object.mjs"></script>
     <style>
       * {
-        font-size: larger
+        font-size: larger;
       }
     </style>
   </head>
   <body>
-    <div>
-      Counter: <my-counter></my-counter>
-    </div>
-    <div>
-      Toggle: <my-toggle></my-toggle>
-    </div>
-    <div>
-      String: <my-hello-world></my-hello-world>
-    </div>
+    <div>Counter: <my-counter></my-counter></div>
+    <div>Toggle: <my-toggle></my-toggle></div>
+    <div>String: <my-hello-world></my-hello-world></div>
     <div>
       <my-object></my-object>
       <p id="display-panel"></p>
     </div>
     <script type="module">
-      import { attachEffect } from "../../src/index.js";
-      const myObjectEl = document.querySelector('my-object');
-      const objectProp = myObjectEl.props.object;
-      const displayPanelEl = document.querySelector('#display-panel');
-      displayPanelEl.textContent = JSON.stringify(objectProp);
+      import { attachEffect } from '../../src/index.js'
+      const myObjectEl = document.querySelector('my-object')
+      const objectProp = myObjectEl.props.object
+      const displayPanelEl = document.querySelector('#display-panel')
+      displayPanelEl.textContent = JSON.stringify(objectProp)
       attachEffect(objectProp, (object) => {
-        displayPanelEl.textContent = JSON.stringify(object);
-      });
+        displayPanelEl.textContent = JSON.stringify(object)
+      })
     </script>
   </body>
 </html>

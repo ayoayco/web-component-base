@@ -4,10 +4,10 @@
  * @param {(newValue: any) => void} callback
  */
 export function attachEffect(obj, callback) {
-  const { proxy, prop } = Object.getPrototypeOf(obj);
+  const { proxy, prop } = Object.getPrototypeOf(obj)
 
   proxy[prop] = {
-    attach: "effect",
+    attach: 'effect',
     callback,
-  };
+  }
 }

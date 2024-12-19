@@ -1,25 +1,25 @@
-import { WebComponent } from "../../src/index.js";
+import { WebComponent } from '../../src/index.js'
 import {
   html,
   render as lit,
-} from "https://unpkg.com/lit-html@3.1.0/lit-html.js";
+} from 'https://unpkg.com/lit-html@3.1.0/lit-html.js'
 
 export class LitCounter extends WebComponent {
   static props = {
     count: 123,
-  };
+  }
   get template() {
-    const list = ["a", "b", "c", "what"];
+    const list = ['a', 'b', 'c', 'what']
     const links = [
       {
-        url: "https://ayco.io",
-        text: "Ayo Ayco",
+        url: 'https://ayco.io',
+        text: 'Ayo Ayco',
       },
       {
-        url: "https://ayco.io/gh/McFly",
-        text: "McFly",
+        url: 'https://ayco.io/gh/McFly',
+        text: 'McFly',
       },
-    ];
+    ]
 
     return html`
       <button
@@ -42,14 +42,14 @@ export class LitCounter extends WebComponent {
       <ul>
         ${links.map(
           (link) =>
-            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
         )}
       </ul>
-    `;
+    `
   }
   render() {
-    lit(this.template, this);
+    lit(this.template, this)
   }
 }
 
-customElements.define("lit-counter", LitCounter);
+customElements.define('lit-counter', LitCounter)

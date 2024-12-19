@@ -1,22 +1,22 @@
 // @ts-check
-import { WebComponent, html } from "../../src/index.js";
+import { WebComponent, html } from '../../src/index.js'
 
 export class Counter extends WebComponent {
   static props = {
     count: 123,
-  };
+  }
   get template() {
-    const list = ["a", "b", "c", "what"];
+    const list = ['a', 'b', 'c', 'what']
     const links = [
       {
-        url: "https://ayco.io",
-        text: "Ayo Ayco",
+        url: 'https://ayco.io',
+        text: 'Ayo Ayco',
       },
       {
-        url: "https://ayco.io/gh/McFly",
-        text: "McFly",
+        url: 'https://ayco.io/gh/McFly',
+        text: 'McFly',
       },
-    ];
+    ]
 
     return html`
       <button
@@ -39,11 +39,11 @@ export class Counter extends WebComponent {
       <ul>
         ${links.map(
           (link) =>
-            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`,
+            html`<li><a href=${link.url} target="_blank">${link.text}</a></li>`
         )}
       </ul>
-    `;
+    `
   }
 }
 
-customElements.define("my-counter", Counter);
+customElements.define('my-counter', Counter)

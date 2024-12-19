@@ -1,4 +1,4 @@
-import { defineMcFlyConfig } from "#imports";
+import { defineMcFlyConfig } from '#imports'
 export default defineMcFlyConfig({
-  components: "js",
-});
+  components: 'js',
+})

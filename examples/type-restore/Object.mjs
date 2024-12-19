@@ -1,4 +1,4 @@
-import { html, WebComponent } from "../../src/index.js";
+import { html, WebComponent } from '../../src/index.js'
 
 /**
  * TODO: rendering currently wipes all children so focus gets removed on fields
@@ -6,45 +6,43 @@ import { html, WebComponent } from "../../src/index.js";
 export class ObjectText extends WebComponent {
   static props = {
     object: {
-      hello: "worldzz",
+      hello: 'worldzz',
       age: 2,
     },
-  };
+  }
   onChanges() {
-    console.log(">>> object", this.props.object);
+    console.log('>>> object', this.props.object)
   }
   get template() {
     return html`
       <form>
         <label for="greeting-field">Hello</label>
         <textarea
-          onkeyup=${
-            (event) => {
-              this.props.object = {
-                ...this.props.object,
-                hello: event.target.value,
-              };
+          onkeyup=${(event) => {
+            this.props.object = {
+              ...this.props.object,
+              hello: event.target.value,
             }
-          }
-          id="greeting-field">
+          }}
+          id="greeting-field"
+        >
             ${this.props.object.hello}
-        </textarea>
+        </textarea
+        >
         <label for="age-field">Age</label>
         <input
-          onkeyup=${
-            (event) => {
-              this.props.object = {
-                ...this.props.object,
-                age: event.target.value,
-              };
+          onkeyup=${(event) => {
+            this.props.object = {
+              ...this.props.object,
+              age: event.target.value,
             }
-          }
-        id="age-field" value=${this.props.object.age} />
+          }}
+          id="age-field"
+          value=${this.props.object.age}
+        />
       </form>
-    `;
+    `
   }
-
-
 }
 
-customElements.define("my-object", ObjectText);
+customElements.define('my-object', ObjectText)

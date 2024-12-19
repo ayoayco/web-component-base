@@ -14,36 +14,39 @@ When you extend the `WebComponent` class for your component, you only have to de
 The result is a reactive UI on property changes.
 
 Links:
+
 - [Read a blog explaining the reactivity](https://ayos.blog/reactive-custom-elements-with-html-dataset/)
 - [View demo on CodePen](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 
 ## Table of Contents
+
 1. [Project Status](#project-status)
 1. [Installation](#installation)
-    1. [Import via CDN](#import-via-cdn)
-    1. [Installation via npm](#installation-via-npm)
+   1. [Import via CDN](#import-via-cdn)
+   1. [Installation via npm](#installation-via-npm)
 1. [Exports](#exports)
-    1. [Main Exports](#main-exports)
-    1. [Utilities](#utilities)
+   1. [Main Exports](#main-exports)
+   1. [Utilities](#utilities)
 1. [Usage](#usage)
 1. [Examples](#Examples)
-    1. [To-Do App](#1-to-do-app)
-    1. [Single HTML file](#2-single-html-file-example)
-    1. [Feature Demos](#3-feature-demos)
+   1. [To-Do App](#1-to-do-app)
+   1. [Single HTML file](#2-single-html-file-example)
+   1. [Feature Demos](#3-feature-demos)
 1. [`template` vs `render()`](#template-vs-render)
 1. [Prop access](#prop-access)
-    1. [Alternatives](#alternatives)
+   1. [Alternatives](#alternatives)
 1. [Styling](#styling)
 1. [Shadow DOM Opt-In](#shadow-dom-opt-in)
 1. [Just the Templating](#just-the-templating)
 1. [Life-Cycle Hooks](#life-cycle-hooks)
-    1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
-    1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
-    1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
-    1. [`onChanges`](#onchanges) - every time an attribute value changes
+   1. [`onInit`](#oninit) - the component is connected to the DOM, before view is initialized
+   1. [`afterViewInit`](#afterviewinit) - after the view is first initialized
+   1. [`onDestroy`](#ondestroy) - the component is disconnected from the DOM
+   1. [`onChanges`](#onchanges) - every time an attribute value changes
 1. [Library Size](#library-size)
 
 ## Project Status
+
 It is ready for many cases we see people use custom elements for. If you have a cool project built on **WebComponent.io** we'd love to know! :)
 
 For building some advanced interactions, we have a few issues that are still open: [#24 smart diffing](https://github.com/ayoayco/web-component-base/issues/24) & [#4 attachEffect improvements](https://github.com/ayoayco/web-component-base/issues/4)
@@ -53,6 +56,7 @@ In the mean time, if you have some complex needs, we recommend using the `WebCom
 ...or you can even [use just parts](#just-the-templating) of it for your own base class.
 
 ## Installation
+
 The library is distributed as complete ECMAScript Modules (ESM) and published on [NPM](https://ayco.io/n/web-component-base). Please file an issue in our [issue tracker](https://ayco.io/gh/web-component-base/issues) for problems or requests regarding our distribution.
 
 ### Import via CDN
@@ -62,10 +66,11 @@ It is possible to import directly using a CDN like [esm.sh](https://esm.sh/web-c
 Additionally, we use `@latest` in the rest of our [usage examples](#usage) here for simplicity, but take note that this incurs additional resolution steps for CDNs to find the actual latest published version. You may replace the `@latest` in the URL with specific versions as shown in our CodePen examples, and this will typically be better for performance.
 
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js"
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 ```
 
 ### Installation via npm
+
 Usable for projects with bundlers or using import maps pointing to the specific files downloaded in `node_modules/web-component-base`.
 
 ```bash
@@ -81,31 +86,37 @@ You can import everything separately, or in a single file each for the main expo
 ```js
 // all in a single file
 
-import { WebComponent, html, attachEffect } from "web-component-base";
+import { WebComponent, html, attachEffect } from 'web-component-base'
 
 // in separate files
 
-import { WebComponent } from "web-component-base/WebComponent.js";
+import { WebComponent } from 'web-component-base/WebComponent.js'
 
-import { html } from "web-component-base/html.js";
+import { html } from 'web-component-base/html.js'
 
-import { attachEffect } from "web-component-base/attach-effect.js";
+import { attachEffect } from 'web-component-base/attach-effect.js'
 ```
 
 ### Utilities
+
 ```js
 // in a single file
 
-import { serialize, deserialize, getCamelCase, getKebabCase, createElement } from "web-component-base/utils";
+import {
+  serialize,
+  deserialize,
+  getCamelCase,
+  getKebabCase,
+  createElement,
+} from 'web-component-base/utils'
 
 // or separate files
 
-import { serialize } from "web-component-base/utils/serialize.js";
+import { serialize } from 'web-component-base/utils/serialize.js'
 
-import { createElement } from "web-component-base/utils/create-element.js";
+import { createElement } from 'web-component-base/utils/create-element.js'
 
 // etc...
-
 ```
 
 ## Usage
@@ -114,21 +125,21 @@ In your component class:
 
 ```js
 // HelloWorld.mjs
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
 class HelloWorld extends WebComponent {
-  static props ={
+  static props = {
     myName: 'World',
-    emotion: 'sad'
+    emotion: 'sad',
   }
   get template() {
     return `
-      <h1>Hello ${this.props.myName}${this.props.emotion === "sad" ? ". 😭" : "! 🙌"}</h1>
-    `;
+      <h1>Hello ${this.props.myName}${this.props.emotion === 'sad' ? '. 😭' : '! 🙌'}</h1>
+    `
   }
 }
 
-customElements.define('hello-world', HelloWorld);
+customElements.define('hello-world', HelloWorld)
 ```
 
 In your HTML page:
@@ -163,40 +174,42 @@ A simple app that allows adding / completing tasks:
 Here is an example of using a custom element in a single .html file.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>WC Base Test</title>
     <script type="module">
-      import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+      import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
       class HelloWorld extends WebComponent {
         static props = {
-          myName: 'World'
+          myName: 'World',
         }
         get template() {
-          return `<h1>Hello ${this.props.myName}!</h1>`;
+          return `<h1>Hello ${this.props.myName}!</h1>`
         }
       }
 
-      customElements.define("hello-world", HelloWorld);
+      customElements.define('hello-world', HelloWorld)
     </script>
   </head>
   <body>
     <hello-world my-name="Ayo"></hello-world>
     <script>
-        const helloWorld = document.querySelector('hello-world');
-        setTimeout(() => {
-            helloWorld.props.myName = 'Ayo zzzZzzz';
-        }, 2500);
+      const helloWorld = document.querySelector('hello-world')
+      setTimeout(() => {
+        helloWorld.props.myName = 'Ayo zzzZzzz'
+      }, 2500)
     </script>
   </body>
 </html>
 ```
 
 ### 3. Feature Demos
+
 Some feature-specific demos:
-1. [Context-Aware Post-Apocalyptic Human](https://codepen.io/ayoayco-the-styleful/pen/WNqJMNG?editors=1010) 
+
+1. [Context-Aware Post-Apocalyptic Human](https://codepen.io/ayoayco-the-styleful/pen/WNqJMNG?editors=1010)
 1. [Simple reactive property](https://codepen.io/ayoayco-the-styleful/pen/ZEwoNOz?editors=1010)
 1. [Counter & Toggle](https://codepen.io/ayoayco-the-styleful/pen/PoVegBK?editors=1010)
 1. [Using custom templating (lit-html)](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
@@ -209,25 +222,23 @@ Some feature-specific demos:
 
 This mental model attempts to reduce the cognitive complexity of authoring components:
 
-1. The `template` is a read-only property (initialized with a `get` keyword) that represents *how* the component view is rendered.
+1. The `template` is a read-only property (initialized with a `get` keyword) that represents _how_ the component view is rendered.
 1. There is a `render()` method that triggers a view render.
-1. This `render()` method is *automatically* called under the hood every time an attribute value changed.
-1. You can *optionally* call this `render()` method at any point to trigger a render if you need (eg, if you have private unobserved properties that need to manually trigger a render)
+1. This `render()` method is _automatically_ called under the hood every time an attribute value changed.
+1. You can _optionally_ call this `render()` method at any point to trigger a render if you need (eg, if you have private unobserved properties that need to manually trigger a render)
 1. Overriding the `render()` function for handling a custom `template` is also possible. Here's an example of using `lit-html`: [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/ZEwNJBR?editors=1010)
 
 ## Prop Access
 
- The `props` property of the `WebComponent` interface is provided for easy read/write access to a camelCase counterpart of *any* observed attribute.
+The `props` property of the `WebComponent` interface is provided for easy read/write access to a camelCase counterpart of _any_ observed attribute.
 
 ```js
 class HelloWorld extends WebComponent {
   static props = {
-    myProp: 'World'
+    myProp: 'World',
   }
   get template() {
-    return html`
-        <h1>Hello ${this.props.myProp}</h1>
-    `;
+    return html` <h1>Hello ${this.props.myProp}</h1> `
   }
 }
 ```
@@ -235,11 +246,13 @@ class HelloWorld extends WebComponent {
 Assigning a value to the `props.camelCase` counterpart of an observed attribute will trigger an "attribute change" hook.
 
 For example, assigning a value like so:
+
 ```
 this.props.myName = 'hello'
 ```
 
 ...is like calling the following:
+
 ```
 this.setAttribute('my-name','hello');
 ```
@@ -253,6 +266,7 @@ Therefore, this will tell the browser that the UI needs a render if the attribut
 ### Alternatives
 
 The current alternatives are using what `HTMLElement` provides out-of-the-box, which are:
+
 1. `HTMLElement.dataset` for attributes prefixed with `data-*`. Read more about this [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
 1. Methods for reading/writing attribute values: `setAttribute(...)` and `getAttribute(...)`; note that managing the attribute names as strings can be difficult as the code grows.
 
@@ -261,55 +275,57 @@ The current alternatives are using what `HTMLElement` provides out-of-the-box, w
 When using the built-in `html` function for tagged templates, a style object of type `Partial<CSSStyleDeclaration>` can be passed to any element's `style` attribute. This allows for calculated and conditional styles. Read more on style objects [on MDN](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration).
 
 Try it now with this [example on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzXjwQ?editors=1010)
+
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
 class StyledElements extends WebComponent {
   static props = {
     emphasize: false,
-    type: "warn",
-  };
+    type: 'warn',
+  }
 
   #typeStyles = {
     warn: {
-      backgroundColor: "yellow",
-      border: "1px solid orange",
+      backgroundColor: 'yellow',
+      border: '1px solid orange',
     },
     error: {
-      backgroundColor: "orange",
-      border: "1px solid red",
+      backgroundColor: 'orange',
+      border: '1px solid red',
     },
-  };
+  }
 
   get template() {
     return html`
       <div
         style=${{
           ...this.#typeStyles[this.props.type],
-          padding: "1em",
+          padding: '1em',
         }}
       >
-        <p style=${{ fontStyle: this.props.emphasize && "italic" }}>Wow!</p>
+        <p style=${{ fontStyle: this.props.emphasize && 'italic' }}>Wow!</p>
       </div>
-    `;
+    `
   }
 }
 
-customElements.define("styled-elements", StyledElements);
+customElements.define('styled-elements', StyledElements)
 ```
 
 ## Shadow DOM Opt-In
+
 Add a static property `shadowRootInit` with object value of type `ShadowRootInit` (see [options on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#options)) to opt-in to using shadow dom for the whole component.
 
 Try it now [on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/VwRYVPv?editors=1010)
 
 Example:
+
 ```js
   static shadowRootInit = {
     mode: "closed",
   };
 ```
-
 
 ## Just the Templating
 
@@ -318,110 +334,112 @@ You don't have to extend the whole base class just to use some features. All int
 Here's an example of using the `html` tag template on a class that extends from vanilla `HTMLElement`... also [View on CodePen ↗](https://codepen.io/ayoayco-the-styleful/pen/bGzJQJg?editors=1010).
 
 ```js
-import {html} from 'https://unpkg.com/web-component-base/html'
-import {createElement} from 'https://unpkg.com/web-component-base/utils'
+import { html } from 'https://unpkg.com/web-component-base/html'
+import { createElement } from 'https://unpkg.com/web-component-base/utils'
 
 class MyQuote extends HTMLElement {
   connectedCallback() {
-    const el = createElement(html`
-      <button onClick=${() => alert('hey')}>
-        hey
-      </button>`);
+    const el = createElement(
+      html` <button onClick=${() => alert('hey')}>hey</button>`
+    )
     this.appendChild(el)
   }
 }
 
 customElements.define('my-quote', MyQuote)
 ```
+
 ## Life-Cycle Hooks
 
 Define behavior when certain events in the component's life cycle is triggered by providing hook methods
 
 ### onInit()
+
 - Triggered when the component is connected to the DOM
 - Best for setting up the component
 
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
 class ClickableText extends WebComponent {
   // gets called when the component is used in an HTML document
   onInit() {
-    this.onclick = () => console.log(">>> click!");
+    this.onclick = () => console.log('>>> click!')
   }
 
   get template() {
-    return `<span style="cursor:pointer">Click me!</span>`;
+    return `<span style="cursor:pointer">Click me!</span>`
   }
 }
 ```
 
 ### afterViewInit()
-- Triggered after the view is first initialized
 
+- Triggered after the view is first initialized
 
 ```js
 class ClickableText extends WebComponent {
   // gets called when the component's innerHTML is first filled
   afterViewInit() {
-    const footer = this.querySelector('footer');
+    const footer = this.querySelector('footer')
     // do stuff to footer after view is initialized
   }
 
   get template() {
-    return `<footer>Awesome site &copy; 2023</footer>`;
+    return `<footer>Awesome site &copy; 2023</footer>`
   }
 }
 ```
 
 ### onDestroy()
+
 - Triggered when the component is disconnected from the DOM
 - best for undoing any setup done in `onInit()`
 
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
 class ClickableText extends WebComponent {
- 
   clickCallback() {
-    console.log(">>> click!");
+    console.log('>>> click!')
   }
 
   onInit() {
-    this.onclick = this.clickCallback;
+    this.onclick = this.clickCallback
   }
 
   onDestroy() {
-    console.log(">>> removing event listener");
-    this.removeEventListener("click", this.clickCallback);
+    console.log('>>> removing event listener')
+    this.removeEventListener('click', this.clickCallback)
   }
 
   get template() {
-    return `<span style="cursor:pointer">Click me!</span>`;
+    return `<span style="cursor:pointer">Click me!</span>`
   }
 }
 ```
 
 ### onChanges()
+
 - Triggered when an attribute value changed
 
 ```js
-import { WebComponent } from "https://unpkg.com/web-component-base@latest/index.js";
+import { WebComponent } from 'https://unpkg.com/web-component-base@latest/index.js'
 
 class ClickableText extends WebComponent {
   // gets called when an attribute value changes
   onChanges(changes) {
-      const {property, previousValue, currentValue} = changes;
-      console.log('>>> ', {property, previousValue, currentValue})
+    const { property, previousValue, currentValue } = changes
+    console.log('>>> ', { property, previousValue, currentValue })
   }
 
   get template() {
-    return `<span style="cursor:pointer">Click me!</span>`;
+    return `<span style="cursor:pointer">Click me!</span>`
   }
 }
 ```
 
-## Library Size 
+## Library Size
 
 All the functions and the base class in the library are minimalist by design and only contains what is needed for their purpose.
 

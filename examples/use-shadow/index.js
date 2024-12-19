@@ -1,33 +1,33 @@
 // @ts-check
-import { WebComponent, html } from "../../src/index.js";
+import { WebComponent, html } from '../../src/index.js'
 
 export class Counter extends WebComponent {
   static props = {
     count: 123,
-  };
+  }
   static shadowRootInit = {
-    mode: "open",
-  };
+    mode: 'open',
+  }
 
   get template() {
-    const list = ["a", "b", "c", "what"];
+    const list = ['a', 'b', 'c', 'what']
     const links = [
       {
-        url: "https://ayco.io",
-        text: "Ayo Ayco",
+        url: 'https://ayco.io',
+        text: 'Ayo Ayco',
       },
       {
-        url: "https://ayco.io/gh/McFly",
-        text: "McFly",
+        url: 'https://ayco.io/gh/McFly',
+        text: 'McFly',
       },
-    ];
+    ]
 
     return html`
       <button
         class="hey"
         id="btn"
         onClick=${() => ++this.props.count}
-        style=${{ backgroundColor: "green", color: "white" }}
+        style=${{ backgroundColor: 'green', color: 'white' }}
         about="Elephant"
         data-name="thing"
         aria-name="thingz"
@@ -48,8 +48,8 @@ export class Counter extends WebComponent {
             </li>`
         )}
       </ul>
-    `;
+    `
   }
 }
 
-customElements.define("my-counter", Counter);
+customElements.define('my-counter', Counter)

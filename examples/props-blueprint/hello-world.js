@@ -1,12 +1,12 @@
-import { html, WebComponent } from "../../src/index.js";
+import { html, WebComponent } from '../../src/index.js'
 
 export class HelloWorld extends WebComponent {
   static props = {
-    myName: "World",
-  };
+    myName: 'World',
+  }
   get template() {
-    return html`<p>Hello ${this.props.myName}</p>`;
+    return html`<p>Hello ${this.props.myName}</p>`
   }
 }
 
-customElements.define("hello-world", HelloWorld);
+customElements.define('hello-world', HelloWorld)

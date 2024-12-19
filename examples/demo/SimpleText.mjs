@@ -1,19 +1,21 @@
 // @ts-check
-import { html, WebComponent } from "../../src/index.js";
+import { html, WebComponent } from '../../src/index.js'
 
 class SimpleText extends WebComponent {
   clickCallback() {
-    console.log(">>> click!");
+    console.log('>>> click!')
   }
 
   onDestroy() {
-    console.log(">>> removing event listener");
-    this.removeEventListener("click", this.clickCallback);
+    console.log('>>> removing event listener')
+    this.removeEventListener('click', this.clickCallback)
   }
 
   get template() {
-    return html`<span onclick=${this.clickCallback} style="cursor:pointer">Click me!</span>`;
+    return html`<span onclick=${this.clickCallback} style="cursor:pointer"
+      >Click me!</span
+    >`
   }
 }
 
-customElements.define("simple-text", SimpleText);
+customElements.define('simple-text', SimpleText)

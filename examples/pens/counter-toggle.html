@@ -13,33 +13,35 @@
       import {
         WebComponent,
         html,
-      } from "https://esm.sh/web-component-base@latest";
+      } from 'https://esm.sh/web-component-base@latest'
 
       export class Counter extends WebComponent {
         static props = {
           count: 0,
-        };
+        }
         get template() {
           return html`<button onClick=${() => ++this.props.count}>
             ${this.props.count}
-          </button>`;
+          </button>`
         }
       }
 
       class Toggle extends WebComponent {
         static props = {
           toggle: false,
-        };
+        }
 
-        clickFn = () => (this.props.toggle = !this.props.toggle);
+        clickFn = () => (this.props.toggle = !this.props.toggle)
 
         get template() {
-          return html`<button onclick=${this.clickFn}>${this.props.toggle ? "On" : "Off"}</button>`;
+          return html`<button onclick=${this.clickFn}>
+            ${this.props.toggle ? 'On' : 'Off'}
+          </button>`
         }
       }
 
-      customElements.define("my-counter", Counter);
-      customElements.define("my-toggle", Toggle);
+      customElements.define('my-counter', Counter)
+      customElements.define('my-toggle', Toggle)
     </script>
   </head>
   <body>

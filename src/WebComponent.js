@@ -63,17 +63,17 @@ export class WebComponent extends HTMLElement {
   /**
    * Triggered after view is initialized
    */
-  afterViewInit() { }
+  afterViewInit() {}
 
   /**
    * Triggered when the component is connected to the DOM
    */
-  onInit() { }
+  onInit() {}
 
   /**
    * Triggered when the component is disconnected from the DOM
    */
-  onDestroy() { }
+  onDestroy() {}
 
   /**
    * Triggered when an attribute value changes
@@ -84,7 +84,7 @@ export class WebComponent extends HTMLElement {
    * }} Changes
    * @param {Changes} changes
    */
-  onChanges(changes) { }
+  onChanges(changes) {}
 
   constructor() {
     super();
@@ -148,7 +148,8 @@ export class WebComponent extends HTMLElement {
           effectsMap[prop].push(value.callback);
         } else if (typeMap[prop] !== typeof value) {
           throw TypeError(
-            `Cannot assign ${typeof value} to ${typeMap[prop]
+            `Cannot assign ${typeof value} to ${
+              typeMap[prop]
             } property (setting '${prop}' of ${meta.constructor.name})`
           );
         } else if (oldValue !== value) {

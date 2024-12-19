@@ -1,53 +1,17 @@
+import globals from "globals";
+import pluginJs from "@eslint/js";
+
+/** @type {import('eslint').Linter.Config[]} */
 export default [
-  // "eslint:recommended",
-  // {
-  //   rules: {
-  //     semi: ["warn", "always"]
-  //   }
-  // },
-  // {
-  //   files: ["./src/*.js"],
-  //   rules: {
-  //     "semi": "error",
-  //     "no-unused-vars": "error"
-  //   }
-  // },
-  // {
-  //   files: ["./site/***js"],
-  //   rules: {
-  //     "no-undef": "off",
-  //     "no-unused-vars": "off",
-  //   },
-  // }
-]
-/*
- {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  extends: ["eslint:recommended"],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: [".eslintrc.{js,cjs}"],
-      parserOptions: {
-        sourceType: "script",
-      },
+  { languageOptions: { globals: globals.browser } },
+  pluginJs.configs.recommended,
+  {
+    rules: {
+      "no-unused-vars": "warn",
+      "no-undef": "off",
     },
-    {
-      files: ["./site/***js"],
-      rules: {
-        "no-undef": "off",
-        "no-unused-vars": "off",
-      },
-    },
-  ],
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
   },
-};
-*/
+  {
+    ignores: ["site/*"],
+  },
+];

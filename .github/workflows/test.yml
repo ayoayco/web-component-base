@@ -1,4 +1,4 @@
-name: ESLint
+name: Test
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
 
       - name: Install deps
         run: |
-          pnpm install
+          npm install vitest
 
       - name: Run Vitest
         run: npx vitest .

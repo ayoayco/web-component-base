@@ -26,5 +26,5 @@ jobs:
           npm install vitest
 
       - name: Run Vitest
-        run: npx vitest .
+        run: npx vitest run .
         continue-on-error: false

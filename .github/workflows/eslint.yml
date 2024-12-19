@@ -28,7 +28,7 @@ jobs:
 
       - name: Run ESLint
         run: npx eslint .
-          --c eslint.config.js
+          --c eslint.config.mjs
           --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
         continue-on-error: false

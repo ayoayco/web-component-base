@@ -38,7 +38,7 @@
     "pub:patch": "npm version patch && pnpm run pub",
     "pub:minor": "npm version minor && pnpm run pub",
     "format": "prettier --write \"./**/*.{js,mjs,json}\"",
-    "lint": "eslint . --config eslint.config.js",
+    "lint": "eslint . --config eslint.config.mjs",
     "prepare": "husky install"
   },
   "repository": "https://github.com/ayoayco/web-component-base",

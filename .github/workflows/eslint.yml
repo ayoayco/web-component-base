@@ -29,8 +29,6 @@ jobs:
       - name: Run ESLint
         run: npx eslint .
           --c eslint.config.mjs
-          --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif
         continue-on-error: false
 
       - name: Upload analysis results to GitHub

@@ -10,8 +10,8 @@ on:
     - cron: '36 3 * * 2'
 
 jobs:
-  eslint:
-    name: Run eslint scanning
+  test:
+    name: Run test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,14 +21,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install ESLint
+      - name: Install deps
         run: |
-          npm install eslint@8.56.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
+          npm install
 
-      - name: Run ESLint
-        run: npx eslint .
-          --c eslint.config.mjs
+      - name: Run Vitest
+        run: npx vitest .
         continue-on-error: false
 
       - name: Upload analysis results to GitHub

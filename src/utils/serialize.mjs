@@ -1,4 +1,3 @@
-
 /**
  * Takes a value and returns the serialized counterpart
  * @param {unknown} value Value to be serialized

@@ -37,7 +37,7 @@
     "pub": "pnpm run clean && pnpm run build && npm publish",
     "pub:patch": "npm version patch && pnpm run pub",
     "pub:minor": "npm version minor && pnpm run pub",
-    "format": "prettier --write \"./**/*.{js,mjs,json}\"",
+    "format": "prettier . --write",
     "lint": "eslint . --config eslint.config.mjs",
     "prepare": "husky install"
   },

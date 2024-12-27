@@ -10,10 +10,10 @@
     "build:preview": "pnpm run build && pnpm run preview"
   },
   "dependencies": {
-    "@mcflyjs/cli": "latest",
-    "@mcflyjs/config": "latest",
-    "@mcflyjs/core": "^0.5.2",
-    "nitropack": "2.8"
+    "@mcflyjs/cli": "^0.0.27",
+    "@mcflyjs/config": "^0.1.5",
+    "@mcflyjs/core": "^0.5.4",
+    "nitropack": "~2.10.4"
   },
   "version": "0.0.1",
   "main": "index.js",

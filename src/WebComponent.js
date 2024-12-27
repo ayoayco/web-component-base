@@ -29,8 +29,11 @@ export class WebComponent extends HTMLElement {
   static properties = []
 
   /**
-   * Blueprint for the Proxy props
    * @typedef {{[name: string]: any}} PropStringMap
+   */
+
+  /**
+   * Blueprint for the Proxy props
    * @type {PropStringMap}
    */
   static props
@@ -38,6 +41,7 @@ export class WebComponent extends HTMLElement {
   /**
    * Read-only string property that represents how the component will be rendered
    * @returns {string | any}
+   * Template string or tree of Nodes
    * @see https://www.npmjs.com/package/web-component-base#template-vs-render
    */
   get template() {
@@ -76,15 +80,21 @@ export class WebComponent extends HTMLElement {
   onDestroy() {}
 
   /**
-   * Triggered when an attribute value changes
-   * @typedef {{
-   *  property: string,
-   *  previousValue: any,
-   *  currentValue: any
-   * }} Changes
-   * @param {Changes} changes
+   * @typedef {object} Changes
+   * @property {string} property Name of the property
+   * @property {any} previousValue Previous value
+   * @property {any} currentValue Current value
    */
-  onChanges(changes) {}
+
+  /**
+   * Triggered when an attribute value changes
+   * @param {Changes} changes Object containing change that triggered the hook
+   * @returns {void}
+   */
+  onChanges(
+    // eslint-disable-next-line no-unused-vars
+    changes
+  ) {}
 
   constructor() {
     super()

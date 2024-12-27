@@ -7,6 +7,8 @@ import { fileURLToPath } from 'node:url'
 
 const unused = 'hey'
 
+console.log(unused)
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const gitignorePath = path.resolve(__dirname, '.gitignore')
@@ -17,11 +19,6 @@ export default [
   pluginJs.configs.recommended,
   jsdoc.configs['flat/recommended'],
   includeIgnoreFile(gitignorePath),
-  {
-    rules: {
-      'no-unused-vars': 'warn',
-    },
-  },
   {
     ignores: ['site/*'],
   },

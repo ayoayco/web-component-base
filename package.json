@@ -63,6 +63,7 @@
     "eslint-plugin-jsdoc": "^50.6.1",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
     "size-limit": "^11.1.6",
     "typescript": "^5.7.2",
@@ -101,5 +102,14 @@
       "path": "./dist/utils/get-kebab-case.js",
       "limit": "0.5 KB"
     }
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,mjs,ts}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  }
 }
